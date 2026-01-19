@@ -1,0 +1,5 @@
+{
+  "name": "ValidateKaro - Internal Audit Machine",
+  "description": "An internal truth machine for credit card compliance, validating database records against bank-issued PDFs with a strict 19-key schema and confidence gates.",
+  "requestFramePermissions": []
+}
