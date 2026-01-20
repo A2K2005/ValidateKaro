@@ -1,5 +1,5 @@
 
-export type RewardType = 'Cashback' | 'Reward Points' | 'Miles' | 'N/A';
+export type RewardType = 'Cashback' | 'Reward Points' | 'Miles' | 'Complimentary' | 'N/A';
 
 export interface CategoryFields {
   reward_type: RewardType;
@@ -59,7 +59,7 @@ export interface ActiveJob {
   cardName: string;
   bankName: string;
   progress: number;
-  status: 'uploading' | 'extracting' | 'validating';
+  status: 'initializing' | 'uploading' | 'uploaded' | 'converting' | 'converted' | 'analyzing' | 'scoring' | 'saving' | 'complete' | 'failed' | 'extracting' | 'validating';
 }
 
 export enum SpendKey {

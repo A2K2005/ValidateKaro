@@ -12,10 +12,10 @@ dist
 dist-ssr
 *.local
 
-# Environment variables
-# .env # Removed by Orchids to allow .env files
-# .env.local # Removed by Orchids to allow .env files
-# .env.*.local # Removed by Orchids to allow .env files
+# Environment variables (CRITICAL: Never commit these!)
+.env
+.env.local
+.env.*.local
 
 # Editor directories and files
 .vscode/*
