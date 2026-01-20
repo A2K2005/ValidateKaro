@@ -1,0 +1,847 @@
+[
+  {
+    "card_name": "Amazon ICICI Pay Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "American Express Platinum Card",
+    "transfer_partners": true,
+    "ratios": {
+      "Marriott Bonvoy": "1:1",
+      "Hilton Honors": "1:0.9",
+      "Airlines (British Airways, Emirates, Etihad, Singapore, etc.)": "2:1",
+      "Cathay Pacific": "2:1"
+    }
+  },
+  {
+    "card_name": "Amex Gold Credit Card",
+    "transfer_partners": true,
+    "ratios": {
+      "Marriott Bonvoy": "1:1",
+      "Hilton Honors": "1:0.9",
+      "Airlines (British Airways, Emirates, Etihad, Singapore, etc.)": "2:1",
+      "Cathay Pacific": "2:1"
+    }
+  },
+  {
+    "card_name": "Amex Membership Rewards Credit Card",
+    "transfer_partners": true,
+    "ratios": {
+      "Marriott Bonvoy": "1:1",
+      "Hilton Honors": "1:0.9",
+      "Airlines (British Airways, Emirates, Etihad, Singapore, etc.)": "2:1",
+      "Cathay Pacific": "2:1"
+    }
+  },
+  {
+    "card_name": "Amex Platinum Reserve Credit Card",
+    "transfer_partners": true,
+    "ratios": {
+      "Marriott Bonvoy": "1:1",
+      "Hilton Honors": "1:0.9",
+      "Airlines (British Airways, Emirates, Etihad, Singapore, etc.)": "2:1",
+      "Cathay Pacific": "2:1"
+    }
+  },
+  {
+    "card_name": "Amex Platinum Travel Credit Card ",
+    "transfer_partners": true,
+    "ratios": {
+      "Marriott Bonvoy": "1:1",
+      "Hilton Honors": "1:0.9",
+      "Airlines (British Airways, Emirates, Etihad, Singapore, etc.)": "2:1",
+      "Cathay Pacific": "2:1"
+    }
+  },
+  {
+    "card_name": "Amex Smart Earn Credit Card",
+    "transfer_partners": true,
+    "ratios": {
+      "Marriott Bonvoy": "1:1",
+      "Hilton Honors": "1:0.9",
+      "Airlines (British Airways, Emirates, Etihad, Singapore, etc.)": "2:1",
+      "Cathay Pacific": "2:1"
+    }
+  },
+  {
+    "card_name": "AU Altura Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "AU Altura Plus Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "AU Bank LIT Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "AU Nomo Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "AU Zenith Plus Credit Card",
+    "transfer_partners": true,
+    "ratios": {
+      "Airlines/Hotels": "1:1"
+    }
+  },
+  {
+    "card_name": "Axis Airtel Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Axis Atlas Credit Card",
+    "transfer_partners": true,
+    "ratios": {
+      "Accor, Air Canada, British Airways, Etihad, Japan Airlines, United, etc. (Group A)": "1:2",
+      "Marriott Bonvoy": "2:1",
+      "Air India, Singapore Airlines, Vistara, etc. (Group B)": "1:2",
+      "Note": "1 EDGE Mile = 2 Partner Points (except Marriott)"
+    }
+  },
+  {
+    "card_name": "Axis Aura Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Axis Bank ACE Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Axis Bank FreeCharge Plus Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Axis Bank Horizon Credit Card",
+    "transfer_partners": true,
+    "ratios": {
+      "Most Partners": "1:1"
+    }
+  },
+  {
+    "card_name": "Axis Bank Privilege Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Axis Cashback Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Axis Flipkart Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Axis IOCL Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Axis Magnus Credit Card",
+    "transfer_partners": true,
+    "ratios": {
+      "Most Partners (Group A & B)": "5:2",
+      "Marriott Bonvoy": "5:2",
+      "Note": "5 EDGE Rewards = 2 Partner Points (2.5:1)"
+    }
+  },
+  {
+    "card_name": "Axis Miles and More World Credit Card",
+    "transfer_partners": true,
+    "ratios": {
+      "Miles & More": "Direct Accumulation"
+    }
+  },
+  {
+    "card_name": "Axis MyZone Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Axis Neo Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Axis Privilege Amex Credit Card ",
+    "transfer_partners": true,
+    "ratios": {
+      "Most Partners": "10:1 or 20:1 (Check Bank)"
+    }
+  },
+  {
+    "card_name": "Axis Rewards Credit Card",
+    "transfer_partners": true,
+    "ratios": {
+      "Most Partners": "10:1 or 20:1 (Check Bank)"
+    }
+  },
+  {
+    "card_name": "Axis Samsung Infinite Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Axis Samsung Signature Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Axis Select Credit Card",
+    "transfer_partners": true,
+    "ratios": {
+      "Most Partners": "10:1 or 20:1 (Check Bank)"
+    }
+  },
+  {
+    "card_name": "Axis Shoppers Stop Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Axis SpiceJet Bank Voyage Black Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Axis SpiceJet Bank Voyage Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Axis Supermoney Rupay Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Axis Vistara Platinum",
+    "transfer_partners": true,
+    "ratios": {
+      "Club Vistara": "Direct Accumulation"
+    }
+  },
+  {
+    "card_name": "Biz Black Metal Edition Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "EazyDiner IndusInd Bank Platinum Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Flipkart SBI Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "HDFC 6E Rewards Indigo Credit Card",
+    "transfer_partners": true,
+    "ratios": {
+      "Indigo 6E": "Direct Accumulation"
+    }
+  },
+  {
+    "card_name": "HDFC Bank Bharat Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "HDFC Biz First Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "HDFC Biz Grow Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "HDFC Business Moneyback Credit card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "HDFC Credit Cards",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "HDFC Diners Club Black Credit Card",
+    "transfer_partners": true,
+    "ratios": {
+      "Airlines (British Airways, Etihad, United, etc.)": "1:1",
+      "Hotels (Accor, IHG, Wyndham)": "1:1",
+      "Marriott Bonvoy": "1:1 (Limited Time/Promo) or Check Portal"
+    }
+  },
+  {
+    "card_name": "HDFC Diners Club Black Metal Credit Card",
+    "transfer_partners": true,
+    "ratios": {
+      "Airlines (British Airways, Etihad, United, etc.)": "1:1",
+      "Hotels (Accor, IHG, Wyndham)": "1:1",
+      "Marriott Bonvoy": "1:1 (Limited Time/Promo) or Check Portal"
+    }
+  },
+  {
+    "card_name": "HDFC Diners Privilege Credit Card",
+    "transfer_partners": true,
+    "ratios": {
+      "Most Partners": "2:1 (Likely)"
+    }
+  },
+  {
+    "card_name": "HDFC Freedom Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "HDFC Indian Oil Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "HDFC Infinia Credit Card",
+    "transfer_partners": true,
+    "ratios": {
+      "Airlines (British Airways, Etihad, United, etc.)": "1:1",
+      "Hotels (Accor, IHG, Wyndham)": "1:1",
+      "Marriott Bonvoy": "1:1 (Limited Time/Promo) or Check Portal"
+    }
+  },
+  {
+    "card_name": "HDFC IRCTC Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "HDFC Marriott Bonvoy Credit Card",
+    "transfer_partners": true,
+    "ratios": {
+      "Marriott Bonvoy": "Direct Accumulation"
+    }
+  },
+  {
+    "card_name": "HDFC Millennia Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "HDFC Moneyback Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "HDFC MoneyBack Plus Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "HDFC PIXEL Play Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "HDFC Regalia Gold Credit Card",
+    "transfer_partners": true,
+    "ratios": {
+      "Airlines": "2:1",
+      "Hotels": "2:1"
+    }
+  },
+  {
+    "card_name": "HDFC RuPay Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "HDFC Shoppers Stop Black Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "HDFC Shoppers Stop Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "HDFC Superia Airline Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "HDFC Swiggy Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "HDFC Tata Neu Plus Credit Card",
+    "transfer_partners": false,
+    "ratios": {
+      "Tata NeuCoins": "1:1 (Use on Tata Neu)"
+    }
+  },
+  {
+    "card_name": "HSBC Cashback Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "HSBC Live Plus Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "HSBC Platinum Rewards Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "HSBC Premier Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "HSBC RuPay Cashback Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "HSBC Travel One Credit Card",
+    "transfer_partners": true,
+    "ratios": {
+      "Most Airlines (Air India, BA, Etihad, Singapore, etc.)": "1:1",
+      "Hotels (Accor, IHG, Marriott, Wyndham)": "1:1",
+      "AirAsia": "1:3",
+      "Exceptions": "Check specifics for others"
+    }
+  },
+  {
+    "card_name": "ICICI HPCL Coral Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "ICICI HPCL Super Saver Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "ICICI MakeMyTrip Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "ICICI Platinum Chip Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "ICICI Rubyx Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "ICICI Sapphiro Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "IDFC CLUB VISTARA CREDIT CARD",
+    "transfer_partners": true,
+    "ratios": {
+      "Club Vistara": "Direct Accumulation"
+    }
+  },
+  {
+    "card_name": "IDFC First Ashva Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "IDFC First Classic Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "IDFC FIRST Dual Indigo Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "IDFC First Mayura Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "IDFC FIRST Millennia Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "IDFC FIRST Power Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "IDFC First Power Plus Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "IDFC First Private Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "IDFC FIRST Select Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "IDFC First SWYP Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "IDFC First WOW Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "IDFC Wealth Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Indian Oil RBL Bank XTRA Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Indian Oil Visa",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "IndianOil Axis Bank Rupay Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "IndianOil RBL Bank Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "IndusInd Bank Legend Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "IndusInd Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "IndusInd EazyDiner Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "IndusInd Legend Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "IndusInd Platinum Aura Edge Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "IndusInd Platinum RuPay Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "IndusInd Tiger Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "IRCTC RBL Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "IRCTC SBI Platinum Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Jupiter Edge Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Kiwi Klick Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Kotak Delight Platinum Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Kotak Essentia Platinum Credit Card ",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Kotak IndianOil Platinum Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Kotak League Platinum Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Kotak Mojo Platinum Credit card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Kotak Zen Signature Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "LIC Axis Bank Platinum Credit Card ",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "LIC Axis Bank Signature Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "MakeMyTrip ICICI Bank Signature Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Myntra Kotak Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Paytm HDFC Bank Select Credit Card ",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Pop Club Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "PVR Kotak Platinum Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "RBL Bank Cookies Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "RBL Bank Play Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "RBL Insignia Preferred Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "RBL Platinum Maxima Plus Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "RBL Shoprite Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "RBL Super Binge Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "RBL World Safari Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "SBI AURUM Credit CARD",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "SBI BPCL Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "SBI BPCL Octane Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "SBI Card Miles Credit Card",
+    "transfer_partners": true,
+    "ratios": {
+      "Group A (Air India, Vistara, SpiceJet, Air Asia, Etihad, Air Canada, Qantas)": "1:1",
+      "Group B (United, Turkish, Qatar, etc.)": "2:1",
+      "Hotels (IHG, Wyndham)": "1:1",
+      "Hotels (Accor)": "2:1"
+    }
+  },
+  {
+    "card_name": "SBI Card Pulse Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "SBI Cashback Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "SBI ELITE Card",
+    "transfer_partners": true,
+    "ratios": {
+      "Club Vistara / InterMiles": "5:1 (Check Validity)"
+    }
+  },
+  {
+    "card_name": "SBI Elite Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "SBI Prime Credit Card",
+    "transfer_partners": true,
+    "ratios": {
+      "Club Vistara / InterMiles": "5:1 (Check Validity)"
+    }
+  },
+  {
+    "card_name": "SBI Simply Click Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "SBI Simply Save Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "SBM Kredit.Pe Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "SBM ZET Magnet Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Scapia Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Standard Chartered EaseMytrip Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Standard Chartered Emirates Platinum Credit Card",
+    "transfer_partners": true,
+    "ratios": {
+      "Emirates Skywards": "Direct Accumulation"
+    }
+  },
+  {
+    "card_name": "Standard Chartered Platinum Rewards Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Standard Chartered Smart Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Standard Chartered Ultimate ",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Tata Neu Infinity HDFC Bank Credit Card",
+    "transfer_partners": false,
+    "ratios": {
+      "Tata NeuCoins": "1:1 (Use on Tata Neu)"
+    }
+  },
+  {
+    "card_name": "Tata Neu Infinity SBI Card",
+    "transfer_partners": false,
+    "ratios": {
+      "Tata NeuCoins": "1:1 (Use on Tata Neu)"
+    }
+  },
+  {
+    "card_name": "Tata Neu Infinity SBI Credit Card",
+    "transfer_partners": false,
+    "ratios": {
+      "Tata NeuCoins": "1:1 (Use on Tata Neu)"
+    }
+  },
+  {
+    "card_name": "Times Black ICICI Bank Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "YES BANK ACE Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  },
+  {
+    "card_name": "Zagg Rupay Credit Card",
+    "transfer_partners": false,
+    "ratios": "None / Cashback / Vouchers"
+  }
+]

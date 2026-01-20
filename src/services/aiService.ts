@@ -140,8 +140,9 @@ export async function processPDFsForCard(
   console.log(`[ValidateKaro] Total extracted text length: ${totalLength} chars`);
 
   // STEP 2: Smart Chunking
-  // We'll split the text into chunks of max ~45,000 characters to be safe (well under 100KB limit)
-  const CHUNK_SIZE = 45000;
+  // We'll split the text into chunks of max ~30,000 characters for faster API responses
+  // Smaller chunks = faster processing, and merging keeps the best results
+  const CHUNK_SIZE = 30000;
   const chunks: string[] = [];
 
   if (totalLength <= CHUNK_SIZE) {
@@ -211,10 +212,14 @@ export async function processPDFsForCard(
 
   let totalTokens = { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0 };
 
-  // Create promises for all chunks
-  const chunkPromises = chunks.map((chunk, i) =>
-    analyzeChunk(chunk, cardName, apiKey, currentDate, i, chunks.length)
-  );
+  // Create promises for all chunks with progress tracking
+  let completedChunks = 0;
+  const chunkPromises = chunks.map(async (chunk, i) => {
+    const result = await analyzeChunk(chunk, cardName, apiKey, currentDate, i, chunks.length);
+    completedChunks++;
+    onProgress?.('analyzing', `AI analysis: ${completedChunks}/${chunks.length} chunks complete`);
+    return result;
+  });
 
   // Wait for all to complete
   const results = await Promise.all(chunkPromises);
@@ -266,6 +271,62 @@ Critical Rules:
 4. For LOUNGE ACCESS: If the document mentions lounge access, lounge program, airport lounge, complimentary lounge visits, or lounge benefits - extract it as a benefit. Put any minimum spend requirements, visit limits, or eligibility conditions in the caps_limits field.
 5. Do not assume rewards that are not mentioned.
 6. Ensure 100% accuracy based ONLY on the provided text chunk.
+
+REWARD INTERPRETATION HIERARCHY (CRITICAL - FOLLOW STRICTLY):
+
+A. Explicit Merchant Rules Override Everything
+   - If a merchant (Amazon, Flipkart, Swiggy, Zomato, etc.) is EXPLICITLY NAMED anywhere in the offer (main table, footnotes, exclusions, examples), apply ONLY the explicitly stated rule for that merchant.
+   - Do NOT fall back to generic categories for explicitly named merchants.
+   - Example: If "Swiggy → 10%" is stated, use 10% for Swiggy, NOT any "food delivery" or "other spends" rate.
+
+B. Category-Level Rules Apply When Merchants Are NOT Explicitly Mentioned
+   - If a category like "All other merchants", "Other online spends", or "Other spends" is defined, and a merchant (e.g., Amazon/Flipkart) is NOT explicitly listed anywhere, then that merchant inherits the category rule.
+   - Example: If document says "Other online spends → 1%" and Amazon is never mentioned, then Amazon gets 1%.
+
+C. Default Inclusion Under Generic Buckets
+   - Merchants like Amazon, Flipkart, Myntra, etc. are treated as regular merchants UNLESS:
+     * Explicitly listed under a special rate, OR
+     * Explicitly excluded
+   - If neither applies, they inherit the nearest generic bucket rate.
+
+D. Exclusion Master List Still Applies
+   - Even if a merchant falls under "All other merchants", rewards are NOT applicable if the transaction belongs to an excluded category, UNLESS explicitly overridden by the bank.
+   - Standard Exclusions (rewards typically NOT earned on):
+     * All Reversals, Cancelled Transactions
+     * Cash Advances, ATM Cash Withdrawals
+     * Quasi-Cash Transactions, Money Transfers, P2P Transfers
+     * Wallet Loads (Paytm, PhonePe, Amazon Pay, etc.)
+     * Gift Cards and Vouchers, Voucher Purchases
+     * EMI Spends
+     * Bank Charges & Fees (Late Payment, Processing, Financial, Interest, Service Charges)
+     * Education Spends (unless explicitly allowed)
+     * Fuel Spends, Fuel Surcharge, Toll Payments (unless explicitly allowed)
+     * Gambling, Lottery, Online Skill-Based Gaming
+     * Government-related Transactions, Taxes
+     * Utility Bill Payments (Electricity, Water, Telecom - unless explicitly allowed)
+     * Insurance Payments (unless explicitly allowed)
+     * Jewellery Purchases (unless explicitly allowed)
+     * Forex Transactions, Cryptocurrency/Digital Asset Transactions
+     * Rent Payment (unless explicitly allowed)
+     * Railways, Transportation (unless explicitly allowed)
+     * Business Services, Contracted Services, Collection Agencies, Security Broker Services
+     * Charity, Donations (Religious, Political Organizations)
+     * Antique Items, Liquid Assets
+     * Load Money, Outstanding Payments
+     * Smartpay, Smartbuy portal (unless explicitly allowed)
+   - If the document explicitly allows rewards on any of these categories, extract that rule. Otherwise, assume excluded.
+
+E. Conflict Resolution Rule (Apply in This Order)
+   1. Merchant-specific rule (highest priority)
+   2. Category-specific rule (medium priority)
+   3. Generic "other spends" rule (lowest priority)
+   - Always prefer explicit mention over inference, and generic buckets over assumptions.
+
+F. No Assumption of Special Treatment
+   - Do NOT infer higher or lower rates for a merchant unless the document explicitly states so.
+   - Silence means inherit the nearest applicable generic rule.
+   - If uncertain, use the generic bucket rate, NOT N/A (unless the category itself is not mentioned).
+
 
 Spending Categories to Output Keys (Map):
 1. Amazon purchases -> amazon_spends
@@ -326,6 +387,13 @@ Output Format: Return ONLY a valid JSON object with this exact structure:
   console.log(`[ValidateKaro] Chunk ${chunkIndex + 1}/${totalChunks}: Request size ${(requestBody.length / 1024).toFixed(1)} KB`);
 
   try {
+    // Add timeout for large requests (3 minutes max)
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => {
+      console.warn(`[ValidateKaro] Chunk ${chunkIndex + 1}: Request timed out after 3 minutes`);
+      controller.abort();
+    }, 180000);
+
     const response = await fetch(OPENROUTER_ENDPOINT, {
       method: "POST",
       headers: {
@@ -334,8 +402,11 @@ Output Format: Return ONLY a valid JSON object with this exact structure:
         "X-Title": "ValidateKaro",
         "Content-Type": "application/json"
       },
-      body: requestBody
+      body: requestBody,
+      signal: controller.signal
     });
+
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
@@ -393,243 +464,6 @@ Output Format: Return ONLY a valid JSON object with this exact structure:
   }
 }
 
-// ============================================================================
-// OLD SINGLE-REQUEST APPROACH (commented out due to 413 payload limit)
-// ============================================================================
-/*
-export async function processPDFsForCard_OLD(
-  cardName: string,
-  pdfInputs: string[],
-  onProgress?: (step: string, detail: string) => void
-): Promise<ValidationOutput> {
-  const currentDate = new Date().toISOString().split('T')[0];
-
-  console.log(`[ValidateKaro] Starting PDF processing for card: ${cardName}`);
-  console.log(`[ValidateKaro] Number of PDFs: ${pdfInputs.length}`);
-  console.log(`[ValidateKaro] Input types:`, pdfInputs.map((input, i) =>
-    `Doc ${i+1}: ${input.startsWith('http') ? 'URL' : input.startsWith('data:') ? 'base64 (with prefix)' : 'base64 (raw)'}`
-  ));
-
-  const apiKey = import.meta.env.VITE_OPENROUTER_API_KEY;
-
-  if (!apiKey) {
-    throw new Error("Configuration Error: OpenRouter API key not configured. Please add VITE_OPENROUTER_API_KEY to your environment.");
-  }
-
-  onProgress?.('analyzing', `Sending ${pdfInputs.length} documents to AI for analysis...`);
-
-  const systemInstruction = `You are a credit card compliance analyst working with MITC documents.
-
-Target Card (Exact Match Only): ${cardName}
-
-Task: From the uploaded documents, extract information only if it is explicitly applicable to the ${cardName}. You must output a JSON object where the keys are exactly the 19 "Output Keys" listed below.
-
-Critical Rules (Strict):
-1. Use exact card name matching.
-2. If a spending category is not mentioned, set the "reward_type" to "N/A" and other fields to empty strings.
-3. Do not assume rewards.
-4. Ensure 100% accuracy based ONLY on the provided text.
-
-Spending Categories to Output Keys (Map):
-1. Amazon purchases -> amazon_spends
-2. Flipkart purchases -> flipkart_spends
-3. Other online shopping -> other_online_spends
-4. Online grocery shopping -> grocery_spends_online
-5. Food delivery apps -> online_food_ordering
-6. Mobile phone bills -> mobile_phone_bills
-7. Electricity bills -> electricity_bills
-8. Water bills -> water_bills
-9. Fuel -> fuel
-10. Restaurants and dining -> dining_or_going_out
-11. Flight bookings (annual) -> flights_annual
-12. Hotel bookings (annual) -> hotels_annual
-13. Domestic lounge access -> domestic_lounge_usage_quarterly
-14. International lounge access -> international_lounge_usage_quarterly
-15. Health insurance (annual) -> insurance_health_annual
-16. Car / bike insurance (annual) -> insurance_car_or_bike_annual
-17. Rent payments -> rent
-18. School fees -> school_fees
-19. Offline shopping (stores/POS) -> other_offline_spends
-
-Mandatory Fields for Each Key:
-- reward_type: Cashback / Reward Points / Miles / N/A
-- reward_rate: Exact value (e.g., "5%") or empty string if N/A
-- caps_limits: Monthly/annual caps or empty string
-- exclusions_conditions: MCC restrictions or exclusions or empty string
-- source_in_mitc: Page number + section (e.g., "Page 4, Section 3.1") or empty string
-- document_reference: Title of the document where rule was found or empty string
-- verification_date: "${currentDate}"
-- confidence: 0-100 (Integer) - 0 if N/A
-
-Output Format: Return ONLY a valid JSON object with this exact structure:
-{
-  "categories": {
-    "amazon_spends": { ...fields... },
-    "flipkart_spends": { ...fields... },
-    ...all 19 keys...
-  }
-}`;
-
-  // Build file contents array - fetch URLs and convert to base64
-  // OpenRouter's file-parser plugin requires actual file content, not URLs
-  const fileContents = await Promise.all(pdfInputs.map(async (input, index) => {
-    let base64Data: string;
-
-    // Check if it's a URL (from Supabase public storage)
-    if (input.startsWith('http://') || input.startsWith('https://')) {
-      console.log(`[ValidateKaro] Doc ${index + 1}: Fetching PDF from URL...`);
-      try {
-        const response = await fetch(input);
-        if (!response.ok) {
-          throw new Error(`Failed to fetch PDF: ${response.status} ${response.statusText}`);
-        }
-        const arrayBuffer = await response.arrayBuffer();
-        const bytes = new Uint8Array(arrayBuffer);
-        let binary = '';
-        for (let i = 0; i < bytes.byteLength; i++) {
-          binary += String.fromCharCode(bytes[i]);
-        }
-        base64Data = btoa(binary);
-        console.log(`[ValidateKaro] Doc ${index + 1}: Fetched and converted to base64 (${(base64Data.length / 1024).toFixed(1)} KB)`);
-      } catch (err) {
-        console.error(`[ValidateKaro] Failed to fetch PDF from URL:`, err);
-        throw new Error(`Failed to fetch PDF ${index + 1} from storage: ${err instanceof Error ? err.message : 'Unknown error'}`);
-      }
-    } else {
-      // It's already base64 - ensure proper format
-      base64Data = input.replace(/^data:application\/pdf;base64,/, '');
-      console.log(`[ValidateKaro] Doc ${index + 1}: Using existing base64 (${(base64Data.length / 1024).toFixed(1)} KB)`);
-    }
-
-    return {
-      type: "file" as const,
-      file: {
-        filename: `document_${index + 1}.pdf`,
-        file_data: `data:application/pdf;base64,${base64Data}`
-      }
-    };
-  }));
-
-  const messages = [
-    { role: "system", content: systemInstruction },
-    {
-      role: "user",
-      content: [
-        { type: "text", text: `Analyze the uploaded MITC documents for "${cardName}". Extract all reward categories and return ONLY valid JSON.` },
-        ...fileContents
-      ]
-    }
-  ];
-
-  // Calculate approximate request size
-  const requestBody = JSON.stringify({
-    model: "z-ai/glm-4.5v",
-    messages,
-    plugins: [{
-      id: "file-parser",
-      pdf: { engine: "pdf-text" }
-    }],
-    response_format: { type: "json_object" },
-    temperature: 0.1,
-    max_tokens: 8192
-  });
-
-  const requestSizeKB = (requestBody.length / 1024).toFixed(1);
-  const requestSizeMB = (requestBody.length / 1024 / 1024).toFixed(2);
-  console.log(`[ValidateKaro] Request size: ${requestSizeKB} KB (${requestSizeMB} MB)`);
-
-  if (requestBody.length > 10 * 1024 * 1024) {
-    throw new Error(`Request too large (${requestSizeMB} MB). OpenRouter limit is ~10MB. Please upload smaller PDFs or fewer files.`);
-  }
-
-  console.log(`[ValidateKaro] Sending request to OpenRouter (model: z-ai/glm-4.5v)...`);
-
-  const response = await fetch(OPENROUTER_ENDPOINT, {
-    method: "POST",
-    headers: {
-      "Authorization": `Bearer ${apiKey}`,
-      "HTTP-Referer": window.location.origin,
-      "X-Title": "ValidateKaro",
-      "Content-Type": "application/json"
-    },
-    body: requestBody
-  });
-
-  console.log(`[ValidateKaro] Response status: ${response.status}`);
-
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({}));
-    // Security: Only log error message, not full error object
-    console.error(`[ValidateKaro] API Error (${response.status}):`, errorData?.error?.message || 'Unknown error');
-
-    // Provide helpful error messages
-    const errorMsg = errorData?.error?.message || errorData?.error || '';
-    if (typeof errorMsg === 'string' && errorMsg.includes('too large')) {
-      throw new Error(`Request too large for OpenRouter. Total size: ${requestSizeMB} MB. Try uploading fewer or smaller PDFs.`);
-    }
-
-    throw new Error(`OpenRouter API Error: ${JSON.stringify(errorData?.error) || response.status}`);
-  }
-
-  const result = await response.json();
-  // Security: Don't log full response (may contain sensitive extracted data)
-  console.log(`[ValidateKaro] Response received successfully (${result.choices?.[0]?.message?.content?.length || 0} chars)`);
-  const text = result.choices?.[0]?.message?.content;
-
-  if (!text) {
-    throw new Error("Audit engine failure: No content returned from OpenRouter.");
-  }
-
-  try {
-    let jsonStr = text.trim();
-    const jsonMatch = jsonStr.match(/```(?:json)?\s*([\s\S]*?)```/);
-    if (jsonMatch) {
-      jsonStr = jsonMatch[1].trim();
-    }
-
-    const parsed = JSON.parse(jsonStr);
-
-    if (!parsed.categories) {
-      throw new Error("Validation failed: Schema root 'categories' missing.");
-    }
-
-    const normalizedCategories: Record<string, any> = {};
-    CANONICAL_KEYS.forEach(key => {
-      if (parsed.categories[key]) {
-        normalizedCategories[key] = {
-          reward_type: parsed.categories[key].reward_type || 'N/A',
-          reward_rate: parsed.categories[key].reward_rate || '',
-          caps_limits: parsed.categories[key].caps_limits || '',
-          exclusions_conditions: parsed.categories[key].exclusions_conditions || '',
-          source_in_mitc: parsed.categories[key].source_in_mitc || '',
-          document_reference: parsed.categories[key].document_reference || '',
-          verification_date: parsed.categories[key].verification_date || currentDate,
-          confidence: typeof parsed.categories[key].confidence === 'number' ? parsed.categories[key].confidence : 0
-        };
-      } else {
-        normalizedCategories[key] = {
-          reward_type: 'N/A',
-          reward_rate: '',
-          caps_limits: '',
-          exclusions_conditions: '',
-          source_in_mitc: '',
-          document_reference: '',
-          verification_date: currentDate,
-          confidence: 0
-        };
-      }
-    });
-
-    return {
-      categories: normalizedCategories,
-      token_usage: result.usage || { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0 }
-    };
-  } catch (e: any) {
-    console.error("JSON Parse Error:", e, "Raw text:", text);
-    throw new Error(`Data extraction failed: ${e.message || 'Model returned malformed JSON structure.'}`);
-  }
-}
-*/
 
 export function extractIssues(data: ValidationOutput): ValidationIssue[] {
   const issues: ValidationIssue[] = [];

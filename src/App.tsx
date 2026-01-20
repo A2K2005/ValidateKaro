@@ -387,11 +387,18 @@ const ActiveJobsOverlay: React.FC<{ jobs: ActiveJob[], onDismiss: (id: string) =
 
             {/* Recent logs */}
             {(job.logs && job.logs.length > 0) && (
-              <div className="mt-3 space-y-1 max-h-24 overflow-y-auto">
-                <p className="text-[10px] text-gray-600 font-bold uppercase tracking-wider">Recent Activity:</p>
-                {job.logs.slice(-3).map((log, idx) => (
-                  <p key={idx} className="text-xs text-gray-700 font-mono truncate">{log}</p>
-                ))}
+              <div className="mt-3 space-y-1.5">
+                <p className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Activity Log:</p>
+                <div className="max-h-28 overflow-y-auto space-y-1 scrollbar-thin">
+                  {job.logs.slice(-5).map((log, idx) => (
+                    <p
+                      key={`${idx}-${log}`}
+                      className={`text-[11px] text-gray-600 font-mono py-1 px-2 rounded-md bg-gray-50 border border-gray-100 truncate ${idx === job.logs!.slice(-5).length - 1 ? 'animate-pulse bg-violet-50 border-violet-200 text-violet-700' : ''}`}
+                    >
+                      {log}
+                    </p>
+                  ))}
+                </div>
               </div>
             )}
 
@@ -453,10 +460,20 @@ const App: React.FC = () => {
     setIsUploadModalOpen(false);
 
     const logs: AuditLog[] = [{ timestamp: new Date().toISOString(), action: 'INIT', details: 'Audit pipeline initiated.', status: 'info' }];
+    const jobLogs: string[] = [];
 
-    const updateJobStatus = (progress: number, status: string, details?: string) => {
+    const updateJobStatus = (progress: number, status: string, details?: string, addLog?: string) => {
       console.log(`📊 Progress: ${progress}% | Status: ${status}${details ? ` | ${details}` : ''}`);
-      setActiveJobs(prev => prev.map(j => j.id === jobId ? { ...j, progress, status } : j));
+      if (addLog) {
+        jobLogs.push(addLog);
+      }
+      setActiveJobs(prev => prev.map(j => j.id === jobId ? {
+        ...j,
+        progress,
+        status,
+        statusMessage: details || status,
+        logs: [...jobLogs]
+      } : j));
     };
 
     try {
@@ -465,15 +482,17 @@ const App: React.FC = () => {
       console.log('───────────────────────────────────────────────────────────');
       console.log('🔵 STEP 2: CREATING AUDIT RECORD IN DATABASE');
       console.log('───────────────────────────────────────────────────────────');
-      updateJobStatus(5, 'initializing', 'Creating audit record...');
+      updateJobStatus(5, 'initializing', 'Creating audit record...', '📝 Initializing audit...');
 
       const audit = await supabaseService.createAuditRecord(bank, name, jobId);
       const auditId = audit?.id;
 
       if (!auditId) {
         console.warn('⚠️ WARNING: Could not create audit record in Supabase. Will use localStorage only.');
+        updateJobStatus(8, 'initializing', 'Using local storage...', '⚠️ Supabase unavailable, using local');
       } else {
         console.log('✅ Audit record created with ID:', auditId);
+        updateJobStatus(8, 'initializing', 'Audit record created', '✅ Audit record created');
       }
 
       // STEP 3: Upload PDFs to Supabase Storage
@@ -481,7 +500,7 @@ const App: React.FC = () => {
       console.log('───────────────────────────────────────────────────────────');
       console.log('🔵 STEP 3: UPLOADING PDFs TO SUPABASE STORAGE');
       console.log('───────────────────────────────────────────────────────────');
-      updateJobStatus(10, 'uploading', 'Uploading PDFs to cloud storage...');
+      updateJobStatus(10, 'uploading', `Uploading ${files.length} PDFs...`, `📤 Uploading ${files.length} PDF(s)...`);
 
       const uploadStartTime = performance.now();
       const uploadPaths = await supabaseService.uploadBatch(files, jobId, auditId);
@@ -499,14 +518,14 @@ const App: React.FC = () => {
       }
 
       logs.push({ timestamp: new Date().toISOString(), action: 'UPLOAD', details: `${files.length} PDFs stored. Paths: ${uploadPaths.join(', ')}`, status: 'success' });
-      updateJobStatus(25, 'uploaded', `${files.length} files uploaded`);
+      updateJobStatus(25, 'uploaded', `${files.length} files uploaded`, `✅ ${files.length} files uploaded (${uploadDuration}s)`);
 
       // STEP 4: Get Public URLs from Supabase
       console.log('');
       console.log('───────────────────────────────────────────────────────────');
       console.log('🔵 STEP 4: GETTING PUBLIC URLs FROM SUPABASE');
       console.log('───────────────────────────────────────────────────────────');
-      updateJobStatus(30, 'converting', 'Getting file URLs...');
+      updateJobStatus(30, 'converting', 'Getting file URLs...', '🔗 Converting to public URLs...');
 
       const pdfUrls: string[] = [];
 
@@ -524,7 +543,7 @@ const App: React.FC = () => {
         console.log('✅ Got', pdfUrls.length, 'public URLs from Supabase');
       }
 
-      updateJobStatus(40, 'converted', 'PDFs ready for AI processing');
+      updateJobStatus(40, 'converted', 'PDFs ready for AI processing', `✅ ${pdfUrls.length} URLs ready`);
 
       // STEP 5: Call GLM API via OpenRouter
       console.log('');
@@ -534,16 +553,43 @@ const App: React.FC = () => {
       console.log('🌐 Endpoint: https://openrouter.ai/api/v1/chat/completions');
       console.log('🤖 Model: z-ai/glm-4.5-air');
       console.log('📄 Sending', pdfUrls.length, 'PDF(s) for analysis...');
-      updateJobStatus(50, 'analyzing', 'AI is analyzing documents...');
+      updateJobStatus(45, 'analyzing', 'Extracting text from PDFs...', '📄 Extracting text from PDFs...');
 
       const apiStartTime = performance.now();
       let aiData;
       try {
-        aiData = await processPDFsForCard(name, pdfUrls);
+        // Progress callback for chunk updates
+        const onAIProgress = (_step: string, detail: string) => {
+          // Parse chunk progress if available
+          const chunkMatch = detail.match(/(\d+)\/(\d+) chunks/);
+          if (chunkMatch) {
+            const completed = parseInt(chunkMatch[1]);
+            const total = parseInt(chunkMatch[2]);
+            const chunkProgress = 50 + Math.round((completed / total) * 20); // 50-70%
+            jobLogs.push(`🤖 ${detail}`);
+            setActiveJobs((prev: ActiveJob[]) => prev.map((j: ActiveJob) => j.id === jobId ? {
+              ...j,
+              progress: chunkProgress,
+              status: 'analyzing' as const,
+              statusMessage: detail,
+              logs: [...jobLogs]
+            } : j));
+          } else {
+            jobLogs.push(`🤖 ${detail}`);
+            setActiveJobs((prev: ActiveJob[]) => prev.map((j: ActiveJob) => j.id === jobId ? {
+              ...j,
+              statusMessage: detail,
+              logs: [...jobLogs]
+            } : j));
+          }
+        };
+
+        aiData = await processPDFsForCard(name, pdfUrls, onAIProgress);
         const apiDuration = ((performance.now() - apiStartTime) / 1000).toFixed(2);
         console.log('✅ AI API call successful in', apiDuration, 'seconds');
         console.log('📦 AI Response categories:', Object.keys(aiData.categories || {}));
         console.log('📊 Token usage:', aiData.token_usage);
+        updateJobStatus(70, 'scoring', 'AI analysis complete!', `✅ AI analysis complete (${apiDuration}s)`);
       } catch (apiError: any) {
         console.error('❌ AI API CALL FAILED:');
         console.error('  Error type:', apiError.name);
@@ -552,7 +598,7 @@ const App: React.FC = () => {
         throw apiError;
       }
 
-      updateJobStatus(70, 'scoring', 'Calculating confidence score...');
+      updateJobStatus(75, 'scoring', 'Calculating confidence score...', '📊 Calculating confidence score...');
 
       // STEP 6: Calculate Score and Extract Issues
       console.log('');
@@ -578,7 +624,7 @@ const App: React.FC = () => {
       console.log('🚦 Final Status:', finalStatus);
       console.log('🚪 Approval Gate:', gate);
 
-      updateJobStatus(85, 'saving', 'Saving results to database...');
+      updateJobStatus(85, 'saving', 'Saving results to database...', `💾 Score: ${score}% | Status: ${finalStatus}`);
 
       // STEP 7: Save to Database
       console.log('');

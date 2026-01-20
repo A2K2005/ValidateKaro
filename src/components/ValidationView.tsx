@@ -67,14 +67,14 @@ const CategoryCard: React.FC<{ label: string, keyName: string, data?: CategoryFi
               </div>
             </div>
 
-            <div className={`grid grid-cols-2 gap-4 transition-all duration-500 ease-out ${isExpanded ? 'opacity-100 max-h-40 mt-4' : 'opacity-0 max-h-0 overflow-hidden'}`}>
-              <div className="space-y-1.5">
+            <div className={`grid grid-cols-2 gap-4 transition-all duration-500 ease-out ${isExpanded ? 'opacity-100 max-h-[200px] mt-4' : 'opacity-0 max-h-0 overflow-hidden'}`}>
+              <div className="space-y-1.5 min-w-0">
                 <div className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Limits</div>
-                <div className="text-xs text-gray-700 font-medium leading-relaxed">{data.caps_limits || "No caps"}</div>
+                <div className="text-xs text-gray-700 font-medium leading-relaxed break-words overflow-y-auto max-h-24">{data.caps_limits || "No caps"}</div>
               </div>
-              <div className="space-y-1.5">
+              <div className="space-y-1.5 min-w-0">
                 <div className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Exclusions</div>
-                <div className="text-xs text-gray-700 font-medium leading-relaxed">{data.exclusions_conditions || "Standard terms"}</div>
+                <div className="text-xs text-gray-700 font-medium leading-relaxed break-words overflow-y-auto max-h-24">{data.exclusions_conditions || "Standard terms"}</div>
               </div>
             </div>
 
