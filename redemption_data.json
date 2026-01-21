@@ -1,0 +1,1390 @@
+{
+  "cardRewardTypes": {
+    "mrcc": "rewards",
+    "amex_platinum_travel": "rewards",
+    "amex_smart_earn": "rewards",
+    "au_altura": "cashback",
+    "au_zenith": "rewards",
+    "au_zenith_plus": "rewards",
+    "axis_airtel_cc": "cashback",
+    "axis_flipkart": "cashback",
+    "axis_indian_oil_rupay": "rewards",
+    "axis_magnus": "rewards",
+    "axis_magnus_burgundy": "rewards",
+    "axis_magnus_burgundy_credit_card": "rewards",
+    "axis_reserve": "rewards",
+    "axis_atlas": "rewards",
+    "axis_my_zone": "rewards",
+    "axis_vistara": "rewards",
+    "hdfc_indian_oil": "rewards",
+    "hdfc_infinia": "rewards",
+    "hdfc_millenia": "rewards",
+    "hdfc_swiggy": "cashback",
+    "hdfc_tata_neu": "cashback",
+    "hdfc_shoppers_stop": "cashback",
+    "sbi_bpcl_octane": "rewards"
+  },
+  "partners": [
+    {
+      "partnerId": "air_india",
+      "partnerName": "Flying Returns (Air India)",
+      "category": "airline",
+      "subCategory": "domestic",
+      "supportedBy": [
+        {
+          "bankOrProgram": "AU ALTURA",
+          "mode": "transfer"
+        }
+      ],
+      "conversionRatios": [
+        {
+          "sourceProgram": "AU ALTURA",
+          "ratio": "6:1",
+          "minimumPoints": 100
+        }
+      ],
+      "constraints": [
+        "ratio_corrected_from_4_1_to_6_1"
+      ],
+      "valuationReference": {
+        "value": 0.99,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "$0.012 per mile"
+      }
+    },
+    {
+      "partnerId": "club_vistara",
+      "partnerName": "Club Vistara",
+      "category": "airline",
+      "subCategory": "domestic",
+      "supportedBy": [],
+      "conversionRatios": [],
+      "constraints": [
+        "legacy_program",
+        "merging_into_air_india"
+      ],
+      "valuationReference": {
+        "value": 1.24,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "$0.015 per mile, Current USD to INR Rate: 90.9612"
+      }
+    },
+    {
+      "partnerId": "british_airways_avios",
+      "partnerName": "British Airways Executive Club (Avios)",
+      "category": "airline",
+      "subCategory": "international",
+      "supportedBy": [
+        {
+          "bankOrProgram": "Axis_Magnus",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Magnus_Burgundy",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Reserve",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Atlas",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "HDFC_Infinia",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "HDFC_Diners_Black",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "MRCC",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "AMEX PLATINUM TRAVEL",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "AMEX SMART EARN",
+          "mode": "transfer"
+        }
+      ],
+      "conversionRatios": [
+        {
+          "sourceProgram": "Axis_Magnus",
+          "ratio": "5:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Magnus_Burgundy",
+          "ratio": "5:4",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Reserve",
+          "ratio": "5:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Atlas",
+          "ratio": "1:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "HDFC_Infinia",
+          "ratio": "100:50",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "HDFC_Diners_Black",
+          "ratio": "100:50",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "MRCC",
+          "ratio": "2:1",
+          "minimumPoints": 1200
+        },
+        {
+          "sourceProgram": "AMEX PLATINUM TRAVEL",
+          "ratio": "2:1",
+          "minimumPoints": 1200
+        },
+        {
+          "sourceProgram": "AMEX SMART EARN",
+          "ratio": "2:1",
+          "minimumPoints": 1200
+        }
+      ],
+      "constraints": [],
+      "valuationReference": {
+        "value": 0.91,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "$0.011 per mile"
+      }
+    },
+    {
+      "partnerId": "qatar_privilege_club_avios",
+      "partnerName": "Qatar Airways Privilege Club (Avios)",
+      "category": "airline",
+      "subCategory": "international",
+      "supportedBy": [
+        {
+          "bankOrProgram": "Axis_Magnus",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Magnus_Burgundy",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Reserve",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Atlas",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "HDFC_Infinia",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "HDFC_Diners_Black",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "MRCC",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "AMEX PLATINUM TRAVEL",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "AMEX SMART EARN",
+          "mode": "transfer"
+        }
+      ],
+      "conversionRatios": [
+        {
+          "sourceProgram": "Axis_Magnus",
+          "ratio": "5:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Magnus_Burgundy",
+          "ratio": "5:4",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Reserve",
+          "ratio": "5:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Atlas",
+          "ratio": "1:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "HDFC_Infinia",
+          "ratio": "100:50",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "HDFC_Diners_Black",
+          "ratio": "100:50",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "MRCC",
+          "ratio": "2:1",
+          "minimumPoints": 500
+        },
+        {
+          "sourceProgram": "AMEX PLATINUM TRAVEL",
+          "ratio": "2:1",
+          "minimumPoints": 500
+        },
+        {
+          "sourceProgram": "AMEX SMART EARN",
+          "ratio": "2:1",
+          "minimumPoints": 500
+        }
+      ],
+      "constraints": [],
+      "valuationReference": {
+        "value": 0.91,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "Linked to Avios ecosystem"
+      }
+    },
+    {
+      "partnerId": "etihad_guest",
+      "partnerName": "Etihad Guest",
+      "category": "airline",
+      "subCategory": "international",
+      "supportedBy": [
+        {
+          "bankOrProgram": "Axis_Magnus",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Magnus_Burgundy",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Reserve",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Atlas",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "HDFC_Infinia",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "HDFC_Diners_Black",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "SBI_MILES",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "MRCC",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "AMEX PLATINUM TRAVEL",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "AMEX SMART EARN",
+          "mode": "transfer"
+        }
+      ],
+      "conversionRatios": [
+        {
+          "sourceProgram": "Axis_Magnus",
+          "ratio": "5:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Magnus_Burgundy",
+          "ratio": "5:4",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Reserve",
+          "ratio": "5:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Atlas",
+          "ratio": "1:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "HDFC_Infinia",
+          "ratio": "100:50",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "HDFC_Diners_Black",
+          "ratio": "100:50",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "SBI_MILES",
+          "ratio": "1:1",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "MRCC",
+          "ratio": "2:1",
+          "minimumPoints": 1600
+        },
+        {
+          "sourceProgram": "AMEX PLATINUM TRAVEL",
+          "ratio": "2:1",
+          "minimumPoints": 1600
+        },
+        {
+          "sourceProgram": "AMEX SMART EARN",
+          "ratio": "2:1",
+          "minimumPoints": 1600
+        }
+      ],
+      "constraints": [],
+      "valuationReference": {
+        "value": 0.82,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "$0.010 per mile"
+      }
+    },
+    {
+      "partnerId": "singapore_krisflyer",
+      "partnerName": "Singapore Airlines KrisFlyer",
+      "category": "airline",
+      "subCategory": "international",
+      "supportedBy": [
+        {
+          "bankOrProgram": "Axis_Magnus",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Magnus_Burgundy",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Reserve",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Atlas",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "HDFC_Infinia",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "HDFC_Diners_Black",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "MRCC",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "AMEX PLATINUM TRAVEL",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "AMEX SMART EARN",
+          "mode": "transfer"
+        }
+      ],
+      "conversionRatios": [
+        {
+          "sourceProgram": "Axis_Magnus",
+          "ratio": "5:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Magnus_Burgundy",
+          "ratio": "5:4",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Reserve",
+          "ratio": "5:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Atlas",
+          "ratio": "1:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "HDFC_Infinia",
+          "ratio": "100:100",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "HDFC_Diners_Black",
+          "ratio": "100:100",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "MRCC",
+          "ratio": "2:1",
+          "minimumPoints": 800
+        },
+        {
+          "sourceProgram": "AMEX PLATINUM TRAVEL",
+          "ratio": "2:1",
+          "minimumPoints": 800
+        },
+        {
+          "sourceProgram": "AMEX SMART EARN",
+          "ratio": "2:1",
+          "minimumPoints": 800
+        }
+      ],
+      "constraints": [],
+      "valuationReference": {
+        "value": 1.07,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "$0.013 per mile"
+      }
+    },
+    {
+      "partnerId": "intermiles",
+      "partnerName": "InterMiles",
+      "category": "airline",
+      "subCategory": "domestic",
+      "supportedBy": [
+        {
+          "bankOrProgram": "HDFC_Infinia",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "HDFC_Diners_Black",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "ICICI_Rewards",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "IndusInd_Rewards",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Kotak_Rewards",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "MRCC",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "AMEX PLATINUM TRAVEL",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "AMEX SMART EARN",
+          "mode": "transfer"
+        }
+      ],
+      "conversionRatios": [
+        {
+          "sourceProgram": "HDFC_Infinia",
+          "ratio": "100:100",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "HDFC_Diners_Black",
+          "ratio": "100:100",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "ICICI_Rewards",
+          "ratio": "300:200",
+          "minimumPoints": 300
+        },
+        {
+          "sourceProgram": "IndusInd_Rewards",
+          "ratio": "1:1",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Kotak_Rewards",
+          "ratio": "1:1",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "MRCC",
+          "ratio": "2:1",
+          "minimumPoints": 800
+        },
+        {
+          "sourceProgram": "AMEX PLATINUM TRAVEL",
+          "ratio": "2:1",
+          "minimumPoints": 800
+        },
+        {
+          "sourceProgram": "AMEX SMART EARN",
+          "ratio": "2:1",
+          "minimumPoints": 800
+        }
+      ],
+      "constraints": [],
+      "valuationReference": {
+        "value": 0.30,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "Variable value"
+      }
+    },
+    {
+      "partnerId": "virgin_atlantic_flying_club",
+      "partnerName": "Virgin Atlantic Flying Club",
+      "category": "airline",
+      "subCategory": "international",
+      "supportedBy": [
+        {
+          "bankOrProgram": "HDFC_Infinia",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "HDFC_Diners_Black",
+          "mode": "transfer"
+        }
+      ],
+      "conversionRatios": [
+        {
+          "sourceProgram": "HDFC_Infinia",
+          "ratio": "100:50",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "HDFC_Diners_Black",
+          "ratio": "100:50",
+          "minimumPoints": null
+        }
+      ],
+      "constraints": [],
+      "valuationReference": {
+        "value": 0.85,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "$0.010 per mile"
+      }
+    },
+    {
+      "partnerId": "marriott_bonvoy",
+      "partnerName": "Marriott Bonvoy",
+      "category": "hotel",
+      "subCategory": null,
+      "supportedBy": [
+        {
+          "bankOrProgram": "Axis_Magnus_Burgundy",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "HDFC_Infinia",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "HDFC_Diners_Black",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "MRCC",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "AMEX PLATINUM TRAVEL",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "AMEX SMART EARN",
+          "mode": "transfer"
+        }
+      ],
+      "conversionRatios": [
+        {
+          "sourceProgram": "Axis_Magnus_Burgundy",
+          "ratio": "5:4",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "HDFC_Infinia",
+          "ratio": "100:50",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "HDFC_Diners_Black",
+          "ratio": "100:50",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "MRCC",
+          "ratio": "1:1",
+          "minimumPoints": 100
+        },
+        {
+          "sourceProgram": "AMEX PLATINUM TRAVEL",
+          "ratio": "1:1",
+          "minimumPoints": 100
+        },
+        {
+          "sourceProgram": "AMEX SMART EARN",
+          "ratio": "1:1",
+          "minimumPoints": 100
+        }
+      ],
+      "constraints": [],
+      "valuationReference": {
+        "value": 0.55,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "$0.007 per point"
+      }
+    },
+    {
+      "partnerId": "hilton_honors",
+      "partnerName": "Hilton Honors",
+      "category": "hotel",
+      "subCategory": null,
+      "supportedBy": [
+        {
+          "bankOrProgram": "MRCC",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "AMEX PLATINUM TRAVEL",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "AMEX SMART EARN",
+          "mode": "transfer"
+        }
+      ],
+      "conversionRatios": [
+        {
+          "sourceProgram": "MRCC",
+          "ratio": "10:9",
+          "minimumPoints": 1000
+        },
+        {
+          "sourceProgram": "AMEX PLATINUM TRAVEL",
+          "ratio": "10:9",
+          "minimumPoints": 1000
+        },
+        {
+          "sourceProgram": "AMEX SMART EARN",
+          "ratio": "10:9",
+          "minimumPoints": 1000
+        }
+      ],
+      "constraints": [],
+      "valuationReference": {
+        "value": 0.25,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "0.3–0.36 US cents/pt (avg. ₹0.27)"
+      }
+    },
+    {
+      "partnerId": "bigbasket_voucher",
+      "partnerName": "BigBasket",
+      "category": "voucher",
+      "subCategory": null,
+      "supportedBy": [
+        {
+          "bankOrProgram": "AMEX SMART EARN",
+          "mode": "voucher"
+        }
+      ],
+      "conversionRatios": [
+        {
+          "sourceProgram": "AMEX SMART EARN",
+          "ratio": "1000:250",
+          "minimumPoints": null
+        }
+      ],
+      "constraints": [],
+      "valuationReference": {
+        "value": 0.25,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "1,000 pts → ₹250 voucher"
+      }
+    },
+    {
+      "partnerId": "flipkart_voucher",
+      "partnerName": "Flipkart",
+      "category": "voucher",
+      "subCategory": null,
+      "supportedBy": [
+        {
+          "bankOrProgram": "AMEX SMART EARN",
+          "mode": "voucher"
+        },
+        {
+          "bankOrProgram": "MRCC",
+          "mode": "voucher"
+        }
+      ],
+      "conversionRatios": [
+        {
+          "sourceProgram": "AMEX SMART EARN",
+          "ratio": "1000:250",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "MRCC",
+          "ratio": "18000:6000",
+          "minimumPoints": null
+        }
+      ],
+      "constraints": [],
+      "valuationReference": {
+        "value": null,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "AMEX SMART EARN: 1,000 pts → ₹250; MRCC: 18,000 pts → ₹6,000"
+      }
+    },
+    {
+      "partnerId": "insta_vouchers",
+      "partnerName": "Insta Vouchers",
+      "category": "voucher",
+      "subCategory": null,
+      "supportedBy": [
+        {
+          "bankOrProgram": "AMEX SMART EARN",
+          "mode": "voucher"
+        },
+        {
+          "bankOrProgram": "MRCC",
+          "mode": "voucher"
+        }
+      ],
+      "conversionRatios": [
+        {
+          "sourceProgram": "AMEX SMART EARN",
+          "ratio": "1000:250",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "MRCC",
+          "ratio": "1000:250",
+          "minimumPoints": null
+        }
+      ],
+      "constraints": [],
+      "valuationReference": {
+        "value": 0.25,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "1,000 pts → ₹250 voucher"
+      }
+    },
+    {
+      "partnerId": "myntra_voucher",
+      "partnerName": "Myntra",
+      "category": "voucher",
+      "subCategory": null,
+      "supportedBy": [
+        {
+          "bankOrProgram": "AMEX SMART EARN",
+          "mode": "voucher"
+        },
+        {
+          "bankOrProgram": "MRCC",
+          "mode": "voucher"
+        }
+      ],
+      "conversionRatios": [
+        {
+          "sourceProgram": "AMEX SMART EARN",
+          "ratio": "1000:250",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "MRCC",
+          "ratio": "18000:7000",
+          "minimumPoints": null
+        }
+      ],
+      "constraints": [],
+      "valuationReference": {
+        "value": null,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "AMEX SMART EARN: 1,000 pts → ₹250; MRCC: 18,000 pts → ₹7,000"
+      }
+    },
+    {
+      "partnerId": "postcard_hotels_voucher",
+      "partnerName": "Postcard Hotels",
+      "category": "voucher",
+      "subCategory": null,
+      "supportedBy": [
+        {
+          "bankOrProgram": "AMEX PLATINUM TRAVEL",
+          "mode": "voucher"
+        }
+      ],
+      "conversionRatios": [
+        {
+          "sourceProgram": "AMEX PLATINUM TRAVEL",
+          "ratio": "20000:10000",
+          "minimumPoints": null
+        }
+      ],
+      "constraints": [],
+      "valuationReference": {
+        "value": 0.5,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "20,000 pts → ₹10,000 voucher"
+      }
+    },
+    {
+      "partnerId": "reliance_digital_voucher",
+      "partnerName": "Reliance Digital",
+      "category": "voucher",
+      "subCategory": null,
+      "supportedBy": [
+        {
+          "bankOrProgram": "AMEX SMART EARN",
+          "mode": "voucher"
+        },
+        {
+          "bankOrProgram": "MRCC",
+          "mode": "voucher"
+        }
+      ],
+      "conversionRatios": [
+        {
+          "sourceProgram": "AMEX SMART EARN",
+          "ratio": "1000:250",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "MRCC",
+          "ratio": "18000:6000",
+          "minimumPoints": null
+        }
+      ],
+      "constraints": [],
+      "valuationReference": {
+        "value": null,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "AMEX SMART EARN: 1,000 pts → ₹250; MRCC: 18,000 pts → ₹6,000"
+      }
+    },
+    {
+      "partnerId": "shoppers_stop_voucher",
+      "partnerName": "Shoppers Stop",
+      "category": "voucher",
+      "subCategory": null,
+      "supportedBy": [
+        {
+          "bankOrProgram": "MRCC",
+          "mode": "voucher"
+        }
+      ],
+      "conversionRatios": [
+        {
+          "sourceProgram": "MRCC",
+          "ratio": "24000:10000",
+          "minimumPoints": null
+        }
+      ],
+      "constraints": [],
+      "valuationReference": {
+        "value": 0.4166666666666667,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "24,000 pts → ₹10,000 voucher"
+      }
+    },
+    {
+      "partnerId": "taj_voucher",
+      "partnerName": "Taj",
+      "category": "voucher",
+      "subCategory": null,
+      "supportedBy": [
+        {
+          "bankOrProgram": "AMEX PLATINUM TRAVEL",
+          "mode": "voucher"
+        },
+        {
+          "bankOrProgram": "AMEX SMART EARN",
+          "mode": "voucher"
+        },
+        {
+          "bankOrProgram": "MRCC",
+          "mode": "voucher"
+        }
+      ],
+      "conversionRatios": [
+        {
+          "sourceProgram": "AMEX PLATINUM TRAVEL",
+          "ratio": "25000:10000",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "AMEX SMART EARN",
+          "ratio": "1000:250",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "MRCC",
+          "ratio": "18000:9000",
+          "minimumPoints": null
+        }
+      ],
+      "constraints": [],
+      "valuationReference": {
+        "value": null,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "AMEX PLATINUM TRAVEL: 25,000 pts → ₹10,000; AMEX SMART EARN: 1,000 pts → ₹250; MRCC: 18,000 pts → ₹9,000"
+      }
+    },
+    {
+      "partnerId": "tanishq_voucher",
+      "partnerName": "Tanishq",
+      "category": "voucher",
+      "subCategory": null,
+      "supportedBy": [
+        {
+          "bankOrProgram": "AMEX SMART EARN",
+          "mode": "voucher"
+        },
+        {
+          "bankOrProgram": "MRCC",
+          "mode": "voucher"
+        }
+      ],
+      "conversionRatios": [
+        {
+          "sourceProgram": "AMEX SMART EARN",
+          "ratio": "1000:250",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "MRCC",
+          "ratio": "24000:9000",
+          "minimumPoints": null
+        }
+      ],
+      "constraints": [],
+      "valuationReference": {
+        "value": null,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "AMEX SMART EARN: 1,000 pts → ₹250; MRCC: 24,000 pts → ₹9,000"
+      }
+    },
+    {
+      "partnerId": "world_of_hyatt",
+      "partnerName": "World of Hyatt",
+      "category": "hotel",
+      "subCategory": "international",
+      "supportedBy": [],
+      "conversionRatios": [],
+      "constraints": [
+        "premium_program"
+      ],
+      "valuationReference": {
+        "value": 1.50,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "~$0.018 per point, highly variable"
+      }
+    },
+    {
+      "partnerId": "choice_privileges",
+      "partnerName": "Choice Privileges",
+      "category": "hotel",
+      "subCategory": "international",
+      "supportedBy": [],
+      "conversionRatios": [],
+      "constraints": [],
+      "valuationReference": {
+        "value": 0.50,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "~$0.006 per point"
+      }
+    },
+    {
+      "partnerId": "best_western_rewards",
+      "partnerName": "Best Western Rewards",
+      "category": "hotel",
+      "subCategory": "international",
+      "supportedBy": [],
+      "conversionRatios": [],
+      "constraints": [],
+      "valuationReference": {
+        "value": 0.40,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "~$0.005 per point"
+      }
+    },
+    {
+      "partnerId": "taj_neupass",
+      "partnerName": "Taj NeuPass",
+      "category": "hotel",
+      "subCategory": "india",
+      "supportedBy": [],
+      "conversionRatios": [],
+      "constraints": [
+        "ihcl_group"
+      ],
+      "valuationReference": {
+        "value": 1.00,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "Covers Taj, Vivanta, SeleQtions, Ginger"
+      }
+    },
+    {
+      "partnerId": "itc_club_itc",
+      "partnerName": "ITC Club ITC",
+      "category": "hotel",
+      "subCategory": "india",
+      "supportedBy": [],
+      "conversionRatios": [],
+      "constraints": [
+        "itc_hotels_group"
+      ],
+      "valuationReference": {
+        "value": 1.00,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "Covers ITC Hotels, Welcomhotel, Fortune, Storii"
+      }
+    },
+    {
+      "partnerId": "oberoi_one",
+      "partnerName": "Oberoi One",
+      "category": "hotel",
+      "subCategory": "india",
+      "supportedBy": [],
+      "conversionRatios": [],
+      "constraints": [
+        "oberoi_group"
+      ],
+      "valuationReference": {
+        "value": 1.50,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "Covers Oberoi Hotels & Resorts, Trident Hotels"
+      }
+    },
+    {
+      "partnerId": "leela_discovery",
+      "partnerName": "Leela DISCOVERY",
+      "category": "hotel",
+      "subCategory": "india",
+      "supportedBy": [],
+      "conversionRatios": [],
+      "constraints": [
+        "gha_member"
+      ],
+      "valuationReference": {
+        "value": 1.20,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "Part of Global Hotel Alliance"
+      }
+    },
+    {
+      "partnerId": "sarovar_rewards",
+      "partnerName": "Sarovar Rewards",
+      "category": "hotel",
+      "subCategory": "india",
+      "supportedBy": [],
+      "conversionRatios": [],
+      "constraints": [],
+      "valuationReference": {
+        "value": 0.80,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "Sarovar Hotels & Resorts"
+      }
+    },
+    {
+      "partnerId": "lemon_tree_infinity",
+      "partnerName": "Lemon Tree Infinity Rewardz",
+      "category": "hotel",
+      "subCategory": "india",
+      "supportedBy": [],
+      "conversionRatios": [],
+      "constraints": [],
+      "valuationReference": {
+        "value": 0.60,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "Lemon Tree Hotels, Red Fox Hotels"
+      }
+    },
+    {
+      "partnerId": "royal_orchid_wanderlust",
+      "partnerName": "Royal Orchid Wanderlust",
+      "category": "hotel",
+      "subCategory": "india",
+      "supportedBy": [],
+      "conversionRatios": [],
+      "constraints": [],
+      "valuationReference": {
+        "value": 0.70,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "Royal Orchid Hotels, Regenta Hotels"
+      }
+    },
+    {
+      "partnerId": "sterling_rewards",
+      "partnerName": "Sterling Rewards",
+      "category": "hotel",
+      "subCategory": "india",
+      "supportedBy": [],
+      "conversionRatios": [],
+      "constraints": [],
+      "valuationReference": {
+        "value": 0.50,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "Sterling Holidays Resorts"
+      }
+    },
+    {
+      "partnerId": "lalit_loyalty",
+      "partnerName": "The Lalit Loyalty",
+      "category": "hotel",
+      "subCategory": "india",
+      "supportedBy": [],
+      "conversionRatios": [],
+      "constraints": [],
+      "valuationReference": {
+        "value": 1.00,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "The Lalit Hotels, Palaces & Resorts"
+      }
+    },
+    {
+      "partnerId": "fortune_privilege",
+      "partnerName": "Fortune Privilege",
+      "category": "hotel",
+      "subCategory": "india",
+      "supportedBy": [],
+      "conversionRatios": [],
+      "constraints": [
+        "itc_subsidiary"
+      ],
+      "valuationReference": {
+        "value": 0.80,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "Fortune Hotels (ITC Group)"
+      }
+    },
+    {
+      "partnerId": "neemrana_friend",
+      "partnerName": "Neemrana Friend of Neemrana",
+      "category": "hotel",
+      "subCategory": "india",
+      "supportedBy": [],
+      "conversionRatios": [],
+      "constraints": [
+        "heritage_hotels"
+      ],
+      "valuationReference": {
+        "value": 0.90,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "Neemrana Hotels"
+      }
+    },
+    {
+      "partnerId": "park_preferred",
+      "partnerName": "The Park Preferred",
+      "category": "hotel",
+      "subCategory": "india",
+      "supportedBy": [],
+      "conversionRatios": [],
+      "constraints": [],
+      "valuationReference": {
+        "value": 0.80,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "The Park Hotels"
+      }
+    },
+    {
+      "partnerId": "trident_privilege",
+      "partnerName": "Trident Privilege",
+      "category": "hotel",
+      "subCategory": "india",
+      "supportedBy": [],
+      "conversionRatios": [],
+      "constraints": [
+        "oberoi_group"
+      ],
+      "valuationReference": {
+        "value": 0.90,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "Trident Hotels (Oberoi Group)"
+      }
+    },
+    {
+      "partnerId": "air_canada_aeroplan",
+      "partnerName": "Air Canada Aeroplan",
+      "category": "airline",
+      "subCategory": "international",
+      "supportedBy": [
+        {
+          "bankOrProgram": "SBI_MILES",
+          "mode": "transfer"
+        }
+      ],
+      "conversionRatios": [
+        {
+          "sourceProgram": "SBI_MILES",
+          "ratio": "1:1",
+          "minimumPoints": null
+        }
+      ],
+      "constraints": [],
+      "valuationReference": {
+        "value": 1.10,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "$0.013 per mile"
+      }
+    },
+    {
+      "partnerId": "japan_airlines_mileage_bank",
+      "partnerName": "Japan Airlines Mileage Bank",
+      "category": "airline",
+      "subCategory": "international",
+      "supportedBy": [],
+      "conversionRatios": [],
+      "constraints": [
+        "limited_access_india"
+      ],
+      "valuationReference": {
+        "value": 1.00,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "$0.012 per mile"
+      }
+    },
+    {
+      "partnerId": "thai_royal_orchid_plus",
+      "partnerName": "Thai Airways Royal Orchid Plus",
+      "category": "airline",
+      "subCategory": "international",
+      "supportedBy": [],
+      "conversionRatios": [],
+      "constraints": [],
+      "valuationReference": {
+        "value": 0.90,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "$0.011 per mile"
+      }
+    },
+    {
+      "partnerId": "ethiopian_shebamiles",
+      "partnerName": "Ethiopian Airlines ShebaMiles",
+      "category": "airline",
+      "subCategory": "international",
+      "supportedBy": [],
+      "conversionRatios": [],
+      "constraints": [],
+      "valuationReference": {
+        "value": 0.70,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "$0.008 per mile"
+      }
+    },
+    {
+      "partnerId": "malaysia_enrich",
+      "partnerName": "Malaysia Airlines Enrich",
+      "category": "airline",
+      "subCategory": "international",
+      "supportedBy": [],
+      "conversionRatios": [],
+      "constraints": [],
+      "valuationReference": {
+        "value": 0.80,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "$0.010 per mile"
+      }
+    },
+    {
+      "partnerId": "lufthansa_miles_more",
+      "partnerName": "Lufthansa Miles & More",
+      "category": "airline",
+      "subCategory": "international",
+      "supportedBy": [],
+      "conversionRatios": [],
+      "constraints": [
+        "rare_access_india"
+      ],
+      "valuationReference": {
+        "value": 1.00,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "$0.012 per mile"
+      }
+    },
+    {
+      "partnerId": "delta_skymiles",
+      "partnerName": "Delta SkyMiles",
+      "category": "airline",
+      "subCategory": "international",
+      "supportedBy": [],
+      "conversionRatios": [],
+      "constraints": [
+        "rare_access_marriott"
+      ],
+      "valuationReference": {
+        "value": 0.90,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "$0.011 per mile"
+      }
+    }
+  ]
+}

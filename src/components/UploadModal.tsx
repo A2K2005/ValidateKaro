@@ -204,13 +204,13 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onStart, act
     ? CREDIT_CARDS.filter(card => card.toLowerCase().includes(cardName.toLowerCase())).slice(0, 10)
     : CREDIT_CARDS.slice(0, 10);
 
-  // Reset highlighted index when filtered list changes
+  // Reset highlighted index when filtered list changes - only if needed
   useEffect(() => {
-    setHighlightedBankIndex(0);
+    if (highlightedBankIndex !== 0) setHighlightedBankIndex(0);
   }, [searchQuery]);
 
   useEffect(() => {
-    setHighlightedCardIndex(0);
+    if (highlightedCardIndex !== 0) setHighlightedCardIndex(0);
   }, [cardName]);
 
   useEffect(() => {
@@ -236,10 +236,16 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onStart, act
 
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      setHighlightedBankIndex(prev => Math.min(prev + 1, filteredBanks.length - 1));
+      const newIndex = Math.min(highlightedBankIndex + 1, filteredBanks.length - 1);
+      setHighlightedBankIndex(newIndex);
+      // Auto-scroll into view
+      document.getElementById(`bank-item-${newIndex}`)?.scrollIntoView({ block: 'nearest' });
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
-      setHighlightedBankIndex(prev => Math.max(prev - 1, 0));
+      const newIndex = Math.max(highlightedBankIndex - 1, 0);
+      setHighlightedBankIndex(newIndex);
+      // Auto-scroll into view
+      document.getElementById(`bank-item-${newIndex}`)?.scrollIntoView({ block: 'nearest' });
     } else if (e.key === 'Enter' && filteredBanks[highlightedBankIndex]) {
       e.preventDefault();
       setBankName(filteredBanks[highlightedBankIndex]);
@@ -257,10 +263,16 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onStart, act
 
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      setHighlightedCardIndex(prev => Math.min(prev + 1, filteredCards.length - 1));
+      const newIndex = Math.min(highlightedCardIndex + 1, filteredCards.length - 1);
+      setHighlightedCardIndex(newIndex);
+      // Auto-scroll into view
+      document.getElementById(`card-item-${newIndex}`)?.scrollIntoView({ block: 'nearest' });
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
-      setHighlightedCardIndex(prev => Math.max(prev - 1, 0));
+      const newIndex = Math.max(highlightedCardIndex - 1, 0);
+      setHighlightedCardIndex(newIndex);
+      // Auto-scroll into view
+      document.getElementById(`card-item-${newIndex}`)?.scrollIntoView({ block: 'nearest' });
     } else if (e.key === 'Enter' && filteredCards[highlightedCardIndex]) {
       e.preventDefault();
       setCardName(filteredCards[highlightedCardIndex]);
@@ -385,16 +397,19 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onStart, act
                       filteredBanks.map((bank, index) => (
                         <button
                           key={bank}
+                          id={`bank-item-${index}`}
                           onClick={() => { setBankName(bank); setIsBankOpen(false); setSearchQuery(''); }}
-                          className={`w-full px-4 py-2.5 text-left text-sm flex items-center justify-between ${
-                            index === highlightedBankIndex
-                              ? 'bg-violet-100 text-violet-900'
-                              : 'text-gray-700'
+                          onMouseEnter={() => {
+                            if (highlightedBankIndex !== index) setHighlightedBankIndex(index);
+                          }}
+                          className={`w-full px-4 py-2.5 text-left text-sm flex items-center justify-between ${index === highlightedBankIndex
+                              ? 'bg-violet-600 text-white'
+                              : 'text-gray-700 hover:bg-violet-50'
                             }`}
                         >
                           <span>{bank}</span>
                           {bankName === bank && (
-                            <svg className="w-4 h-4 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" /></svg>
+                            <svg className={`w-4 h-4 ${index === highlightedBankIndex ? 'text-white' : 'text-violet-600'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" /></svg>
                           )}
                         </button>
                       ))
@@ -431,11 +446,14 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onStart, act
                       filteredCards.map((card, index) => (
                         <button
                           key={card}
+                          id={`card-item-${index}`}
                           onClick={() => { setCardName(card); setIsCardOpen(false); }}
-                          className={`w-full px-4 py-2.5 text-left text-sm flex items-center justify-between ${
-                            index === highlightedCardIndex
-                              ? 'bg-violet-100 text-violet-900'
-                              : 'text-gray-700'
+                          onMouseEnter={() => {
+                            if (highlightedCardIndex !== index) setHighlightedCardIndex(index);
+                          }}
+                          className={`w-full px-4 py-2.5 text-left text-sm flex items-center justify-between ${index === highlightedCardIndex
+                              ? 'bg-violet-600 text-white'
+                              : 'text-gray-700 hover:bg-violet-50'
                             }`}
                         >
                           <span>{card}</span>
@@ -455,8 +473,8 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onStart, act
             </div>
             <div
               className={`border-2 border-dashed rounded-xl p-8 text-center transition-all duration-300 ease-out cursor-pointer ${isDragging
-                  ? 'bg-violet-50 border-violet-400'
-                  : 'bg-gray-50 border-gray-300 hover:border-gray-400 hover:bg-gray-100'
+                ? 'bg-violet-50 border-violet-400'
+                : 'bg-gray-50 border-gray-300 hover:border-gray-400 hover:bg-gray-100'
                 }`}
               onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
               onDragLeave={() => setIsDragging(false)}

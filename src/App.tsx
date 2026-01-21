@@ -644,7 +644,8 @@ const App: React.FC = () => {
         data: aiData,
         issues,
         logs,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        pdf_storage_paths: uploadPaths
       };
 
       console.log('💾 Saving process object...');
@@ -736,15 +737,157 @@ const App: React.FC = () => {
     }
   };
 
+  const reAnalyzeExistingCard = async (process: ValidationProcess) => {
+    const { process_id: jobId, card_name: name, bank_name: bank, pdf_storage_paths } = process;
+
+    if (activeJobs.some(j => j.id === jobId && j.status !== 'complete' && j.status !== 'failed')) {
+      alert("Analysis already in progress for this card!");
+      return;
+    }
+
+    // Initialize Job
+    const jobLogs: string[] = ['🔄 Re-analysis initialized'];
+    const newJob: ActiveJob = {
+      id: jobId,
+      cardName: name,
+      bankName: bank,
+      progress: 5,
+      status: 'initializing',
+      statusMessage: 'Fetching stored PDFs...'
+    };
+
+    setActiveJobs(prev => {
+      const exists = prev.some(j => j.id === jobId);
+      return exists ? prev.map(j => j.id === jobId ? newJob : j) : [...prev, newJob];
+    });
+
+    const updateJobStatus = (progress: number, status: string, details?: string, addLog?: string) => {
+      if (addLog) jobLogs.push(addLog);
+      setActiveJobs(prev => prev.map(j => j.id === jobId ? {
+        ...j, progress, status, statusMessage: details || status, logs: [...jobLogs]
+      } : j));
+    };
+
+    try {
+      // Step 1: Get PDFs
+      console.log(`[Re-Analyze] Fetching PDFs for ${jobId}`);
+      updateJobStatus(10, 'initializing', 'Retrieving PDFs...', '🔍 Fetching PDF URLs...');
+
+      const reAnalysisData = await supabaseService.reAnalyzeProcess(jobId);
+
+      if (!reAnalysisData || reAnalysisData.pdfUrls.length === 0) {
+        throw new Error("No PDFs found. Please re-upload.");
+      }
+
+      const { pdfUrls } = reAnalysisData;
+      console.log(`[Re-Analyze] Got ${pdfUrls.length} URLs`);
+      updateJobStatus(20, 'converted', 'PDFs ready', `✅ Loaded ${pdfUrls.length} PDFs`);
+
+      // Step 2: AI Analysis
+      updateJobStatus(30, 'analyzing', 'Starting AI analysis...', '🤖 Sending to AI...');
+
+      const onAIProgress = (_step: string, detail: string) => {
+        const chunkMatch = detail.match(/(\d+)\/(\d+) chunks/);
+        if (chunkMatch) {
+          const completed = parseInt(chunkMatch[1]);
+          const total = parseInt(chunkMatch[2]);
+          const chunkProgress = 30 + Math.round((completed / total) * 40); // 30-70%
+          jobLogs.push(`🤖 ${detail}`);
+          setActiveJobs((prev: ActiveJob[]) => prev.map((j: ActiveJob) => j.id === jobId ? {
+            ...j, progress: chunkProgress, status: 'analyzing' as const, statusMessage: detail, logs: [...jobLogs]
+          } : j));
+        } else {
+          jobLogs.push(`🤖 ${detail}`);
+          setActiveJobs((prev: ActiveJob[]) => prev.map((j: ActiveJob) => j.id === jobId ? {
+            ...j, statusMessage: detail, logs: [...jobLogs]
+          } : j));
+        }
+      };
+
+      const aiData = await processPDFsForCard(name, pdfUrls, onAIProgress);
+      updateJobStatus(75, 'scoring', 'Calculating score...', '✅ AI Analysis complete');
+
+      // Step 3: Scoring & Saving
+      const score = calculateFinalScore(aiData);
+      const issues = extractIssues(aiData);
+      const finalStatus: ProcessStatus = score >= 90 ? 'approved' : score < 75 ? 'rejected' : 'review_required';
+      const gate = score >= 90 ? 'Production Ready' : score < 75 ? 'Must Re-run' : 'Blocked';
+
+      updateJobStatus(85, 'saving', 'Saving results...', `💾 Score: ${score}%`);
+
+      const updatedProcess: ValidationProcess = {
+        process_id: jobId,
+        card_id: process.card_id,
+        card_name: name,
+        bank_name: bank,
+        status: finalStatus,
+        storage_path: process.storage_path,
+        pdf_storage_paths, // PRESIST PATHS
+        confidence_score: score,
+        approval_gate: gate as any,
+        data: aiData,
+        issues,
+        logs: process.logs ? [...process.logs, ...jobLogs.map(l => ({ timestamp: new Date().toISOString(), action: 'RE-ANALYZE', details: l, status: 'info' as const }))] : [],
+        timestamp: new Date().toISOString()
+      };
+
+      await supabaseService.saveProcess(updatedProcess);
+
+      // Update UI
+      const allProcesses = await supabaseService.getProcesses();
+      setProcesses(allProcesses);
+
+      // CRITICAL: Update the currently viewed process so UI refreshes
+      setSelectedProcess(updatedProcess);
+
+      setActiveJobs(prev => prev.map(j =>
+        j.id === jobId
+          ? {
+            ...j,
+            progress: 100,
+            status: 'complete',
+            result: 'success',
+            statusMessage: `Re-analysis complete! Score: ${score}%`,
+            completedAt: new Date().toISOString(),
+            logs: [...jobLogs, `✅ Re-analysis done. Score: ${score}%`]
+          }
+          : j
+      ));
+
+      console.log('✅ Re-analysis successful');
+
+    } catch (err: any) {
+      console.error("Re-analysis failed:", err);
+      updateJobStatus(100, 'failed', 'Re-analysis failed', `❌ Error: ${err.message}`);
+      setActiveJobs(prev => prev.map(j =>
+        j.id === jobId
+          ? {
+            ...j,
+            progress: 100,
+            status: 'failed',
+            result: 'failed',
+            error: err.message,
+            statusMessage: 'Re-analysis failed',
+            logs: [...jobLogs, `❌ Failed: ${err.message}`]
+          }
+          : j
+      ));
+      alert(`Re-analysis failed: ${err.message}`);
+    }
+  };
+
   const handleApprove = async (id: string) => {
     await supabaseService.updateStatus(id, 'approved', 'Production Ready');
     const updatedProcesses = await supabaseService.getProcesses();
     setProcesses(updatedProcesses);
   };
 
-  const handleRevalidate = (process: ValidationProcess) => {
-    setSelectedProcess(null);
-    setIsUploadModalOpen(true);
+  const handleRevalidate = async (process: ValidationProcess) => {
+    const confirm = window.confirm(`Re-run AI analysis for ${process.card_name}? This will use the existing PDFs.`);
+    if (confirm) {
+      setSelectedProcess(null);
+      await reAnalyzeExistingCard(process);
+    }
   };
 
   useEffect(() => {

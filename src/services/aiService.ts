@@ -110,9 +110,10 @@ export async function processPDFsForCard(
   pdfInputs: string[],
   onProgress?: (step: string, detail: string) => void
 ): Promise<ValidationOutput> {
+  const processStartTime = performance.now();
   const currentDate = new Date().toISOString().split('T')[0];
 
-  console.log(`[ValidateKaro] Starting PDF processing for card: ${cardName}`);
+  console.log(`[ValidateKaro] ⏱️  Starting PDF processing for card: ${cardName}`);
   console.log(`[ValidateKaro] Number of PDFs: ${pdfInputs.length}`);
   console.log(`[ValidateKaro] Strategy: Extract -> Chunk -> Analyze -> Merge`);
 
@@ -122,6 +123,7 @@ export async function processPDFsForCard(
   }
 
   // STEP 1: Extract text (Client-side)
+  const extractStartTime = performance.now();
   onProgress?.('analyzing', `Extracting text from ${pdfInputs.length} documents...`);
   const extractedTexts: string[] = [];
   try {
@@ -134,65 +136,46 @@ export async function processPDFsForCard(
     console.error("Text extraction failed:", err);
     throw new Error(`Text extraction failed: ${err.message}`);
   }
+  const extractEndTime = performance.now();
+  const extractDuration = ((extractEndTime - extractStartTime) / 1000).toFixed(2);
+  console.log(`[ValidateKaro] ⏱️  PDF Extraction completed in ${extractDuration}s`);
 
   const fullTextCombined = extractedTexts.join("\n\n");
   const totalLength = fullTextCombined.length;
   console.log(`[ValidateKaro] Total extracted text length: ${totalLength} chars`);
 
   // STEP 2: Smart Chunking
-  // We'll split the text into chunks of max ~30,000 characters for faster API responses
-  // Smaller chunks = faster processing, and merging keeps the best results
-  const CHUNK_SIZE = 30000;
+  const chunkStartTime = performance.now();
+  // CRITICAL: GLM-4.5-Air has limited context window (~32K tokens total)
+  // System prompt ≈ 4K tokens, so chunk must leave room for input + output
+  // 8000 chars ≈ 2K tokens input, leaving headroom for 16K output tokens
+  // More chunks = more parallel calls, but avoids truncation (finish_reason: length)
+  const CHUNK_SIZE = 8000;  // Reduced from 15000 to prevent GLM truncation
   const chunks: string[] = [];
 
   if (totalLength <= CHUNK_SIZE) {
     chunks.push(fullTextCombined);
   } else {
-    // Split by documents first to avoid breaking context mid-sentence if possible
-    let currentChunk = "";
-
-    extractedTexts.forEach((docText, i) => {
-      const header = `\n========== DOCUMENT ${i + 1} ==========\n`;
-      const textWithHeader = header + docText;
-
-      if (textWithHeader.length > CHUNK_SIZE) {
-        // If a single document is huge (like the 98k one), we MUST split it internally
-        if (currentChunk.length > 0) {
-          chunks.push(currentChunk);
-          currentChunk = "";
-        }
-
-        // Sub-chunk this large document
-        let remaining = textWithHeader;
-        while (remaining.length > 0) {
-          let slice = remaining.slice(0, CHUNK_SIZE);
-          // Try to find a safe break point (newline) in the last 1000 chars
-          const lastNewline = slice.lastIndexOf('\n', slice.length);
-          if (lastNewline > slice.length * 0.8) {
-            slice = slice.slice(0, lastNewline);
-            remaining = remaining.slice(lastNewline + 1);
-          } else {
-            remaining = remaining.slice(slice.length);
-          }
-          chunks.push(slice);
-        }
-      } else {
-        // Normal accumulation
-        if (currentChunk.length + textWithHeader.length > CHUNK_SIZE) {
-          chunks.push(currentChunk);
-          currentChunk = textWithHeader;
-        } else {
-          currentChunk += textWithHeader;
-        }
-      }
-    });
-    if (currentChunk.length > 0) chunks.push(currentChunk);
+    // Split into chunks
+    let start = 0;
+    while (start < totalLength) {
+      const end = Math.min(start + CHUNK_SIZE, totalLength);
+      chunks.push(fullTextCombined.slice(start, end));
+      start = end;
+    }
   }
+  const chunkEndTime = performance.now();
+  const chunkDuration = ((chunkEndTime - chunkStartTime) / 1000).toFixed(2);
 
-  console.log(`[ValidateKaro] Split content into ${chunks.length} chunks for analysis`);
+  console.log(`[ValidateKaro] ⏱️  Chunking completed in ${chunkDuration}s`);
+  console.log(`[ValidateKaro] Created ${chunks.length} chunks for analysis`);
+  console.log(`[ValidateKaro] Chunk size: ${CHUNK_SIZE} chars`);
+  console.log(`[ValidateKaro] Estimated API calls: ${chunks.length}`);
 
-  // STEP 3: Parallel Analysis & Merging
-  console.log(`[ValidateKaro] Starting parallel analysis of ${chunks.length} chunks...`);
+  onProgress?.('analyzing', `Analyzing ${chunks.length} chunks with AI...`);
+
+  // STEP 3: Parallel AI Analysis
+  const aiStartTime = performance.now();
 
   let masterCategories: Record<string, any> = {};
 
@@ -215,7 +198,10 @@ export async function processPDFsForCard(
   // Create promises for all chunks with progress tracking
   let completedChunks = 0;
   const chunkPromises = chunks.map(async (chunk, i) => {
+    const chunkAIStart = performance.now();
     const result = await analyzeChunk(chunk, cardName, apiKey, currentDate, i, chunks.length);
+    const chunkAIDuration = ((performance.now() - chunkAIStart) / 1000).toFixed(2);
+    console.log(`[ValidateKaro] ⏱️  Chunk ${i + 1}/${chunks.length} analyzed in ${chunkAIDuration}s`);
     completedChunks++;
     onProgress?.('analyzing', `AI analysis: ${completedChunks}/${chunks.length} chunks complete`);
     return result;
@@ -223,8 +209,12 @@ export async function processPDFsForCard(
 
   // Wait for all to complete
   const results = await Promise.all(chunkPromises);
+  const aiEndTime = performance.now();
+  const aiDuration = ((aiEndTime - aiStartTime) / 1000).toFixed(2);
+  console.log(`[ValidateKaro] ⏱️  AI Analysis (all chunks) completed in ${aiDuration}s`);
 
-  // Merge all results
+  // STEP 4: Merge results
+  const mergeStartTime = performance.now();
   results.forEach((chunkResult, i) => {
     if (chunkResult.categories) {
       console.log(`[ValidateKaro] Merging result from chunk ${i + 1}`);
@@ -237,6 +227,20 @@ export async function processPDFsForCard(
       totalTokens.total_tokens += chunkResult.token_usage.total_tokens;
     }
   });
+  const mergeEndTime = performance.now();
+  const mergeDuration = ((mergeEndTime - mergeStartTime) / 1000).toFixed(2);
+  console.log(`[ValidateKaro] ⏱️  Results merging completed in ${mergeDuration}s`);
+
+  // Final timing summary
+  const processEndTime = performance.now();
+  const totalDuration = ((processEndTime - processStartTime) / 1000).toFixed(2);
+  console.log(`[ValidateKaro] ═══════════════════════════════════════`);
+  console.log(`[ValidateKaro] ⏱️  TOTAL PROCESSING TIME: ${totalDuration}s`);
+  console.log(`[ValidateKaro]    ├─ PDF Extraction: ${extractDuration}s`);
+  console.log(`[ValidateKaro]    ├─ Chunking: ${chunkDuration}s`);
+  console.log(`[ValidateKaro]    ├─ AI Analysis: ${aiDuration}s`);
+  console.log(`[ValidateKaro]    └─ Merging: ${mergeDuration}s`);
+  console.log(`[ValidateKaro] ═══════════════════════════════════════`);
 
   return {
     categories: masterCategories,
@@ -253,120 +257,97 @@ async function analyzeChunk(
   chunkIndex: number,
   totalChunks: number
 ): Promise<any> {
-  const systemInstruction = `You are a credit card compliance analyst.
-CONTEXT: The provided text is an excerpt (Chunk ${chunkIndex + 1}/${totalChunks}) from the official MITC documents for the credit card: "${cardName}".
+  const systemInstruction = `You are a credit card compliance analyst extracting reward information from "${cardName}" MITC documents.
 
-TASK: Extract reward information for the "${cardName}" from the text below.
-Since this is an excerpt:
-1. ASSUME all "cardholder", "program", or generic references apply to "${cardName}".
-2. ACCEPT fuzzy variations of the card name (e.g. if target is "Axis Magnus Burgundy", accept "Magnus", "Burgundy", "Axis Magnus", etc.).
-3. If a reward table is present, extract the data even if the specific card name isn't repeated in every row.
+CONTEXT: This is chunk ${chunkIndex + 1}/${totalChunks} of the document.
 
-You must output a JSON object where the keys are exactly the 19 "Output Keys" listed below.
+CARD NAME MATCHING (FLEXIBLE):
+- Accept variations: If card is "Axis Magnus Burgundy", accept "Magnus", "Burgundy", "Axis Magnus", etc.
+- Assume "cardholder", "program", or generic references apply to "${cardName}"
+- Extract reward tables even if card name isn't repeated in every row
 
-Critical Rules:
-1. Match card name flexibly as per context.
-2. If a spending category is COMPLETELY NOT MENTIONED in this chunk, set the "reward_type" to "N/A".
-3. IMPORTANT: If a benefit EXISTS but has CONDITIONS (like minimum spend requirements, quarterly limits, complimentary access limits), it is NOT "N/A". Extract it with the conditions in caps_limits and exclusions_conditions.
-4. For LOUNGE ACCESS: If the document mentions lounge access, lounge program, airport lounge, complimentary lounge visits, or lounge benefits - extract it as a benefit. Put any minimum spend requirements, visit limits, or eligibility conditions in the caps_limits field.
-5. Do not assume rewards that are not mentioned.
-6. Ensure 100% accuracy based ONLY on the provided text chunk.
+EXTRACTION RULES (PRIORITY ORDER):
 
-REWARD INTERPRETATION HIERARCHY (CRITICAL - FOLLOW STRICTLY):
+1. EXPLICIT MERCHANT RULES (Highest Priority)
+   • If Amazon, Flipkart, Swiggy, Zomato, etc. are EXPLICITLY NAMED → use that exact rule
+   • Explicit rules override everything else
+   • Example: "Swiggy → 10%" means Swiggy gets 10%, NOT any generic "food delivery" rate
 
-A. Explicit Merchant Rules Override Everything
-   - If a merchant (Amazon, Flipkart, Swiggy, Zomato, etc.) is EXPLICITLY NAMED anywhere in the offer (main table, footnotes, exclusions, examples), apply ONLY the explicitly stated rule for that merchant.
-   - Do NOT fall back to generic categories for explicitly named merchants.
-   - Example: If "Swiggy → 10%" is stated, use 10% for Swiggy, NOT any "food delivery" or "other spends" rate.
+2. CATEGORY RULES (Medium Priority)
+   • If merchant NOT explicitly named → use category rule
+   • "All other merchants", "Other online spends", "Other spends" → applies to unnamed merchants
+   • Example: "Other online spends → 1%" + Amazon never mentioned → Amazon gets 1%
 
-B. Category-Level Rules Apply When Merchants Are NOT Explicitly Mentioned
-   - If a category like "All other merchants", "Other online spends", or "Other spends" is defined, and a merchant (e.g., Amazon/Flipkart) is NOT explicitly listed anywhere, then that merchant inherits the category rule.
-   - Example: If document says "Other online spends → 1%" and Amazon is never mentioned, then Amazon gets 1%.
+3. GENERIC BUCKETS (Lowest Priority)
+   • Merchants inherit nearest generic bucket rate if not explicitly listed or excluded
 
-C. Default Inclusion Under Generic Buckets
-   - Merchants like Amazon, Flipkart, Myntra, etc. are treated as regular merchants UNLESS:
-     * Explicitly listed under a special rate, OR
-     * Explicitly excluded
-   - If neither applies, they inherit the nearest generic bucket rate.
+4. STANDARD EXCLUSIONS (Apply Unless Explicitly Overridden)
+   Rewards NOT earned on (unless document explicitly allows):
+   • Cash: ATM withdrawals, cash advances, quasi-cash, money transfers
+   • Wallets: Paytm, PhonePe, Amazon Pay loads
+   • EMI, gift cards, vouchers
+   • Bank fees: late payment, processing, interest charges
+   • Fuel (unless explicitly allowed)
+   • Utilities: electricity, water, phone bills (unless explicitly allowed)
+   • Insurance, rent, taxes (unless explicitly allowed)
+   • Gambling, crypto, govt transactions
+   • Reversals, cancelled transactions
 
-D. Exclusion Master List Still Applies
-   - Even if a merchant falls under "All other merchants", rewards are NOT applicable if the transaction belongs to an excluded category, UNLESS explicitly overridden by the bank.
-   - Standard Exclusions (rewards typically NOT earned on):
-     * All Reversals, Cancelled Transactions
-     * Cash Advances, ATM Cash Withdrawals
-     * Quasi-Cash Transactions, Money Transfers, P2P Transfers
-     * Wallet Loads (Paytm, PhonePe, Amazon Pay, etc.)
-     * Gift Cards and Vouchers, Voucher Purchases
-     * EMI Spends
-     * Bank Charges & Fees (Late Payment, Processing, Financial, Interest, Service Charges)
-     * Education Spends (unless explicitly allowed)
-     * Fuel Spends, Fuel Surcharge, Toll Payments (unless explicitly allowed)
-     * Gambling, Lottery, Online Skill-Based Gaming
-     * Government-related Transactions, Taxes
-     * Utility Bill Payments (Electricity, Water, Telecom - unless explicitly allowed)
-     * Insurance Payments (unless explicitly allowed)
-     * Jewellery Purchases (unless explicitly allowed)
-     * Forex Transactions, Cryptocurrency/Digital Asset Transactions
-     * Rent Payment (unless explicitly allowed)
-     * Railways, Transportation (unless explicitly allowed)
-     * Business Services, Contracted Services, Collection Agencies, Security Broker Services
-     * Charity, Donations (Religious, Political Organizations)
-     * Antique Items, Liquid Assets
-     * Load Money, Outstanding Payments
-     * Smartpay, Smartbuy portal (unless explicitly allowed)
-   - If the document explicitly allows rewards on any of these categories, extract that rule. Otherwise, assume excluded.
+5. WHEN TO USE "N/A"
+   • Category is COMPLETELY NOT MENTIONED in this chunk → "N/A"
+   • If benefit EXISTS but has conditions (minimum spend, limits) → NOT "N/A", extract with conditions
 
-E. Conflict Resolution Rule (Apply in This Order)
-   1. Merchant-specific rule (highest priority)
-   2. Category-specific rule (medium priority)
-   3. Generic "other spends" rule (lowest priority)
-   - Always prefer explicit mention over inference, and generic buckets over assumptions.
+6. LOUNGE ACCESS (Important)
+   • If ANY mention of: lounge access, lounge program, airport lounge, complimentary visits
+   • Extract as benefit (reward_type: "Complimentary")
+   • Put limits/conditions in caps_limits (e.g., "4 visits per quarter", "minimum ₹50k quarterly spend")
 
-F. No Assumption of Special Treatment
-   - Do NOT infer higher or lower rates for a merchant unless the document explicitly states so.
-   - Silence means inherit the nearest applicable generic rule.
-   - If uncertain, use the generic bucket rate, NOT N/A (unless the category itself is not mentioned).
+---
 
+OUTPUT FORMAT (19 MANDATORY CATEGORIES):
 
-Spending Categories to Output Keys (Map):
-1. Amazon purchases -> amazon_spends
-2. Flipkart purchases -> flipkart_spends
-3. Other online shopping -> other_online_spends
-4. Online grocery shopping -> grocery_spends_online
-5. Food delivery apps -> online_food_ordering
-6. Mobile phone bills -> mobile_phone_bills
-7. Electricity bills -> electricity_bills
-8. Water bills -> water_bills
-9. Fuel -> fuel
-10. Restaurants and dining -> dining_or_going_out
-11. Flight bookings (annual) -> flights_annual
-12. Hotel bookings (annual) -> hotels_annual
-13. Domestic lounge access (complimentary visits, lounge program) -> domestic_lounge_usage_quarterly
-14. International lounge access (Priority Pass, lounge program) -> international_lounge_usage_quarterly
-15. Health insurance (annual) -> insurance_health_annual
-16. Car / bike insurance (annual) -> insurance_car_or_bike_annual
-17. Rent payments -> rent
-18. School fees -> school_fees
-19. Offline shopping (stores/POS) -> other_offline_spends
+Return ONLY valid JSON with ALL 19 keys below. Each key must have these fields:
 
-Mandatory Fields for Each Key:
-- reward_type: Cashback / Reward Points / Miles / N/A (use "Complimentary" for free lounge access)
-- reward_rate: Exact value (e.g., "5%", "2 visits/quarter", "4 complimentary visits") or empty string if N/A
-- caps_limits: Monthly/annual caps, minimum spend requirements, visit limits, or empty string
-- exclusions_conditions: MCC restrictions, eligibility conditions, or exclusions or empty string
-- source_in_mitc: Page number + section (e.g., "Page 4, Section 3.1") or empty string
-- document_reference: Title of the document where rule was found or empty string
-- verification_date: "${currentDate}"
-- confidence: 0-100 (Integer) - 0 if N/A
-
-Output Format: Return ONLY a valid JSON object with this exact structure:
 {
   "categories": {
-    "amazon_spends": { "reward_type": "...", "reward_rate": "...", "caps_limits": "...", "exclusions_conditions": "...", "source_in_mitc": "...", "document_reference": "...", "verification_date": "${currentDate}", "confidence": 0 },
-    "flipkart_spends": { ...fields... },
-    ...all 19 keys...
+    "amazon_spends": {
+      "reward_type": "Cashback | Reward Points | Miles | Complimentary | N/A",
+      "reward_rate": "5% | 2 points per ₹100 | 4 visits | (empty if N/A)",
+      "caps_limits": "Monthly cap ₹500 | Annual cap 10,000 points | (empty if none)",
+      "exclusions_conditions": "Excludes EMI | MCC 6300 excluded | (empty if none)",
+      "source_in_mitc": "Page 4, Section 3.1 | (empty if N/A)",
+      "document_reference": "Axis Magnus MITC | (empty if N/A)",
+      "verification_date": "${currentDate}",
+      "confidence": 85
+    }
   }
-}`;
+}
+
+---
+
+19 SPENDING CATEGORIES (MUST INCLUDE ALL):
+
+1. amazon_spends              → Amazon purchases
+2. flipkart_spends            → Flipkart purchases
+3. other_online_spends        → Other online shopping (Myntra, Nykaa, etc.)
+4. grocery_spends_online      → Online grocery (BigBasket, Blinkit, etc.)
+5. online_food_ordering       → Food delivery (Swiggy, Zomato, Uber Eats)
+6. mobile_phone_bills         → Mobile/telecom bills
+7. electricity_bills          → Electricity bills
+8. water_bills                → Water bills
+9. fuel                       → Fuel purchases
+10. dining_or_going_out       → Restaurants, dining, bars
+11. flights_annual            → Flight bookings
+12. hotels_annual             → Hotel bookings
+13. domestic_lounge_usage_quarterly    → Domestic airport lounge access
+14. international_lounge_usage_quarterly → International lounge (Priority Pass, etc.)
+15. insurance_health_annual   → Health insurance premiums
+16. insurance_car_or_bike_annual → Vehicle insurance premiums
+17. rent                      → Rent payments
+18. school_fees               → School/education fees
+19. other_offline_spends      → Offline store/POS purchases
+
+CRITICAL: Output MUST include ALL 19 keys. Set reward_type to "N/A" if category not mentioned in chunk.`;
 
   const messages = [
     { role: "system", content: systemInstruction },
@@ -377,11 +358,12 @@ Output Format: Return ONLY a valid JSON object with this exact structure:
   ];
 
   const requestBody = JSON.stringify({
-    model: "z-ai/glm-4.5-air",
+    model: "z-ai/glm-4.5-air",  // GLM gives richer, more detailed extraction results
     messages,
     response_format: { type: "json_object" },
     temperature: 0.1,
-    max_tokens: 32768  // Maximum for GLM-4.5-air to prevent any cutoff
+    max_tokens: 16384,  // Reduced from 32768 - gives model more input headroom
+    top_p: 0.9  // Nucleus sampling for consistent generation
   });
 
   console.log(`[ValidateKaro] Chunk ${chunkIndex + 1}/${totalChunks}: Request size ${(requestBody.length / 1024).toFixed(1)} KB`);
@@ -425,6 +407,14 @@ Output Format: Return ONLY a valid JSON object with this exact structure:
     });
 
     const content = result.choices?.[0]?.message?.content;
+    const finishReason = result.choices?.[0]?.finish_reason;
+
+    // Check for token limit issues
+    if (finishReason === 'length' && (!content || content.trim().length < 10)) {
+      console.error(`[ValidateKaro] Chunk ${chunkIndex + 1}: Response truncated (finish_reason: length) with no/minimal content`);
+      console.error(`[ValidateKaro] Chunk ${chunkIndex + 1}: This usually means input exceeded token limit`);
+      return { categories: {} };
+    }
 
     if (!content) {
       console.warn(`[ValidateKaro] Chunk ${chunkIndex + 1}: No content in response`);
@@ -432,6 +422,7 @@ Output Format: Return ONLY a valid JSON object with this exact structure:
     }
 
     console.log(`[ValidateKaro] Chunk ${chunkIndex + 1}: Raw response length: ${content.length} chars`);
+    console.log(`[ValidateKaro] Chunk ${chunkIndex + 1}: First 200 chars of raw response:`, content.substring(0, 200));
 
     let jsonStr = content.trim();
 
@@ -442,11 +433,14 @@ Output Format: Return ONLY a valid JSON object with this exact structure:
       console.log(`[ValidateKaro] Chunk ${chunkIndex + 1}: Extracted from code block`);
     }
 
-    // Try to find JSON object if response has extra text
+    // Also try to find JSON object directly
     const jsonMatch = jsonStr.match(/\{[\s\S]*\}/);
     if (jsonMatch) {
       jsonStr = jsonMatch[0];
     }
+
+    console.log(`[ValidateKaro] Chunk ${chunkIndex + 1}: JSON string length before parse: ${jsonStr.length} chars`);
+    console.log(`[ValidateKaro] Chunk ${chunkIndex + 1}: First 300 chars of JSON:`, jsonStr.substring(0, 300));
 
     try {
       const parsed = JSON.parse(jsonStr);
@@ -454,8 +448,8 @@ Output Format: Return ONLY a valid JSON object with this exact structure:
       return { categories: parsed.categories || {}, token_usage: result.usage };
     } catch (parseError) {
       console.error(`[ValidateKaro] Chunk ${chunkIndex + 1}: JSON parse failed`);
-      console.error(`[ValidateKaro] Chunk ${chunkIndex + 1}: First 500 chars:`, jsonStr.substring(0, 500));
       console.error(`[ValidateKaro] Chunk ${chunkIndex + 1}: Parse error:`, parseError);
+      console.error(`[ValidateKaro] Chunk ${chunkIndex + 1}: Full JSON string that failed:`, jsonStr);
       return { categories: {} };
     }
   } catch (e) {
@@ -504,8 +498,14 @@ export function calculateFinalScore(extractedData: ValidationOutput) {
   let score = 100;
   const categories = extractedData.categories || {};
 
+  // Count how many categories have actual data vs N/A
+  let specifiedCount = 0;
+  let totalCount = 0;
+
   CANONICAL_KEYS.forEach(key => {
     const data = categories[key];
+    totalCount++;
+
     if (!data) {
       score -= 5; // Missing Category
       return;
@@ -513,6 +513,8 @@ export function calculateFinalScore(extractedData: ValidationOutput) {
 
     const isSpecified = data.reward_type !== 'N/A';
     if (isSpecified) {
+      specifiedCount++;
+
       // Missing Required Field (Rate/Limit) -3%
       if (!data.reward_rate || data.reward_rate.length < 2) {
         score -= 3;
@@ -536,6 +538,17 @@ export function calculateFinalScore(extractedData: ValidationOutput) {
       }
     }
   });
+
+  // CRITICAL: If no categories have actual data extracted, this is a failed extraction
+  // Score should reflect that we didn't extract useful information
+  if (specifiedCount === 0) {
+    console.warn(`[ValidateKaro] Warning: No categories with actual data extracted (all N/A)`);
+    score = 0; // Complete extraction failure
+  } else if (specifiedCount < 3) {
+    // Very few categories extracted - likely partial failure
+    console.warn(`[ValidateKaro] Warning: Only ${specifiedCount}/${totalCount} categories have data`);
+    score = Math.min(score, 30); // Cap at 30% for minimal extraction
+  }
 
   return Math.max(0, Math.min(100, score));
 }

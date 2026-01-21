@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { ValidationProcess, CategoryFields } from '../types';
 import { SPEND_KEY_LABELS } from '../constants';
 import JsonModal from './JsonModal';
+import { calculateRewardsForTransaction } from '../services/rewardsEngine/calculator';
+import PartnerConversionPanel from './PartnerConversionPanel';
 
 interface ValidationViewProps {
   process: ValidationProcess;
@@ -44,7 +46,7 @@ const CategoryCard: React.FC<{ label: string, keyName: string, data?: CategoryFi
         </div>
         {isSpecified && (
           <div className={`text-xs font-bold px-3 py-1.5 rounded-full border-2 flex items-center gap-2 ${data.confidence >= 90 ? 'text-emerald-700 bg-emerald-100 border-emerald-300' :
-              data.confidence >= 75 ? 'text-amber-700 bg-amber-100 border-amber-300' : 'text-rose-700 bg-rose-100 border-rose-300'
+            data.confidence >= 75 ? 'text-amber-700 bg-amber-100 border-amber-300' : 'text-rose-700 bg-rose-100 border-rose-300'
             }`}>
             <div className={`w-2 h-2 rounded-full animate-pulse ${data.confidence >= 90 ? 'bg-emerald-500' : data.confidence >= 75 ? 'bg-amber-500' : 'bg-rose-500'}`} />
             {data.confidence}%
@@ -60,11 +62,46 @@ const CategoryCard: React.FC<{ label: string, keyName: string, data?: CategoryFi
               <div className="flex items-center gap-3">
                 <span className="text-lg font-bold text-gray-900">{data.reward_rate || '-'}</span>
                 <span className={`text-[10px] font-bold uppercase px-3 py-1 rounded-full ${data.reward_type === 'Cashback' ? 'bg-emerald-100 text-emerald-700' :
-                    data.reward_type === 'Reward Points' ? 'bg-violet-100 text-violet-700' :
+                  data.reward_type === 'Reward Points' ? 'bg-violet-100 text-violet-700' :
                     data.reward_type === 'Complimentary' ? 'bg-sky-100 text-sky-700' :
-                    data.reward_type === 'Miles' ? 'bg-amber-100 text-amber-700' : 'bg-gray-100 text-gray-700'
+                      data.reward_type === 'Miles' ? 'bg-amber-100 text-amber-700' : 'bg-gray-100 text-gray-700'
                   }`}>{data.reward_type}</span>
               </div>
+
+              {/* Points Earned Calculator */}
+              {(() => {
+                const rewardType = (data.reward_type || '').toLowerCase();
+                const isRewardPoints = rewardType.includes('reward') || rewardType.includes('point') || rewardType.includes('mile') || rewardType.includes('avios');
+
+                if (!isRewardPoints) return null;
+
+                const rateString = data.reward_rate || '';
+                // Robust regex for all reward types: EDGE, Points, Avios, Miles, Ranges
+                const pointsMatch = rateString.match(/(\d+(?:-\d+)?)[^\d]*?(?:EDGE|reward|points?|avios|miles)/i);
+                const amountMatch = rateString.match(/(?:per|\/)\s*(?:Rs\.?|INR|₹)\s*(\d+\.?\d*)/i);
+
+                if (pointsMatch && amountMatch) {
+                  const pointsStr = pointsMatch[1].split('-')[0];
+                  const points = parseFloat(pointsStr);
+                  const amount = parseFloat(amountMatch[1]);
+
+                  const travelCategories = ['flights_annual', 'hotels_annual'];
+                  const sampleSpend = travelCategories.includes(keyName) ? 150000 : 30000;
+                  const pointsEarned = Math.floor((sampleSpend / amount) * points);
+
+                  return (
+                    <div className="mt-3 p-3 bg-violet-50 border-2 border-violet-200 rounded-lg">
+                      <div className="text-[10px] font-bold text-violet-700 uppercase tracking-widest mb-1.5">Points You'll Earn</div>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-xs text-gray-600">For ₹{(sampleSpend / 1000).toFixed(0)}k spend →</span>
+                        <span className="text-xl font-bold text-violet-700">{pointsEarned.toLocaleString()}</span>
+                        <span className="text-xs text-violet-600 font-semibold">points</span>
+                      </div>
+                    </div>
+                  );
+                }
+                return null;
+              })()}
             </div>
 
             <div className={`grid grid-cols-2 gap-4 transition-all duration-500 ease-out ${isExpanded ? 'opacity-100 max-h-[200px] mt-4' : 'opacity-0 max-h-0 overflow-hidden'}`}>
@@ -109,12 +146,66 @@ const CategoryCard: React.FC<{ label: string, keyName: string, data?: CategoryFi
 const ValidationView: React.FC<ValidationViewProps> = ({ process, onApprove, onRevalidate, onBack }) => {
   const [isJsonModalOpen, setIsJsonModalOpen] = useState(false);
   const [showReport, setShowReport] = useState(process.issues.length > 0);
+  const [activeTab, setActiveTab] = useState<'categories' | 'partner-transfers'>('categories');
 
   useEffect(() => {
     const handleKeys = (e: KeyboardEvent) => { if (e.key === 'Escape') onBack(); };
     window.addEventListener('keydown', handleKeys);
     return () => window.removeEventListener('keydown', handleKeys);
   }, [onBack]);
+
+  // Calculate rewards for partner transfers
+  const categoryRewards = useMemo(() => {
+    if (!process.data?.categories) return [];
+
+    const travelCategories = ['flights_annual', 'hotels_annual'];
+
+    return travelCategories.map(category => {
+      const categoryData = process.data?.categories[category];
+      if (!categoryData) return null;
+
+      const rewardType = (categoryData.reward_type || '').toLowerCase();
+      // Case insensitive check for reward points
+      const isRewardPoints = rewardType.includes('reward') || rewardType.includes('point') || rewardType.includes('mile') || rewardType.includes('avios');
+
+      if (!isRewardPoints || rewardType === 'n/a') return null;
+
+      // Robust regex for all reward types: EDGE, Points, Avios, Miles, Ranges
+      const rateString = categoryData.reward_rate || '';
+      const pointsMatch = rateString.match(/(\d+(?:-\d+)?)[^\d]*?(?:EDGE|reward|points?|avios|miles)/i);
+      const amountMatch = rateString.match(/(?:per|\/)\s*(?:Rs\.?|INR|₹)\s*(\d+\.?\d*)/i);
+
+      let rewardRate = 0;
+      if (pointsMatch && amountMatch) {
+        const pointsStr = pointsMatch[1].split('-')[0]; // Take lower bound for ranges
+        const points = parseFloat(pointsStr);
+        const amount = parseFloat(amountMatch[1]);
+        rewardRate = (points / amount) * 100; // Normalized to points per 100
+      }
+
+      if (rewardRate === 0) return null;
+
+      const sampleAmount = 150000; // Fixed 1.5L for travel categories
+      const transactionResult = calculateRewardsForTransaction(
+        process.card_name,
+        category,
+        sampleAmount,
+        process.data?.categories
+      );
+
+      // Force update earned points based on our extracted rate if needed
+      // But usually calculateRewardsForTransaction uses the engine's data. 
+      // For display purposes we trust the calculation engine but filtering mainly happens here.
+
+      return {
+        category,
+        label: SPEND_KEY_LABELS[category as any],
+        rewardData: categoryData,
+        sampleAmount,
+        transactionResult
+      };
+    }).filter((item): item is NonNullable<typeof item> => item !== null);
+  }, [process.data, process.card_name]);
 
   const getStatusConfig = () => {
     switch (process.status) {
@@ -152,7 +243,7 @@ const ValidationView: React.FC<ValidationViewProps> = ({ process, onApprove, onR
 
         <div className="flex items-center gap-6 w-full md:w-auto justify-between md:justify-end">
           <div className={`px-6 py-3 rounded-xl border-2 font-bold text-2xl shadow-lg ${process.confidence_score >= 90 ? 'text-emerald-700 bg-emerald-100 border-emerald-300' :
-              process.confidence_score >= 75 ? 'text-amber-700 bg-amber-100 border-amber-300' : 'text-rose-700 bg-rose-100 border-rose-300'
+            process.confidence_score >= 75 ? 'text-amber-700 bg-amber-100 border-amber-300' : 'text-rose-700 bg-rose-100 border-rose-300'
             }`}>
             {process.confidence_score}%
           </div>
@@ -207,21 +298,145 @@ const ValidationView: React.FC<ValidationViewProps> = ({ process, onApprove, onR
           </div>
         )}
 
+        {/* Tab Navigation */}
+        <div className="bg-white border-b-2 border-gray-200 px-8 shrink-0 flex gap-2">
+          <button
+            onClick={() => setActiveTab('categories')}
+            className={`px-6 py-4 font-semibold text-sm transition-all duration-300 border-b-4 flex items-center gap-2 ${activeTab === 'categories'
+              ? 'text-violet-700 border-violet-600 bg-violet-50/50'
+              : 'text-gray-500 border-transparent hover:text-gray-700 hover:bg-gray-50'
+              }`}
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>
+            Category Details
+          </button>
+          <button
+            onClick={() => setActiveTab('partner-transfers')}
+            className={`px-6 py-4 font-semibold text-sm transition-all duration-300 border-b-4 flex items-center gap-2 ${activeTab === 'partner-transfers'
+              ? 'text-violet-700 border-violet-600 bg-violet-50/50'
+              : 'text-gray-500 border-transparent hover:text-gray-700 hover:bg-gray-50'
+              }`}
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
+            Partner Transfers
+            {categoryRewards.length > 0 && (
+              <span className="ml-1 bg-violet-100 text-violet-700 px-2 py-0.5 rounded-full text-xs font-bold ring-1 ring-violet-200">
+                {categoryRewards.length}
+              </span>
+            )}
+          </button>
+        </div>
+
         <main className="flex-1 overflow-auto p-8 bg-gradient-to-br from-gray-50 to-white">
           <div className="max-w-7xl mx-auto space-y-12">
-            {CATEGORY_GROUPS.map((group, gIdx) => (
-              <section key={gIdx} className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: `${gIdx * 100}ms` }}>
-                <div className="flex items-center gap-4">
-                  <h3 className="text-sm font-bold text-gray-600 uppercase tracking-[0.2em] whitespace-nowrap">{group.title}</h3>
-                  <div className="h-0.5 w-full bg-gradient-to-r from-gray-300 to-transparent" />
+
+            {/* Category Details View */}
+            {activeTab === 'categories' && (
+              <>
+                {CATEGORY_GROUPS.map((group, gIdx) => (
+                  <section key={gIdx} className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: `${gIdx * 100}ms` }}>
+                    <div className="flex items-center gap-4">
+                      <h3 className="text-sm font-bold text-gray-600 uppercase tracking-[0.2em] whitespace-nowrap">{group.title}</h3>
+                      <div className="h-0.5 w-full bg-gradient-to-r from-gray-300 to-transparent" />
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                      {group.keys.map((key) => (
+                        <CategoryCard key={key} label={SPEND_KEY_LABELS[key as any]} keyName={key} data={process.data?.categories[key]} />
+                      ))}
+                    </div>
+                  </section>
+                ))}
+              </>
+            )}
+
+            {/* Partner Transfers View */}
+            {activeTab === 'partner-transfers' && (
+              <div className="space-y-8 animate-in fade-in zoom-in-95 duration-500">
+                {/* Header */}
+                <div className="text-center space-y-3">
+                  <h2 className="text-3xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
+                    Partner Transfer Options
+                  </h2>
+                  <p className="text-gray-600 max-w-2xl mx-auto">
+                    Convert your {process.card_name} reward points to airline miles, hotel points, or vouchers.
+                    Below are the available transfer partners for each spending category.
+                  </p>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-                  {group.keys.map((key) => (
-                    <CategoryCard key={key} label={SPEND_KEY_LABELS[key as any]} keyName={key} data={process.data?.categories[key]} />
-                  ))}
-                </div>
-              </section>
-            ))}
+
+                {categoryRewards.length === 0 ? (
+                  <div className="text-center py-16">
+                    <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
+                      <svg className="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                      </svg>
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-700 mb-2">No Reward Points Categories Found</h3>
+                    <p className="text-gray-500 max-w-md mx-auto">
+                      This card doesn't have any categories that earn transferable reward points, or the reward structure hasn't been extracted yet.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="space-y-10">
+                    {/* 1. Category Summary Cards (Flight/Hotel) */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {categoryRewards.map((item) => (
+                        <div key={item.category} className="p-6 bg-white rounded-2xl border-2 border-violet-200 shadow-sm hover:shadow-md transition-shadow duration-300">
+                          <div className="flex justify-between items-start mb-4">
+                            <div>
+                              <h3 className="text-lg font-bold text-gray-900">{item.label}</h3>
+                              <p className="text-sm text-gray-500 mt-1 font-medium">{item.rewardData.reward_rate} • {item.rewardData.reward_type}</p>
+                            </div>
+                            <div className="w-10 h-10 rounded-full bg-violet-50 flex items-center justify-center text-violet-600">
+                              {item.category.includes('flight') ? (
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
+                              ) : (
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="pt-4 border-t border-gray-100">
+                            <div className="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-1">Points Earned</div>
+                            <div className="flex items-baseline gap-2">
+                              <span className="text-sm text-gray-400">On ₹{(item.sampleAmount / 1000).toFixed(0)}k spend →</span>
+                              <span className="text-2xl font-bold text-violet-700">{item.transactionResult.earned.toLocaleString()}</span>
+                              <span className="text-sm text-violet-600 font-bold">{item.transactionResult.bankPointsType || 'points'}</span>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* 2. Unified Partner Transfer Options Section - displayed ONCE */}
+                    <div className="bg-white rounded-3xl border border-gray-200 shadow-xl overflow-hidden">
+                      <div className="bg-gradient-to-r from-violet-600 to-purple-700 p-8 text-white">
+                        <h3 className="text-2xl font-bold mb-2">Transfer Partners</h3>
+                        <p className="opacity-90 max-w-2xl">
+                          Below are the transfer partners available for these points. Conversion ratios apply to the points earned above.
+                        </p>
+                      </div>
+
+                      <div className="p-8">
+                        {/* Use the first category's result as they should share the same reward program/partners */}
+                        {categoryRewards[0].transactionResult.partnerConversions && categoryRewards[0].transactionResult.partnerConversions.length > 0 ? (
+                          <PartnerConversionPanel
+                            bankPoints={categoryRewards[0].transactionResult.earned}
+                            bankPointsType={categoryRewards[0].transactionResult.bankPointsType}
+                            sourceCard={process.card_name}
+                            partnerConversions={categoryRewards[0].transactionResult.partnerConversions}
+                          />
+                        ) : (
+                          <div className="text-center py-12 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-300">
+                            <p className="text-gray-500 italic">No direct partner transfer options identified for this card's reward program.</p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
           </div>
         </main>
       </div>

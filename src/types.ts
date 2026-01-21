@@ -46,6 +46,7 @@ export interface ValidationProcess {
   bank_name: string;
   status: ProcessStatus;
   storage_path: string;
+  pdf_storage_paths?: string[];
   confidence_score: number;
   approval_gate: 'Production Ready' | 'Blocked' | 'Must Re-run';
   data?: ValidationOutput;
@@ -60,6 +61,11 @@ export interface ActiveJob {
   bankName: string;
   progress: number;
   status: 'initializing' | 'uploading' | 'uploaded' | 'converting' | 'converted' | 'analyzing' | 'scoring' | 'saving' | 'complete' | 'failed' | 'extracting' | 'validating';
+  statusMessage?: string;
+  error?: string;
+  logs?: string[];
+  completedAt?: string;
+  result?: 'success' | 'failed';
 }
 
 export enum SpendKey {

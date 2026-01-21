@@ -8,6 +8,10 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+ENGINEERING_CONTEXT.md
+metadata.json
+reward-cashback.json
+updated data.md
 dist
 dist-ssr
 *.local

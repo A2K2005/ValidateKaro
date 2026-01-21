@@ -6,7 +6,9 @@ import {
   deleteAudit as deleteSupabaseAudit,
   uploadPDF,
   Audit,
-  getPDFUrl
+  getPDFUrl,
+  getAuditFiles,
+  getAuditByProcessId
 } from '../lib/supabase';
 
 const DB_KEY = 'vk_audit_processes';
@@ -124,6 +126,54 @@ export const supabaseService = {
     const filtered = processes.filter(p => p.process_id !== id);
     localStorage.setItem(DB_KEY, JSON.stringify(filtered));
     return true;
+  },
+
+  async reAnalyzeProcess(processId: string): Promise<{ pdfUrls: string[], cardName: string, bankName: string } | null> {
+    console.log(`🔄 Re-analyzing process ${processId}...`);
+
+    // 1. Try to find in local storage first
+    const processes = this.getLocalProcesses();
+    const localProcess = processes.find(p => p.process_id === processId);
+
+    let pdfPaths: string[] = [];
+    let cardName = localProcess?.card_name || '';
+    let bankName = localProcess?.bank_name || '';
+
+    if (localProcess && localProcess.pdf_storage_paths && localProcess.pdf_storage_paths.length > 0) {
+      console.log('✅ Found PDF paths in local storage');
+      pdfPaths = localProcess.pdf_storage_paths;
+    } else {
+      // 2. If not in local, try Supabase
+      console.log('⚠️ PDF paths not in local storage, fetching from Supabase...');
+      try {
+        const audit = await getAuditByProcessId(processId);
+        if (!audit) {
+          console.error('❌ Audit not found in Supabase');
+          return null;
+        }
+        cardName = audit.card_name;
+        bankName = audit.bank_name;
+
+        const files = await getAuditFiles(audit.id);
+        if (files && files.length > 0) {
+          pdfPaths = files.map(f => f.file_path);
+          console.log(`✅ Found ${files.length} files in Supabase`);
+        }
+      } catch (e) {
+        console.error('❌ Error fetching from Supabase:', e);
+      }
+    }
+
+    if (pdfPaths.length === 0) {
+      console.error('❌ No PDF paths found anywhere');
+      return null;
+    }
+
+    // 3. Convert to URLs
+    const pdfUrls = pdfPaths.map(path => this.getPDFUrl(path));
+    console.log(`🔗 Generated ${pdfUrls.length} public URLs`);
+
+    return { pdfUrls, cardName, bankName };
   },
 
   async uploadBatch(files: File[], processId: string, auditId?: string): Promise<string[]> {

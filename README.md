@@ -16,6 +16,8 @@ ValidateKaro is an internal operations tool that automates the extraction and va
 - **🎯 Fuzzy Card Matching** - Accepts variations of card names (e.g., "Magnus", "Burgundy", "Axis Magnus" all match "Axis Magnus Burgundy")
 - **💾 Dual Storage** - Saves to both Supabase (cloud) and localStorage (offline fallback)
 - **📊 Real-time Progress Tracking** - Live overlay showing job status, progress percentage, and detailed activity logs
+- **✈️ Partner Transfers** - Calculate and display airline/hotel loyalty program transfer options with conversion ratios
+- **💰 Rewards Calculator** - Transaction-based reward point calculations with partner conversion options
 
 ### Extracted Data Points
 Automatically extracts reward information for 19 spending categories:
@@ -100,20 +102,145 @@ validatekaro_v1/
 │   ├── components/
 │   │   ├── Sidebar.tsx       # Navigation sidebar
 │   │   ├── UploadModal.tsx   # PDF upload with bank/card dropdowns
-│   │   ├── ValidationView.tsx # Detailed results display
-│   │   └── JsonModal.tsx     # Raw JSON viewer
+│   │   ├── ValidationView.tsx # Detailed results with Partner Transfers tab
+│   │   ├── JsonModal.tsx     # Raw JSON viewer
+│   │   ├── PartnerConversionPanel.tsx # Transfer partner display UI
+│   │   └── ui/               # Shadcn UI components (Button, Card, Tabs, etc.)
 │   ├── services/
 │   │   ├── aiService.ts      # PDF extraction & AI analysis logic
-│   │   └── supabaseService.ts # Database & storage operations
+│   │   ├── supabaseService.ts # Database & storage operations
+│   │   └── rewardsEngine/    # Rewards calculation engine
+│   │       ├── index.ts      # Barrel exports
+│   │       ├── types.ts      # TypeScript type definitions
+│   │       ├── redemptions.ts # Partner transfer logic
+│   │       ├── calculator.ts # Transaction rewards calculator
+│   │       └── missingDataHandler.ts # Missing ratio tracking
 │   ├── lib/
 │   │   └── supabase.ts       # Supabase client configuration
 │   ├── types.ts              # TypeScript interfaces
 │   ├── constants.ts          # Category keys & labels
 │   └── App.tsx               # Main application with dashboard
+├── redemption_data.json      # Card reward types & transfer partner data
 ├── supabase-schema.sql       # Database schema
 ├── .env.example              # Environment variables template
 └── README.md
 ```
+
+---
+
+## 🎯 Rewards Engine
+
+The Rewards Engine provides comprehensive credit card reward calculations and partner program transfer functionality.
+
+### Features
+
+- **Card Type Detection** - Automatically determine if a card earns cashback or transferable reward points
+- **Partner Transfer Lookup** - Find available airline/hotel transfer partners for any card
+- **Conversion Calculations** - Calculate partner points from bank points with ratio support (e.g., 3:1, 1:1)
+- **Transaction Rewards** - Calculate rewards earned from spending transactions with category-wise breakdown
+- **Reference Valuations** - Display-only estimated values in INR/USD (with appropriate warnings)
+- **Missing Data Tracking** - Track and report missing conversion ratios for product improvement
+- **Subcategory Support** - Domestic vs International partner categorization
+- **Partner Points Types** - Display proper point names ("Club Vistara Points", "Marriott Bonvoy Points", etc.)
+
+### Partner Transfers Tab in ValidationView
+
+The ValidationView now includes a **Partner Transfers** tab that displays:
+- Category-wise reward points earned (based on extracted reward rates)
+- Available partner transfer options for each category
+- Conversion ratios and minimum points requirements
+- Estimated values with appropriate disclaimers
+- Filtering by partner category (Airlines, Hotels, Vouchers)
+- Sorting by value, ratio, or name
+
+### Quick Start
+
+```typescript
+import {
+  getCardType,
+  calculateRewardsForTransaction,
+  getAvailablePartners,
+  calculatePartnerPoints,
+} from '@/services/rewardsEngine';
+
+// Check if card earns rewards or cashback
+const cardType = getCardType('HDFC Infinia Credit Card');
+// => 'rewards'
+
+// Calculate rewards from a transaction
+const result = calculateRewardsForTransaction(
+  1000,                        // Transaction amount (Rs.)
+  'Axis Atlas Credit Card',    // Card name
+  5,                           // Reward rate (points per Rs.100)
+  'Travel'                     // Spending category
+);
+// => { earned: 50, partnerConversions: [...], bankPointsType: 'EDGE Rewards', ... }
+
+// Get available transfer partners
+const partners = getAvailablePartners('HDFC Infinia Credit Card');
+// => [{ partnerId: 'marriott_bonvoy', partnerName: 'Marriott Bonvoy', ratio: '1:1', ... }]
+
+// Calculate partner points
+const conversion = calculatePartnerPoints(10000, 'HDFC Infinia', 'marriott_bonvoy');
+// => { partnerPoints: 10000, conversionRatio: '1:1', canConvert: true, ... }
+```
+
+### Supported Transfer Partners
+
+| Category | Partners | Subcategory |
+|----------|----------|-------------|
+| Airlines | British Airways Avios, Emirates Skywards, Singapore KrisFlyer, Etihad Guest, Club Vistara, Air India Flying Returns, United MileagePlus, Cathay Pacific Asia Miles, Qantas, Miles & More, IndiGo 6E Rewards | Domestic / International |
+| Hotels | Marriott Bonvoy, Hilton Honors, IHG Rewards, Accor Live Limitless, Wyndham Rewards | - |
+| Vouchers | Amazon Pay, Flipkart, Tanishq | - |
+
+### Supported Card Programs
+
+| Bank | Reward Program | Example Cards |
+|------|----------------|---------------|
+| HDFC | Infinia/Diners Points | Infinia, Diners Black, Regalia Gold, Millenia |
+| American Express | Membership Rewards | Platinum, Gold, Smart Earn, MRCC, Platinum Travel |
+| Axis Bank | EDGE Rewards | Atlas, Magnus, Horizon, My Zone, Vistara |
+| AU Bank | Reward Points | Zenith, Zenith Plus, Altura, Altura Plus |
+| SBI | Reward Points | Elite, Prime, BPCL Octane |
+| ICICI | Reward Points | Emeralde, Coral |
+| IndusInd | Avios/Reward Points | Avios, Iconia |
+| Standard Chartered | Reward Points | Emirates |
+| Kotak | Reward Points | 6E Rewards |
+| IDFC FIRST | Reward Points | Club Vistara |
+
+### UI Component
+
+```tsx
+import { PartnerConversionPanel } from '@/components/PartnerConversionPanel';
+
+<PartnerConversionPanel
+  bankPoints={5000}
+  bankPointsType="EDGE Rewards"
+  sourceCard="Axis Atlas Credit Card"
+  partnerConversions={result.partnerConversions}
+  onTransferClick={(partnerId) => console.log('Transfer to', partnerId)}
+/>
+```
+
+**Features:**
+- Category tabs (All / Airlines / Hotels / Vouchers)
+- Sort by estimated value, conversion ratio, or name
+- Minimum points validation
+- Warning-styled reference values with disclaimers
+- Disabled states for insufficient points
+
+### Important Notes
+
+> **Reference Values are for Display Only**
+>
+> The `displayReference.estimatedValue` field is provided for UI display purposes only.
+> Actual redemption values vary significantly based on:
+> - Availability and booking class
+> - Travel dates and routing
+> - Award chart changes
+> - Redemption option chosen
+>
+> Never use these values for "best card" comparisons or automated decisions.
 
 ---
 
@@ -180,6 +307,8 @@ A floating overlay shows real-time progress:
 - **Dashboard** - View all audits with confidence scores, sortable by date or confidence
 - **Search** - Filter audits by card or bank name (press `/` to focus)
 - **Validation View** - Click any audit to see detailed extraction per category
+  - **Category Details Tab** - View extracted reward rates, caps, exclusions for each spending category
+  - **Partner Transfers Tab** - See available partner transfer options with conversion ratios
 - **JSON Export** - View raw extracted JSON data
 - **Keyboard Navigation** - Use `j`/`k` to navigate, `Enter` to select, `Esc` to go back
 
