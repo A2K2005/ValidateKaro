@@ -1,0 +1,710 @@
+{
+  "meta": {
+    "version": "2026.02.CONSOLIDATED",
+    "description": "Complete Credit Card Transfer Partners - Bank-wise Organization",
+    "last_updated": "2026-01-21",
+    "usd_to_inr": 91.622
+  },
+  "partner_valuations": {
+    "airlines": {
+      "air_india": {"name": "Flying Returns (Air India)", "value_inr": 0.99},
+      "club_vistara": {"name": "Club Vistara", "value_inr": 1.24},
+      "indigo_6e": {"name": "6E Rewards (IndiGo)", "value_inr": 0.83},
+      "spicejet": {"name": "SpiceClub (SpiceJet)", "value_inr": 0.66},
+      "intermiles": {"name": "InterMiles", "value_inr": 0.83},
+      "emirates": {"name": "Emirates Skywards", "value_inr": 0.91},
+      "british_airways": {"name": "British Airways Executive Club (Avios)", "value_inr": 0.91},
+      "qatar": {"name": "Qatar Airways Privilege Club (Avios)", "value_inr": 1.24},
+      "etihad": {"name": "Etihad Guest", "value_inr": 0.83},
+      "singapore": {"name": "Singapore Airlines KrisFlyer", "value_inr": 1.15},
+      "air_france_klm": {"name": "Air France-KLM Flying Blue", "value_inr": 1.07},
+      "turkish": {"name": "Turkish Airlines Miles&Smiles", "value_inr": 0.99},
+      "united": {"name": "United MileagePlus", "value_inr": 0.99},
+      "air_canada": {"name": "Air Canada Aeroplan", "value_inr": 1.24},
+      "jal": {"name": "Japan Airlines Mileage Bank", "value_inr": 1.07},
+      "qantas": {"name": "Qantas Frequent Flyer", "value_inr": 1.07},
+      "virgin_atlantic": {"name": "Virgin Atlantic Flying Club", "value_inr": 0.99},
+      "thai": {"name": "Thai Airways Royal Orchid Plus", "value_inr": 0.83},
+      "ethiopian": {"name": "Ethiopian Airlines ShebaMiles", "value_inr": 0.83},
+      "malaysia": {"name": "Malaysia Airlines Enrich", "value_inr": 0.83},
+      "lufthansa": {"name": "Lufthansa Miles & More", "value_inr": 1.07},
+      "delta": {"name": "Delta SkyMiles", "value_inr": 0.99},
+      "airasia": {"name": "AirAsia Rewards", "value_inr": 0.50},
+      "avianca": {"name": "Avianca LifeMiles", "value_inr": 0.95},
+      "vietnam": {"name": "Vietnam Airlines", "value_inr": 0.75},
+      "asia_miles": {"name": "Asia Miles (Cathay Pacific)", "value_inr": 0.90}
+    },
+    "hotels": {
+      "marriott": {"name": "Marriott Bonvoy", "value_inr": 0.5},
+      "hilton": {"name": "Hilton Honors", "value_inr": 0.25},
+      "hyatt": {"name": "World of Hyatt", "value_inr": 1.3},
+      "ihg": {"name": "IHG One Rewards", "value_inr": 0.35},
+      "accor": {"name": "Accor Live Limitless", "value_inr": 1.7},
+      "wyndham": {"name": "Wyndham Rewards", "value_inr": 0.6},
+      "choice": {"name": "Choice Privileges", "value_inr": 0.6},
+      "radisson": {"name": "Radisson Rewards", "value_inr": 0.35},
+      "best_western": {"name": "Best Western Rewards", "value_inr": 0.4},
+      "taj": {"name": "Taj NeuPass", "value_inr": 1.0},
+      "itc": {"name": "ITC Club ITC", "value_inr": 0.6},
+      "oberoi": {"name": "Oberoi One", "value_inr": 1.0},
+      "leela": {"name": "Leela DISCOVERY", "value_inr": 1.0},
+      "trident": {"name": "Trident Privilege", "value_inr": 1.0}
+    }
+  },
+  "banks": {
+    "AXIS_BANK": {
+      "bank_name": "Axis Bank",
+      "program_name": "EDGE Rewards / EDGE Miles",
+      "cards": {
+        "AXIS_ATLAS": {
+          "card_name": "Axis Atlas",
+          "card_type": "rewards",
+          "currency": "EDGE Miles",
+          "default_ratio": "1:2",
+          "note": "1 EDGE Mile = 2 Partner Miles (except Marriott). Group A: 30k cap, Group B: 120k cap",
+          "partners": {
+            "airlines_domestic": {
+              "air_india": {"ratio": "1:2", "group": "B"},
+              "club_vistara": {"ratio": "1:2", "group": "B"},
+              "spicejet": {"ratio": "1:2", "group": "B"}
+            },
+            "airlines_international": {
+              "singapore": {"ratio": "1:2", "group": "A"},
+              "british_airways": {"ratio": "1:2", "group": "A"},
+              "qatar": {"ratio": "1:2", "group": "A"},
+              "etihad": {"ratio": "1:2", "group": "A"},
+              "united": {"ratio": "1:2", "group": "A"},
+              "turkish": {"ratio": "1:2", "group": "A"},
+              "air_france_klm": {"ratio": "1:2", "group": "B"},
+              "thai": {"ratio": "1:2", "group": "A"},
+              "jal": {"ratio": "1:2", "group": "A"},
+              "qantas": {"ratio": "1:2", "group": "B"},
+              "airasia": {"ratio": "1:2", "group": "B"}
+            },
+            "hotels": {
+              "marriott": {"ratio": "2:1", "note": "Reverse - 2 Miles = 1 Point"},
+              "accor": {"ratio": "1:2", "group": "A"},
+              "wyndham": {"ratio": "1:2", "group": "A"},
+              "itc": {"ratio": "1:2", "group": "B"}
+            }
+          }
+        },
+        "AXIS_MAGNUS_BURGUNDY": {
+          "card_name": "Axis Magnus for Burgundy",
+          "card_type": "rewards",
+          "currency": "EDGE Reward Points",
+          "default_ratio": "5:4",
+          "note": "Exclusive Burgundy. 5 Points = 4 Miles",
+          "partners": {
+            "airlines_domestic": {
+              "air_india": {"ratio": "5:4"},
+              "club_vistara": {"ratio": "5:4"}
+            },
+            "airlines_international": {
+              "singapore": {"ratio": "5:4"},
+              "british_airways": {"ratio": "5:4"},
+              "qatar": {"ratio": "5:4"},
+              "etihad": {"ratio": "5:4"},
+              "united": {"ratio": "5:4"},
+              "turkish": {"ratio": "5:4"},
+              "airasia": {"ratio": "5:4"}
+            },
+            "hotels": {
+              "marriott": {"ratio": "5:4"},
+              "accor": {"ratio": "5:4"},
+              "wyndham": {"ratio": "5:4"}
+            }
+          }
+        },
+        "AXIS_MAGNUS": {
+          "card_name": "Axis Magnus",
+          "card_type": "rewards",
+          "currency": "EDGE Reward Points",
+          "default_ratio": "5:2",
+          "note": "Standard Magnus. 5 Points = 2 Miles",
+          "partners": {
+            "airlines_domestic": {
+              "air_india": {"ratio": "5:2"},
+              "club_vistara": {"ratio": "5:2"}
+            },
+            "airlines_international": {
+              "singapore": {"ratio": "5:2"},
+              "british_airways": {"ratio": "5:2"},
+              "qatar": {"ratio": "5:2"},
+              "etihad": {"ratio": "5:2"},
+              "united": {"ratio": "5:2"},
+              "turkish": {"ratio": "5:2"},
+              "airasia": {"ratio": "5:2"}
+            },
+            "hotels": {
+              "marriott": {"ratio": "5:2"},
+              "accor": {"ratio": "5:2"},
+              "wyndham": {"ratio": "5:2"}
+            }
+          }
+        },
+        "AXIS_RESERVE": {
+          "card_name": "Axis Reserve",
+          "card_type": "rewards",
+          "currency": "EDGE Reward Points",
+          "default_ratio": "5:2",
+          "note": "Same as Magnus Standard",
+          "partners": {
+            "airlines_domestic": {
+              "air_india": {"ratio": "5:2"},
+              "club_vistara": {"ratio": "5:2"}
+            },
+            "airlines_international": {
+              "singapore": {"ratio": "5:2"},
+              "british_airways": {"ratio": "5:2"},
+              "qatar": {"ratio": "5:2"},
+              "etihad": {"ratio": "5:2"},
+              "united": {"ratio": "5:2"},
+              "turkish": {"ratio": "5:2"}
+            },
+            "hotels": {
+              "marriott": {"ratio": "5:2"},
+              "accor": {"ratio": "5:2"}
+            }
+          }
+        },
+        "AXIS_VISTARA": {
+          "card_name": "Axis Vistara",
+          "card_type": "rewards",
+          "currency": "Club Vistara Points",
+          "default_ratio": "1:1",
+          "note": "Co-branded - Direct earn",
+          "partners": {
+            "airlines_domestic": {
+              "club_vistara": {"ratio": "1:1", "note": "Direct earn"}
+            },
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AXIS_PRIVILEGE": {
+          "card_name": "Axis Privilege",
+          "card_type": "rewards",
+          "currency": "EDGE Reward Points",
+          "default_ratio": "10:1",
+          "note": "Poor ratios for lower-tier card",
+          "partners": {
+            "airlines_domestic": {
+              "club_vistara": {"ratio": "5:1"},
+              "itc": {"ratio": "5:1"},
+              "spicejet": {"ratio": "5:1"},
+              "airasia": {"ratio": "5:1"}
+            },
+            "airlines_international": {
+              "air_india": {"ratio": "10:1"},
+              "singapore": {"ratio": "10:1"},
+              "qatar": {"ratio": "10:1"}
+            },
+            "hotels": {
+              "marriott": {"ratio": "10:1"}
+            }
+          }
+        },
+        "AXIS_SELECT": {
+          "card_name": "Axis Select",
+          "card_type": "rewards",
+          "currency": "EDGE Reward Points",
+          "default_ratio": "10:1",
+          "note": "Similar to Privilege",
+          "partners": {
+            "airlines_domestic": {
+              "club_vistara": {"ratio": "5:1"},
+              "itc": {"ratio": "5:1"}
+            },
+            "airlines_international": {
+              "air_india": {"ratio": "10:1"},
+              "singapore": {"ratio": "10:1"}
+            },
+            "hotels": {
+              "marriott": {"ratio": "10:1"}
+            }
+          }
+        },
+        "AXIS_REWARDS": {
+          "card_name": "Axis Rewards",
+          "card_type": "rewards",
+          "currency": "EDGE Reward Points",
+          "default_ratio": "10:1",
+          "note": "Entry-level card",
+          "partners": {
+            "airlines_domestic": {
+              "club_vistara": {"ratio": "5:1"}
+            },
+            "airlines_international": {
+              "air_india": {"ratio": "10:1"}
+            },
+            "hotels": {}
+          }
+        }
+      }
+    },
+    "HDFC_BANK": {
+      "bank_name": "HDFC Bank",
+      "program_name": "SmartBuy Rewards",
+      "cards": {
+        "HDFC_INFINIA": {
+          "card_name": "HDFC Infinia",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "Varies",
+          "note": "Premium card. 1:1 domestic, 2:1 international",
+          "partners": {
+            "airlines_domestic": {
+              "air_india": {"ratio": "2:1"},
+              "club_vistara": {"ratio": "2:1", "note": "Via Air India"},
+              "intermiles": {"ratio": "1:1"}
+            },
+            "airlines_international": {
+              "singapore": {"ratio": "1:1"},
+              "british_airways": {"ratio": "2:1"},
+              "qatar": {"ratio": "2:1"},
+              "etihad": {"ratio": "2:1"},
+              "united": {"ratio": "2:1"},
+              "turkish": {"ratio": "2:1"},
+              "virgin_atlantic": {"ratio": "2:1"},
+              "air_france_klm": {"ratio": "1:1"},
+              "air_canada": {"ratio": "2:1"},
+              "avianca": {"ratio": "2:1"},
+              "airasia": {"ratio": "1:1"},
+              "vietnam": {"ratio": "1:1"}
+            },
+            "hotels": {
+              "marriott": {"ratio": "2:1"},
+              "accor": {"ratio": "2:1"},
+              "ihg": {"ratio": "1:1"},
+              "wyndham": {"ratio": "1:1"}
+            }
+          }
+        },
+        "HDFC_DINERS_BLACK": {
+          "card_name": "HDFC Diners Club Black",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "Same as Infinia",
+          "note": "Identical to Infinia",
+          "partners": {
+            "airlines_domestic": {
+              "air_india": {"ratio": "2:1"},
+              "intermiles": {"ratio": "1:1"}
+            },
+            "airlines_international": {
+              "singapore": {"ratio": "1:1"},
+              "british_airways": {"ratio": "2:1"},
+              "qatar": {"ratio": "2:1"},
+              "etihad": {"ratio": "2:1"},
+              "virgin_atlantic": {"ratio": "2:1"}
+            },
+            "hotels": {
+              "marriott": {"ratio": "2:1"}
+            }
+          }
+        },
+        "HDFC_REGALIA_GOLD": {
+          "card_name": "HDFC Regalia Gold",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Standard 2:1, except Air India 3:1",
+          "partners": {
+            "airlines_domestic": {
+              "air_india": {"ratio": "3:1"}
+            },
+            "airlines_international": {
+              "singapore": {"ratio": "2:1"},
+              "british_airways": {"ratio": "2:1"},
+              "etihad": {"ratio": "2:1"},
+              "united": {"ratio": "2:1"},
+              "air_canada": {"ratio": "2:1"},
+              "airasia": {"ratio": "2:1"}
+            },
+            "hotels": {
+              "accor": {"ratio": "2:1"}
+            }
+          }
+        },
+        "HDFC_MARRIOTT": {
+          "card_name": "HDFC Marriott Bonvoy",
+          "card_type": "rewards",
+          "currency": "Marriott Bonvoy Points",
+          "default_ratio": "1:1",
+          "note": "Co-branded - Direct earn",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {
+              "marriott": {"ratio": "1:1", "note": "Direct earn"}
+            }
+          }
+        },
+        "HDFC_MILLENIA": {
+          "card_name": "HDFC Millenia",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "Limited partners",
+          "note": "Entry-level rewards card",
+          "partners": {
+            "airlines_domestic": {
+              "intermiles": {"ratio": "2:1"}
+            },
+            "airlines_international": {
+              "airasia": {"ratio": "2:1"}
+            },
+            "hotels": {}
+          }
+        },
+        "HDFC_6E_INDIGO": {
+          "card_name": "6E Rewards - IndiGo HDFC",
+          "card_type": "rewards",
+          "currency": "6E Rewards Points",
+          "default_ratio": "1:1",
+          "note": "Co-branded - Direct earn",
+          "partners": {
+            "airlines_domestic": {
+              "indigo_6e": {"ratio": "1:1", "note": "Direct earn"}
+            },
+            "airlines_international": {},
+            "hotels": {}
+          }
+        }
+      }
+    },
+    "AMERICAN_EXPRESS": {
+      "bank_name": "American Express",
+      "program_name": "Membership Rewards",
+      "cards": {
+        "AMEX_PLATINUM_TRAVEL": {
+          "card_name": "American Express Platinum Travel",
+          "card_type": "rewards",
+          "currency": "Membership Rewards Points",
+          "default_ratio": "2:1",
+          "note": "Premium Amex. 1:1 for Marriott is best",
+          "partners": {
+            "airlines_domestic": {
+              "intermiles": {"ratio": "2:1", "min": 800},
+              "club_vistara": {"ratio": "3:1", "min": 900, "note": "Poor ratio"}
+            },
+            "airlines_international": {
+              "british_airways": {"ratio": "2:1", "min": 1200},
+              "emirates": {"ratio": "2:1", "min": 800},
+              "etihad": {"ratio": "2:1", "min": 1600},
+              "qatar": {"ratio": "2:1", "min": 500},
+              "singapore": {"ratio": "2:1", "min": 800},
+              "virgin_atlantic": {"ratio": "2:1", "min": 800},
+              "asia_miles": {"ratio": "2:1", "min": 800}
+            },
+            "hotels": {
+              "marriott": {"ratio": "1:1", "min": 100, "note": "Best value"},
+              "hilton": {"ratio": "10:9", "min": 1000}
+            },
+            "vouchers": {
+              "postcard_hotels": {"ratio": "20000:10000", "note": "₹10k voucher for 20k points"},
+              "taj": {"ratio": "25000:10000"}
+            }
+          }
+        },
+        "AMEX_MRCC": {
+          "card_name": "American Express Membership Rewards",
+          "card_type": "rewards",
+          "currency": "Membership Rewards Points",
+          "default_ratio": "2:1",
+          "note": "Entry-level Amex MR card",
+          "partners": {
+            "airlines_domestic": {
+              "intermiles": {"ratio": "2:1", "min": 800},
+              "club_vistara": {"ratio": "3:1", "min": 800}
+            },
+            "airlines_international": {
+              "british_airways": {"ratio": "2:1", "min": 1200},
+              "emirates": {"ratio": "2:1", "min": 800},
+              "etihad": {"ratio": "2:1", "min": 1600},
+              "qatar": {"ratio": "2:1", "min": 500},
+              "singapore": {"ratio": "2:1", "min": 800},
+              "virgin_atlantic": {"ratio": "2:1", "min": 800},
+              "asia_miles": {"ratio": "2:1", "min": 800}
+            },
+            "hotels": {
+              "marriott": {"ratio": "1:1", "min": 100},
+              "hilton": {"ratio": "10:9", "min": 1000}
+            },
+            "vouchers": {
+              "flipkart": {"ratio": "18000:6000"},
+              "myntra": {"ratio": "18000:7000"},
+              "taj": {"ratio": "18000:9000"},
+              "tanishq": {"ratio": "24000:9000"},
+              "shoppers_stop": {"ratio": "24000:10000"},
+              "reliance_digital": {"ratio": "18000:6000"},
+              "insta_vouchers": {"ratio": "1000:250"}
+            }
+          }
+        },
+        "AMEX_SMART_EARN": {
+          "card_name": "American Express Smart Earn",
+          "card_type": "rewards",
+          "currency": "Membership Rewards Points",
+          "default_ratio": "2:1",
+          "note": "Cashback-focused with MR earning",
+          "partners": {
+            "airlines_domestic": {
+              "intermiles": {"ratio": "2:1", "min": 800},
+              "club_vistara": {"ratio": "3:1", "min": 800}
+            },
+            "airlines_international": {
+              "british_airways": {"ratio": "2:1", "min": 1200},
+              "emirates": {"ratio": "2:1", "min": 800},
+              "etihad": {"ratio": "2:1", "min": 1600},
+              "qatar": {"ratio": "2:1", "min": 500},
+              "singapore": {"ratio": "2:1", "min": 800},
+              "virgin_atlantic": {"ratio": "2:1", "min": 800}
+            },
+            "hotels": {
+              "marriott": {"ratio": "1:1", "min": 100},
+              "hilton": {"ratio": "10:9", "min": 1000}
+            },
+            "vouchers": {
+              "bigbasket": {"ratio": "1000:250"},
+              "flipkart": {"ratio": "1000:250"},
+              "myntra": {"ratio": "1000:250"},
+              "taj": {"ratio": "1000:250"},
+              "tanishq": {"ratio": "1000:250"},
+              "reliance_digital": {"ratio": "1000:250"},
+              "insta_vouchers": {"ratio": "1000:250"}
+            }
+          }
+        },
+        "AMEX_GOLD": {
+          "card_name": "American Express Gold",
+          "card_type": "rewards",
+          "currency": "Membership Rewards Points",
+          "default_ratio": "2:1",
+          "note": "Similar to MRCC",
+          "partners": {
+            "airlines_domestic": {
+              "intermiles": {"ratio": "2:1"},
+              "club_vistara": {"ratio": "3:1"}
+            },
+            "airlines_international": {
+              "british_airways": {"ratio": "2:1"},
+              "singapore": {"ratio": "2:1"},
+              "qatar": {"ratio": "2:1"}
+            },
+            "hotels": {
+              "marriott": {"ratio": "1:1"},
+              "hilton": {"ratio": "10:9"}
+            }
+          }
+        }
+      }
+    },
+    "SBI_CARD": {
+      "bank_name": "SBI Card",
+      "program_name": "SBI Card MILES / Rewards",
+      "cards": {
+        "SBI_MILES_PRIME": {
+          "card_name": "SBI Card MILES",
+          "card_type": "rewards",
+          "currency": "SBI Miles",
+          "default_ratio": "Varies",
+          "note": "New 2025/26 program. 1:1 Group A, 2:1 Group B",
+          "partners": {
+            "airlines_domestic": {
+              "air_india": {"ratio": "1:1", "group": "A"},
+              "club_vistara": {"ratio": "1:1", "group": "A"}
+            },
+            "airlines_international": {
+              "etihad": {"ratio": "1:1", "group": "A"},
+              "air_canada": {"ratio": "1:1", "group": "A"},
+              "air_france_klm": {"ratio": "1:1", "group": "A"},
+              "qantas": {"ratio": "1:1", "group": "A"},
+              "accor": {"ratio": "2:1", "group": "B"},
+              "singapore": {"ratio": "2:1", "group": "B"},
+              "united": {"ratio": "2:1", "group": "B"},
+              "qatar": {"ratio": "2:1", "group": "B"},
+              "emirates": {"ratio": "2:1", "group": "B"}
+            },
+            "hotels": {
+              "ihg": {"ratio": "1:1", "group": "A"}
+            }
+          }
+        },
+        "SBI_ELITE": {
+          "card_name": "SBI Elite",
+          "card_type": "rewards",
+          "currency": "SBI Reward Points",
+          "default_ratio": "Varies",
+          "note": "Premium SBI card",
+          "partners": {
+            "airlines_domestic": {
+              "air_india": {"ratio": "2:1"},
+              "intermiles": {"ratio": "2:1"}
+            },
+            "airlines_international": {
+              "singapore": {"ratio": "2:1"},
+              "etihad": {"ratio": "2:1"}
+            },
+            "hotels": {}
+          }
+        },
+        "SBI_AURUM": {
+          "card_name": "SBI Aurum",
+          "card_type": "rewards",
+          "currency": "SBI Reward Points",
+          "default_ratio": "Limited partners",
+          "note": "Mid-tier card",
+          "partners": {
+            "airlines_domestic": {
+              "air_india": { "ratio": "5:1" }
+            },
+            "airlines_international": {},
+            "hotels": {}
+          }
+        }
+
+      }
+    },
+    "AU_BANK": {
+      "bank_name": "AU Small Finance Bank",
+      "program_name": "AU Rewards",
+      "cards": {
+        "AU_ZENITH_PLUS": {
+          "card_name": "AU Zenith+",
+          "card_type": "rewards",
+          "currency": "AU Reward Points",
+          "default_ratio": "1.5:1",
+          "note": "Premium AU card",
+          "partners": {
+            "airlines_domestic": {
+              "air_india": {"ratio": "1.5:1"},
+              "club_vistara": {"ratio": "1.5:1"}
+            },
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AU_ZENITH": {
+          "card_name": "AU Zenith",
+          "card_type": "rewards",
+          "currency": "AU Reward Points",
+          "default_ratio": "6:1",
+          "note": "Mid-tier AU card. Same 6:1 slab as other non-Zenith+ AU cards",
+          "partners": {
+            "airlines_domestic": {
+              "air_india": { "ratio": "6:1" }
+            },
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AU_ALTURA": {
+          "card_name": "AU Altura",
+          "card_type": "rewards",
+          "currency": "AU Reward Points",
+          "default_ratio": "6:1",
+          "note": "Entry-level rewards",
+          "partners": {
+            "airlines_domestic": {
+              "air_india": {"ratio": "6:1", "min": 100}
+            },
+            "airlines_international": {},
+            "hotels": {}
+          }
+        }
+      }
+    },
+    "YES_BANK": {
+      "bank_name": "YES Bank",
+      "program_name": "YES Rewards",
+      "cards": {
+        "YES_MARQUEE": {
+          "card_name": "YES Bank Marquee",
+          "card_type": "rewards",
+          "currency": "YES Reward Points",
+          "default_ratio": "4:1",
+          "note": "Poor Air India ratio",
+          "partners": {
+            "airlines_domestic": {
+              "club_vistara": {"ratio": "4:1"},
+              "intermiles": {"ratio": "4:1"},
+              "air_india": {"ratio": "15:1", "note": "Extremely poor"}
+            },
+            "airlines_international": {},
+            "hotels": {}
+          }
+        }
+      }
+    },
+    "INDUSIND_BANK": {
+      "bank_name": "IndusInd Bank",
+      "program_name": "IndusInd Rewards",
+      "cards": {
+        "INDUSIND_LEGEND": {
+          "card_name": "IndusInd Legend",
+          "card_type": "rewards",
+          "currency": "IndusInd Reward Points",
+          "default_ratio": "1:1",
+          "note": "Premium card",
+          "partners": {
+            "airlines_domestic": {
+              "intermiles": {
+                "ratio": "1:1",
+                "status": "discontinued",
+                "note": "InterMiles redemption ended 21 Jan 2025"
+              }
+            },
+            "airlines_international": {
+              "british_airways": {"ratio": "2:1", "note": "Via Avios co-brand"}
+            },
+            "hotels": {}
+          }
+        },
+        "INDUSIND_AVIOS": {
+          "card_name": "IndusInd Avios",
+          "card_type": "rewards",
+          "currency": "Avios",
+          "default_ratio": "1:1",
+          "note": "Co-branded - Direct earn BA Avios",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {
+              "british_airways": { "ratio": "2:1", "note": "Via Avios co-brand"},
+              "qatar": {"ratio": "1:1", "note": "Avios partner"}
+            },
+            "hotels": {}
+          }
+        }
+      }
+    },
+    "ICICI_BANK": {
+      "bank_name": "ICICI Bank",
+      "program_name": "ICICI Rewards",
+      "cards": {
+        "ICICI_EMERALDE": {
+          "card_name": "ICICI Emeralde Private Metal",
+          "card_type": "rewards",
+          "currency": "ICICI Reward Points",
+          "default_ratio": "300:200",
+          "note": "Premium private banking card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        }
+      }
+    },
+    "STANDARD_CHARTERED": {
+      "bank_name": "Standard Chartered",
+      "program_name": "SC 360 Rewards",
+      "cards": {}
+    },
+    "IDFC_FIRST": {
+      "bank_name": "IDFC FIRST Bank",
+      "program_name": "IDFC First Rewards",
+      "cards": {}
+    }
+  }
+}

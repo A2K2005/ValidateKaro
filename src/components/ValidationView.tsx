@@ -187,10 +187,10 @@ const ValidationView: React.FC<ValidationViewProps> = ({ process, onApprove, onR
 
       const sampleAmount = 150000; // Fixed 1.5L for travel categories
       const transactionResult = calculateRewardsForTransaction(
-        process.card_name,
-        category,
-        sampleAmount,
-        process.data?.categories
+        sampleAmount,           // transactionAmount
+        process.card_name,      // cardName
+        rewardRate,             // rewardRate (points per 100)
+        category                // category name
       );
 
       // Force update earned points based on our extracted rate if needed

@@ -8,11 +8,13 @@
  */
 
 import {
-  getAvailablePartners,
-  calculatePartnerPoints,
   getCardType,
   getPartnerPointsType,
 } from './redemptions';
+import {
+  getPartnerConversionsV2,
+  getBestValueV2
+} from './redemptionsV2';
 import type {
   AvailablePartner,
   PartnerConversionOption,
@@ -221,56 +223,12 @@ function calculatePartnerConversions(
   bankPoints: number,
   cardName: string
 ): PartnerConversionOption[] {
-  // Get available partners for this card
-  const availablePartners = getAvailablePartners(cardName);
+  // Use V2 Service with Smart Lookup
+  const conversions = getPartnerConversionsV2(bankPoints, cardName);
 
-  if (availablePartners.length === 0) {
+  if (conversions.length === 0) {
     return [];
   }
-
-  // Calculate conversion for each partner
-  const conversions: PartnerConversionOption[] = availablePartners.map(
-    (partner: AvailablePartner) => {
-      const result = calculatePartnerPoints(bankPoints, cardName, partner.partnerId);
-
-      // Calculate display reference value (FOR DISPLAY ONLY)
-      const valuePerPoint = partner.valuationReference.value || 0;
-      const estimatedValueINR = result.partnerPoints * valuePerPoint;
-
-      // Get partner points type
-      const partnerPointsType = getPartnerPointsType(partner.partnerId);
-
-      // Build display reference (only if we have valuation data)
-      let displayReference: DisplayReference | null = null;
-      if (valuePerPoint > 0) {
-        displayReference = {
-          estimatedValueINR: Math.round(estimatedValueINR * 100) / 100,
-          estimatedValueUSD:
-            partner.valuationReference.currency === 'USD'
-              ? Math.round((estimatedValueINR / 83) * 100) / 100
-              : null,
-          notes: partner.valuationReference.notes || '',
-          warning:
-            'This is a reference value only. Actual value varies significantly based on redemption option, availability, and booking class.',
-        };
-      }
-
-      return {
-        partnerId: partner.partnerId,
-        partnerName: partner.partnerName,
-        category: partner.category,
-        subCategory: partner.subCategory,
-        conversionRatio: partner.conversionRatio,
-        bankPointsRequired: bankPoints,
-        partnerPointsEarned: result.partnerPoints,
-        minimumPointsRequired: partner.minimumPoints,
-        canConvert: result.canConvert,
-        insufficientPoints: result.insufficientPoints,
-        partnerPointsType,
-        displayReference,
-      };
-    }
-  );
 
   return conversions;
 }
@@ -301,27 +259,11 @@ export function getBestEstimatedValue(
   bankPoints: number,
   cardName: string
 ): { partnerId: string; partnerName: string; estimatedValue: number } | null {
-  const conversions = calculatePartnerConversions(bankPoints, cardName);
+  const best = getBestValueV2(bankPoints, cardName);
 
-  if (conversions.length === 0) {
+  if (!best) {
     return null;
   }
-
-  // Find conversion with highest estimated value that can actually convert
-  const validConversions = conversions.filter(
-    (c) => c.canConvert && c.displayReference !== null
-  );
-
-  if (validConversions.length === 0) {
-    return null;
-  }
-
-  const best = validConversions.reduce((prev, current) =>
-    (current.displayReference?.estimatedValueINR || 0) >
-      (prev.displayReference?.estimatedValueINR || 0)
-      ? current
-      : prev
-  );
 
   return {
     partnerId: best.partnerId,

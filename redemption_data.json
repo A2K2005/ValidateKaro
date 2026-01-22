@@ -34,6 +34,22 @@
         {
           "bankOrProgram": "AU ALTURA",
           "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Magnus_Burgundy",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Magnus",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Reserve",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Atlas",
+          "mode": "transfer"
         }
       ],
       "conversionRatios": [
@@ -41,6 +57,26 @@
           "sourceProgram": "AU ALTURA",
           "ratio": "6:1",
           "minimumPoints": 100
+        },
+        {
+          "sourceProgram": "Axis_Magnus_Burgundy",
+          "ratio": "5:4",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Magnus",
+          "ratio": "5:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Reserve",
+          "ratio": "5:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Atlas",
+          "ratio": "1:2",
+          "minimumPoints": null
         }
       ],
       "constraints": [
@@ -1384,6 +1420,307 @@
         "currency": "INR",
         "asOf": null,
         "notes": "$0.011 per mile"
+      }
+    },
+    {
+      "partnerId": "united_mileageplus",
+      "partnerName": "United MileagePlus",
+      "category": "airline",
+      "subCategory": "international",
+      "supportedBy": [
+        {
+          "bankOrProgram": "Axis_Magnus_Burgundy",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Magnus",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Reserve",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Atlas",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "HDFC_Infinia",
+          "mode": "transfer"
+        }
+      ],
+      "conversionRatios": [
+        {
+          "sourceProgram": "Axis_Magnus_Burgundy",
+          "ratio": "5:4",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Magnus",
+          "ratio": "5:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Reserve",
+          "ratio": "5:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Atlas",
+          "ratio": "1:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "HDFC_Infinia",
+          "ratio": "2:1",
+          "minimumPoints": null
+        }
+      ],
+      "constraints": [],
+      "valuationReference": {
+        "value": 0.99,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "$0.012 per mile"
+      }
+    },
+    {
+      "partnerId": "turkish_milessmiles",
+      "partnerName": "Turkish Airlines Miles&Smiles",
+      "category": "airline",
+      "subCategory": "international",
+      "supportedBy": [
+        {
+          "bankOrProgram": "Axis_Magnus_Burgundy",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Magnus",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Reserve",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Atlas",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "HDFC_Infinia",
+          "mode": "transfer"
+        }
+      ],
+      "conversionRatios": [
+        {
+          "sourceProgram": "Axis_Magnus_Burgundy",
+          "ratio": "5:4",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Magnus",
+          "ratio": "5:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Reserve",
+          "ratio": "5:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Atlas",
+          "ratio": "1:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "HDFC_Infinia",
+          "ratio": "2:1",
+          "minimumPoints": null
+        }
+      ],
+      "constraints": [],
+      "valuationReference": {
+        "value": 0.99,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "$0.012 per mile"
+      }
+    },
+    {
+      "partnerId": "accor_all",
+      "partnerName": "Accor Live Limitless",
+      "category": "hotel",
+      "subCategory": null,
+      "supportedBy": [
+        {
+          "bankOrProgram": "Axis_Magnus_Burgundy",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Magnus",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Reserve",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Atlas",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "HDFC_Infinia",
+          "mode": "transfer"
+        }
+      ],
+      "conversionRatios": [
+        {
+          "sourceProgram": "Axis_Magnus_Burgundy",
+          "ratio": "5:4",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Magnus",
+          "ratio": "5:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Reserve",
+          "ratio": "5:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Atlas",
+          "ratio": "1:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "HDFC_Infinia",
+          "ratio": "2:1",
+          "minimumPoints": null
+        }
+      ],
+      "constraints": [],
+      "valuationReference": {
+        "value": 1.70,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "~$0.020 per point, high value hotel program"
+      }
+    },
+    {
+      "partnerId": "wyndham_rewards",
+      "partnerName": "Wyndham Rewards",
+      "category": "hotel",
+      "subCategory": null,
+      "supportedBy": [
+        {
+          "bankOrProgram": "Axis_Magnus_Burgundy",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Magnus",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Atlas",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "HDFC_Infinia",
+          "mode": "transfer"
+        }
+      ],
+      "conversionRatios": [
+        {
+          "sourceProgram": "Axis_Magnus_Burgundy",
+          "ratio": "5:4",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Magnus",
+          "ratio": "5:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Atlas",
+          "ratio": "1:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "HDFC_Infinia",
+          "ratio": "1:1",
+          "minimumPoints": null
+        }
+      ],
+      "constraints": [],
+      "valuationReference": {
+        "value": 0.60,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "$0.007 per point"
+      }
+    },
+    {
+      "partnerId": "airasia_rewards",
+      "partnerName": "AirAsia Rewards",
+      "category": "airline",
+      "subCategory": "international",
+      "supportedBy": [
+        {
+          "bankOrProgram": "Axis_Magnus_Burgundy",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Magnus",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "Axis_Atlas",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "HDFC_Infinia",
+          "mode": "transfer"
+        },
+        {
+          "bankOrProgram": "HDFC_Diners_Black",
+          "mode": "transfer"
+        }
+      ],
+      "conversionRatios": [
+        {
+          "sourceProgram": "Axis_Magnus_Burgundy",
+          "ratio": "5:4",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Magnus",
+          "ratio": "5:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "Axis_Atlas",
+          "ratio": "1:2",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "HDFC_Infinia",
+          "ratio": "1:1",
+          "minimumPoints": null
+        },
+        {
+          "sourceProgram": "HDFC_Diners_Black",
+          "ratio": "1:1",
+          "minimumPoints": null
+        }
+      ],
+      "constraints": [],
+      "valuationReference": {
+        "value": 0.50,
+        "currency": "INR",
+        "asOf": null,
+        "notes": "$0.006 per point, budget airline"
       }
     }
   ]

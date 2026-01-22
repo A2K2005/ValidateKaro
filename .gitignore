@@ -8,7 +8,6 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-ENGINEERING_CONTEXT.md
 metadata.json
 reward-cashback.json
 updated data.md
@@ -31,3 +30,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+partnerLookup.ts
+ENGINEERING_CONTEXT.md
+Redemption - v1 (1).xlsx
+redemption_data.json
+redemption_data.txt
