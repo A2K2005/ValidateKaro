@@ -41,10 +41,21 @@ type BankConfig = {
     cards: Record<string, CardConfig>;
 };
 
+type PartnerValuation = {
+    name: string;
+    value_inr: number;
+    value_usd?: number;
+};
+
+type ValuationsConfig = {
+    airlines: Record<string, PartnerValuation>;
+    hotels: Record<string, PartnerValuation>;
+};
+
 // Type assertion
 const v2Data = partnerDataV2 as any;
 const BANKS = v2Data.banks as Record<string, BankConfig>;
-const VALUATIONS = v2Data.partner_valuations;
+const VALUATIONS = v2Data.partner_valuations as ValuationsConfig;
 
 /**
  * Normalize input string to snake_case key
@@ -126,7 +137,9 @@ export function getPartnerConversionsV2(
     if (!resolved) return [];
 
     const { bankKey, cardKey } = resolved;
-    const cardData = BANKS[bankKey].cards[cardKey];
+    const bankData = BANKS[bankKey];
+    const cards = bankData.cards;
+    const cardData = cards[cardKey];
 
     if (!cardData || !cardData.partners) return [];
 
@@ -196,6 +209,51 @@ export function getPartnerConversionsV2(
     if (cardData.partners.vouchers)
         processCategory('voucher', cardData.partners.vouchers);
 
+    // CRITICAL: If card matched but has no partners, check if it's cashback or rewards
+    if (options.length === 0) {
+        // If it's a cashback card, return empty - cashback cards don't have loyalty programs
+        if (cardData.card_type === 'cashback') {
+            console.warn(`[SmartLookup] Card "${cardName}" is a cashback card - no partner transfers available`);
+            return [];
+        }
+        
+        // For rewards cards with no partners, fallback to bank default
+        const defaults: Record<string, string> = {
+            'AXIS_BANK': 'AXIS_MAGNUS',
+            'HDFC_BANK': 'HDFC_REGALIA_GOLD',
+            'AMERICAN_EXPRESS': 'AMEX_MRCC',
+            'SBI_CARD': 'SBI_MILES_PRIME',
+            'AU_BANK': 'AU_ZENITH',
+            'INDUSIND_BANK': 'INDUSIND_LEGEND'
+        };
+        
+        const defaultCardKey = defaults[bankKey];
+        // Only fallback if: (1) default exists, (2) it's different from current card, (3) default card has partners
+        if (defaultCardKey && defaultCardKey !== cardKey && cards[defaultCardKey]) {
+            const defaultCardData = cards[defaultCardKey];
+            // Check if default card has any partners
+            const hasPartners = defaultCardData.partners && (
+                Object.keys(defaultCardData.partners.airlines_domestic || {}).length > 0 ||
+                Object.keys(defaultCardData.partners.airlines_international || {}).length > 0 ||
+                Object.keys(defaultCardData.partners.hotels || {}).length > 0 ||
+                Object.keys(defaultCardData.partners.vouchers || {}).length > 0
+            );
+            
+            if (hasPartners) {
+                console.warn(`[SmartLookup] Card "${cardName}" has no partners. Falling back to ${defaultCardKey}`);
+                // Process default card's partners
+                if (defaultCardData.partners.airlines_domestic)
+                    processCategory('airline', defaultCardData.partners.airlines_domestic, 'Domestic');
+                if (defaultCardData.partners.airlines_international)
+                    processCategory('airline', defaultCardData.partners.airlines_international, 'International');
+                if (defaultCardData.partners.hotels)
+                    processCategory('hotel', defaultCardData.partners.hotels);
+                if (defaultCardData.partners.vouchers)
+                    processCategory('voucher', defaultCardData.partners.vouchers);
+            }
+        }
+    }
+
     return options;
 }
 
@@ -211,4 +269,100 @@ export function getBestValueV2(points: number, cardName: string) {
         const bestVal = best.displayReference?.estimatedValueINR || 0;
         return currVal > bestVal ? current : best;
     }, options[0]);
+}
+
+/**
+ * UTILITY MIGRATION: Replacement functions for legacy redemptions.ts
+ */
+
+/**
+ * Get card type (rewards vs cashback)
+ */
+export function getCardType(cardName: string): 'rewards' | 'cashback' | null {
+    const resolved = resolveCardKey(cardName);
+
+    // 1. If found in JSON, trust the defined type
+    if (resolved) {
+        const { bankKey, cardKey } = resolved;
+        const cardConfig = BANKS[bankKey]?.cards[cardKey];
+        if (cardConfig?.card_type) {
+            return cardConfig.card_type as 'rewards' | 'cashback';
+        }
+    }
+
+    // 2. Heuristic Fallback: Detect "Cashback" or known cashback keywords in the name
+    const lowerName = normalizeKey(cardName);
+    if (lowerName.includes('cashback') || lowerName.includes('swiggy') || lowerName.includes('flipkart') || lowerName.includes('amazon')) {
+        return 'cashback';
+    }
+
+    // Default to rewards if ambiguous (to show partners by default)
+    return 'rewards'; // Default to rewards for V2 mapped cards
+}
+
+/**
+ * Get partner points type display name (e.g., "Club Vistara Points")
+ */
+export function getPartnerPointsType(partnerId: string): string {
+    // Try to find in valuations first
+    if (VALUATIONS.airlines[partnerId]) return `${VALUATIONS.airlines[partnerId].name} Points`;
+    if (VALUATIONS.hotels[partnerId]) return `${VALUATIONS.hotels[partnerId].name} Points`;
+
+    // Fallback logic
+    const cleanId = partnerId.toLowerCase();
+    if (cleanId.includes('avios')) return 'Avios';
+    if (cleanId.includes('miles')) return 'Miles';
+    if (cleanId.includes('bonvoy')) return 'Bonvoy Points';
+
+    return 'Points';
+}
+
+/**
+ * Get all available partner programs
+ */
+export function getAllPartners() {
+    const partners = [];
+
+    // Airlines
+    Object.entries(VALUATIONS.airlines).forEach(([id, val]) => {
+        partners.push({
+            partnerId: id,
+            partnerName: val.name,
+            category: 'airline',
+            subCategory: null
+        });
+    });
+
+    // Hotels
+    Object.entries(VALUATIONS.hotels).forEach(([id, val]) => {
+        partners.push({
+            partnerId: id,
+            partnerName: val.name,
+            category: 'hotel',
+            subCategory: null
+        });
+    });
+
+    return partners;
+}
+
+/**
+ * Get all transferable cards (keys from V2 JSON)
+ */
+export function getTransferableCards(): string[] {
+    const cards: string[] = [];
+    Object.values(BANKS).forEach(bank => {
+        Object.keys(bank.cards).forEach(cardKey => {
+            cards.push(cardKey);
+        });
+    });
+    return cards;
+}
+
+/**
+ * Check if a card can transfer to a specific partner
+ */
+export function canTransferTo(cardName: string, partnerId: string): boolean {
+    const options = getPartnerConversionsV2(1000, cardName); // Dummy points to check eligibility
+    return options.some(opt => opt.partnerId === partnerId);
 }

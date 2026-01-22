@@ -3,6 +3,7 @@ import { ValidationProcess, CategoryFields } from '../types';
 import { SPEND_KEY_LABELS } from '../constants';
 import JsonModal from './JsonModal';
 import { calculateRewardsForTransaction } from '../services/rewardsEngine/calculator';
+import { getCardType } from '../services/rewardsEngine/redemptionsV2';
 import PartnerConversionPanel from './PartnerConversionPanel';
 
 interface ValidationViewProps {
@@ -259,11 +260,50 @@ const ValidationView: React.FC<ValidationViewProps> = ({ process, onApprove, onR
             </button>
             {process.status !== 'approved' && (
               <button
-                onClick={() => onApprove(process.process_id)}
-                disabled={process.status === 'rejected' || process.confidence_score < 75}
-                className="px-8 py-3 bg-gradient-to-r from-violet-600 to-purple-600 text-white text-sm font-bold rounded-xl hover:shadow-xl hover:shadow-violet-200 shadow-lg disabled:opacity-30 disabled:shadow-none transition-all duration-300 ease-out"
+                onClick={() => {
+                  const isManualOverride = process.confidence_score < 75 || process.status === 'rejected';
+                  const message = isManualOverride
+                    ? `Manually approve "${process.card_name}"?\n\nThis will override the automatic validation (Score: ${process.confidence_score}%).\n\nAre you sure you want to proceed?`
+                    : `Approve "${process.card_name}" for production?`;
+                  
+                  if (window.confirm(message)) {
+                    onApprove(process.process_id);
+                  }
+                }}
+                className="px-8 py-3 bg-gradient-to-r from-violet-600 to-purple-600 text-white text-sm font-bold rounded-xl hover:shadow-xl hover:shadow-violet-200 shadow-lg transition-all duration-300 ease-out flex items-center gap-2"
+                title={process.confidence_score < 75 || process.status === 'rejected' ? 'Manual Approval (Overrides automatic validation)' : 'Approve for production'}
               >
-                Approve
+                {process.confidence_score < 75 || process.status === 'rejected' ? (
+                  <>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                    </svg>
+                    Manual Approve
+                  </>
+                ) : (
+                  <>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Approve
+                  </>
+                )}
+              </button>
+            )}
+            {process.status === 'approved' && (
+              <button
+                onClick={() => {
+                  if (window.confirm(`Un-approve "${process.card_name}"?\n\nThis will change the status back to review required.`)) {
+                    onApprove(process.process_id);
+                  }
+                }}
+                className="px-8 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-bold rounded-xl hover:shadow-xl hover:shadow-amber-200 shadow-lg transition-all duration-300 ease-out flex items-center gap-2"
+                title="Un-approve this card"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                Un-approve
               </button>
             )}
           </div>
@@ -364,17 +404,39 @@ const ValidationView: React.FC<ValidationViewProps> = ({ process, onApprove, onR
                 </div>
 
                 {categoryRewards.length === 0 ? (
-                  <div className="text-center py-16">
-                    <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
-                      <svg className="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
-                      </svg>
-                    </div>
-                    <h3 className="text-xl font-semibold text-gray-700 mb-2">No Reward Points Categories Found</h3>
-                    <p className="text-gray-500 max-w-md mx-auto">
-                      This card doesn't have any categories that earn transferable reward points, or the reward structure hasn't been extracted yet.
-                    </p>
-                  </div>
+                  (() => {
+                    const cardType = getCardType(process.card_name);
+                    const isCashback = cardType === 'cashback';
+                    
+                    return (
+                      <div className="text-center py-16">
+                        <div className={`w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center ${
+                          isCashback ? 'bg-amber-100' : 'bg-gray-100'
+                        }`}>
+                          {isCashback ? (
+                            <svg className="w-10 h-10 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                          ) : (
+                            <svg className="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                            </svg>
+                          )}
+                        </div>
+                        <h3 className={`text-xl font-semibold mb-2 ${
+                          isCashback ? 'text-amber-700' : 'text-gray-700'
+                        }`}>
+                          {isCashback ? 'Cashback Card - No Partner Transfers' : 'No Reward Points Categories Found'}
+                        </h3>
+                        <p className="text-gray-500 max-w-md mx-auto">
+                          {isCashback 
+                            ? 'This is a cashback card that earns direct cashback instead of transferable reward points. Partner loyalty program transfers are not available for this card type.'
+                            : "This card doesn't have any categories that earn transferable reward points, or the reward structure hasn't been extracted yet."
+                          }
+                        </p>
+                      </div>
+                    );
+                  })()
                 ) : (
                   <div className="space-y-10">
                     {/* 1. Category Summary Cards (Flight/Hotel) */}

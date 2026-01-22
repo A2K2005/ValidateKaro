@@ -7,48 +7,168 @@
   },
   "partner_valuations": {
     "airlines": {
-      "air_india": {"name": "Flying Returns (Air India)", "value_inr": 0.99},
-      "club_vistara": {"name": "Club Vistara", "value_inr": 1.24},
-      "indigo_6e": {"name": "6E Rewards (IndiGo)", "value_inr": 0.83},
-      "spicejet": {"name": "SpiceClub (SpiceJet)", "value_inr": 0.66},
-      "intermiles": {"name": "InterMiles", "value_inr": 0.83},
-      "emirates": {"name": "Emirates Skywards", "value_inr": 0.91},
-      "british_airways": {"name": "British Airways Executive Club (Avios)", "value_inr": 0.91},
-      "qatar": {"name": "Qatar Airways Privilege Club (Avios)", "value_inr": 1.24},
-      "etihad": {"name": "Etihad Guest", "value_inr": 0.83},
-      "singapore": {"name": "Singapore Airlines KrisFlyer", "value_inr": 1.15},
-      "air_france_klm": {"name": "Air France-KLM Flying Blue", "value_inr": 1.07},
-      "turkish": {"name": "Turkish Airlines Miles&Smiles", "value_inr": 0.99},
-      "united": {"name": "United MileagePlus", "value_inr": 0.99},
-      "air_canada": {"name": "Air Canada Aeroplan", "value_inr": 1.24},
-      "jal": {"name": "Japan Airlines Mileage Bank", "value_inr": 1.07},
-      "qantas": {"name": "Qantas Frequent Flyer", "value_inr": 1.07},
-      "virgin_atlantic": {"name": "Virgin Atlantic Flying Club", "value_inr": 0.99},
-      "thai": {"name": "Thai Airways Royal Orchid Plus", "value_inr": 0.83},
-      "ethiopian": {"name": "Ethiopian Airlines ShebaMiles", "value_inr": 0.83},
-      "malaysia": {"name": "Malaysia Airlines Enrich", "value_inr": 0.83},
-      "lufthansa": {"name": "Lufthansa Miles & More", "value_inr": 1.07},
-      "delta": {"name": "Delta SkyMiles", "value_inr": 0.99},
-      "airasia": {"name": "AirAsia Rewards", "value_inr": 0.50},
-      "avianca": {"name": "Avianca LifeMiles", "value_inr": 0.95},
-      "vietnam": {"name": "Vietnam Airlines", "value_inr": 0.75},
-      "asia_miles": {"name": "Asia Miles (Cathay Pacific)", "value_inr": 0.90}
+      "air_india": {
+        "name": "Flying Returns (Air India)",
+        "value_inr": 0.99
+      },
+      "club_vistara": {
+        "name": "Club Vistara",
+        "value_inr": 1.24
+      },
+      "indigo_6e": {
+        "name": "6E Rewards (IndiGo)",
+        "value_inr": 0.83
+      },
+      "spicejet": {
+        "name": "SpiceClub (SpiceJet)",
+        "value_inr": 0.66
+      },
+      "intermiles": {
+        "name": "InterMiles",
+        "value_inr": 0.83
+      },
+      "emirates": {
+        "name": "Emirates Skywards",
+        "value_inr": 0.91
+      },
+      "british_airways": {
+        "name": "British Airways Executive Club (Avios)",
+        "value_inr": 0.91
+      },
+      "qatar": {
+        "name": "Qatar Airways Privilege Club (Avios)",
+        "value_inr": 1.24
+      },
+      "etihad": {
+        "name": "Etihad Guest",
+        "value_inr": 0.83
+      },
+      "singapore": {
+        "name": "Singapore Airlines KrisFlyer",
+        "value_inr": 1.15
+      },
+      "air_france_klm": {
+        "name": "Air France-KLM Flying Blue",
+        "value_inr": 1.07
+      },
+      "turkish": {
+        "name": "Turkish Airlines Miles&Smiles",
+        "value_inr": 0.99
+      },
+      "united": {
+        "name": "United MileagePlus",
+        "value_inr": 0.99
+      },
+      "air_canada": {
+        "name": "Air Canada Aeroplan",
+        "value_inr": 1.24
+      },
+      "jal": {
+        "name": "Japan Airlines Mileage Bank",
+        "value_inr": 1.07
+      },
+      "qantas": {
+        "name": "Qantas Frequent Flyer",
+        "value_inr": 1.07
+      },
+      "virgin_atlantic": {
+        "name": "Virgin Atlantic Flying Club",
+        "value_inr": 0.99
+      },
+      "thai": {
+        "name": "Thai Airways Royal Orchid Plus",
+        "value_inr": 0.83
+      },
+      "ethiopian": {
+        "name": "Ethiopian Airlines ShebaMiles",
+        "value_inr": 0.83
+      },
+      "malaysia": {
+        "name": "Malaysia Airlines Enrich",
+        "value_inr": 0.83
+      },
+      "lufthansa": {
+        "name": "Lufthansa Miles & More",
+        "value_inr": 1.07
+      },
+      "delta": {
+        "name": "Delta SkyMiles",
+        "value_inr": 0.99
+      },
+      "airasia": {
+        "name": "AirAsia Rewards",
+        "value_inr": 0.5
+      },
+      "avianca": {
+        "name": "Avianca LifeMiles",
+        "value_inr": 0.95
+      },
+      "vietnam": {
+        "name": "Vietnam Airlines",
+        "value_inr": 0.75
+      },
+      "asia_miles": {
+        "name": "Asia Miles (Cathay Pacific)",
+        "value_inr": 0.9
+      }
     },
     "hotels": {
-      "marriott": {"name": "Marriott Bonvoy", "value_inr": 0.5},
-      "hilton": {"name": "Hilton Honors", "value_inr": 0.25},
-      "hyatt": {"name": "World of Hyatt", "value_inr": 1.3},
-      "ihg": {"name": "IHG One Rewards", "value_inr": 0.35},
-      "accor": {"name": "Accor Live Limitless", "value_inr": 1.7},
-      "wyndham": {"name": "Wyndham Rewards", "value_inr": 0.6},
-      "choice": {"name": "Choice Privileges", "value_inr": 0.6},
-      "radisson": {"name": "Radisson Rewards", "value_inr": 0.35},
-      "best_western": {"name": "Best Western Rewards", "value_inr": 0.4},
-      "taj": {"name": "Taj NeuPass", "value_inr": 1.0},
-      "itc": {"name": "ITC Club ITC", "value_inr": 0.6},
-      "oberoi": {"name": "Oberoi One", "value_inr": 1.0},
-      "leela": {"name": "Leela DISCOVERY", "value_inr": 1.0},
-      "trident": {"name": "Trident Privilege", "value_inr": 1.0}
+      "marriott": {
+        "name": "Marriott Bonvoy",
+        "value_inr": 0.5
+      },
+      "hilton": {
+        "name": "Hilton Honors",
+        "value_inr": 0.25
+      },
+      "hyatt": {
+        "name": "World of Hyatt",
+        "value_inr": 1.3
+      },
+      "ihg": {
+        "name": "IHG One Rewards",
+        "value_inr": 0.35
+      },
+      "accor": {
+        "name": "Accor Live Limitless",
+        "value_inr": 1.7
+      },
+      "wyndham": {
+        "name": "Wyndham Rewards",
+        "value_inr": 0.6
+      },
+      "choice": {
+        "name": "Choice Privileges",
+        "value_inr": 0.6
+      },
+      "radisson": {
+        "name": "Radisson Rewards",
+        "value_inr": 0.35
+      },
+      "best_western": {
+        "name": "Best Western Rewards",
+        "value_inr": 0.4
+      },
+      "taj": {
+        "name": "Taj NeuPass",
+        "value_inr": 1
+      },
+      "itc": {
+        "name": "ITC Club ITC",
+        "value_inr": 0.6
+      },
+      "oberoi": {
+        "name": "Oberoi One",
+        "value_inr": 1
+      },
+      "leela": {
+        "name": "Leela DISCOVERY",
+        "value_inr": 1
+      },
+      "trident": {
+        "name": "Trident Privilege",
+        "value_inr": 1
+      }
     }
   },
   "banks": {
@@ -64,28 +184,82 @@
           "note": "1 EDGE Mile = 2 Partner Miles (except Marriott). Group A: 30k cap, Group B: 120k cap",
           "partners": {
             "airlines_domestic": {
-              "air_india": {"ratio": "1:2", "group": "B"},
-              "club_vistara": {"ratio": "1:2", "group": "B"},
-              "spicejet": {"ratio": "1:2", "group": "B"}
+              "air_india": {
+                "ratio": "1:2",
+                "group": "B"
+              },
+              "club_vistara": {
+                "ratio": "1:2",
+                "group": "B"
+              },
+              "spicejet": {
+                "ratio": "1:2",
+                "group": "B"
+              }
             },
             "airlines_international": {
-              "singapore": {"ratio": "1:2", "group": "A"},
-              "british_airways": {"ratio": "1:2", "group": "A"},
-              "qatar": {"ratio": "1:2", "group": "A"},
-              "etihad": {"ratio": "1:2", "group": "A"},
-              "united": {"ratio": "1:2", "group": "A"},
-              "turkish": {"ratio": "1:2", "group": "A"},
-              "air_france_klm": {"ratio": "1:2", "group": "B"},
-              "thai": {"ratio": "1:2", "group": "A"},
-              "jal": {"ratio": "1:2", "group": "A"},
-              "qantas": {"ratio": "1:2", "group": "B"},
-              "airasia": {"ratio": "1:2", "group": "B"}
+              "singapore": {
+                "ratio": "1:2",
+                "group": "A"
+              },
+              "british_airways": {
+                "ratio": "1:2",
+                "group": "A"
+              },
+              "qatar": {
+                "ratio": "1:2",
+                "group": "A"
+              },
+              "etihad": {
+                "ratio": "1:2",
+                "group": "A"
+              },
+              "united": {
+                "ratio": "1:2",
+                "group": "A"
+              },
+              "turkish": {
+                "ratio": "1:2",
+                "group": "A"
+              },
+              "air_france_klm": {
+                "ratio": "1:2",
+                "group": "B"
+              },
+              "thai": {
+                "ratio": "1:2",
+                "group": "A"
+              },
+              "jal": {
+                "ratio": "1:2",
+                "group": "A"
+              },
+              "qantas": {
+                "ratio": "1:2",
+                "group": "B"
+              },
+              "airasia": {
+                "ratio": "1:2",
+                "group": "B"
+              }
             },
             "hotels": {
-              "marriott": {"ratio": "2:1", "note": "Reverse - 2 Miles = 1 Point"},
-              "accor": {"ratio": "1:2", "group": "A"},
-              "wyndham": {"ratio": "1:2", "group": "A"},
-              "itc": {"ratio": "1:2", "group": "B"}
+              "marriott": {
+                "ratio": "2:1",
+                "note": "Reverse - 2 Miles = 1 Point"
+              },
+              "accor": {
+                "ratio": "1:2",
+                "group": "A"
+              },
+              "wyndham": {
+                "ratio": "1:2",
+                "group": "A"
+              },
+              "itc": {
+                "ratio": "1:2",
+                "group": "B"
+              }
             }
           }
         },
@@ -97,22 +271,46 @@
           "note": "Exclusive Burgundy. 5 Points = 4 Miles",
           "partners": {
             "airlines_domestic": {
-              "air_india": {"ratio": "5:4"},
-              "club_vistara": {"ratio": "5:4"}
+              "air_india": {
+                "ratio": "5:4"
+              },
+              "club_vistara": {
+                "ratio": "5:4"
+              }
             },
             "airlines_international": {
-              "singapore": {"ratio": "5:4"},
-              "british_airways": {"ratio": "5:4"},
-              "qatar": {"ratio": "5:4"},
-              "etihad": {"ratio": "5:4"},
-              "united": {"ratio": "5:4"},
-              "turkish": {"ratio": "5:4"},
-              "airasia": {"ratio": "5:4"}
+              "singapore": {
+                "ratio": "5:4"
+              },
+              "british_airways": {
+                "ratio": "5:4"
+              },
+              "qatar": {
+                "ratio": "5:4"
+              },
+              "etihad": {
+                "ratio": "5:4"
+              },
+              "united": {
+                "ratio": "5:4"
+              },
+              "turkish": {
+                "ratio": "5:4"
+              },
+              "airasia": {
+                "ratio": "5:4"
+              }
             },
             "hotels": {
-              "marriott": {"ratio": "5:4"},
-              "accor": {"ratio": "5:4"},
-              "wyndham": {"ratio": "5:4"}
+              "marriott": {
+                "ratio": "5:4"
+              },
+              "accor": {
+                "ratio": "5:4"
+              },
+              "wyndham": {
+                "ratio": "5:4"
+              }
             }
           }
         },
@@ -124,22 +322,46 @@
           "note": "Standard Magnus. 5 Points = 2 Miles",
           "partners": {
             "airlines_domestic": {
-              "air_india": {"ratio": "5:2"},
-              "club_vistara": {"ratio": "5:2"}
+              "air_india": {
+                "ratio": "5:2"
+              },
+              "club_vistara": {
+                "ratio": "5:2"
+              }
             },
             "airlines_international": {
-              "singapore": {"ratio": "5:2"},
-              "british_airways": {"ratio": "5:2"},
-              "qatar": {"ratio": "5:2"},
-              "etihad": {"ratio": "5:2"},
-              "united": {"ratio": "5:2"},
-              "turkish": {"ratio": "5:2"},
-              "airasia": {"ratio": "5:2"}
+              "singapore": {
+                "ratio": "5:2"
+              },
+              "british_airways": {
+                "ratio": "5:2"
+              },
+              "qatar": {
+                "ratio": "5:2"
+              },
+              "etihad": {
+                "ratio": "5:2"
+              },
+              "united": {
+                "ratio": "5:2"
+              },
+              "turkish": {
+                "ratio": "5:2"
+              },
+              "airasia": {
+                "ratio": "5:2"
+              }
             },
             "hotels": {
-              "marriott": {"ratio": "5:2"},
-              "accor": {"ratio": "5:2"},
-              "wyndham": {"ratio": "5:2"}
+              "marriott": {
+                "ratio": "5:2"
+              },
+              "accor": {
+                "ratio": "5:2"
+              },
+              "wyndham": {
+                "ratio": "5:2"
+              }
             }
           }
         },
@@ -151,20 +373,40 @@
           "note": "Same as Magnus Standard",
           "partners": {
             "airlines_domestic": {
-              "air_india": {"ratio": "5:2"},
-              "club_vistara": {"ratio": "5:2"}
+              "air_india": {
+                "ratio": "5:2"
+              },
+              "club_vistara": {
+                "ratio": "5:2"
+              }
             },
             "airlines_international": {
-              "singapore": {"ratio": "5:2"},
-              "british_airways": {"ratio": "5:2"},
-              "qatar": {"ratio": "5:2"},
-              "etihad": {"ratio": "5:2"},
-              "united": {"ratio": "5:2"},
-              "turkish": {"ratio": "5:2"}
+              "singapore": {
+                "ratio": "5:2"
+              },
+              "british_airways": {
+                "ratio": "5:2"
+              },
+              "qatar": {
+                "ratio": "5:2"
+              },
+              "etihad": {
+                "ratio": "5:2"
+              },
+              "united": {
+                "ratio": "5:2"
+              },
+              "turkish": {
+                "ratio": "5:2"
+              }
             },
             "hotels": {
-              "marriott": {"ratio": "5:2"},
-              "accor": {"ratio": "5:2"}
+              "marriott": {
+                "ratio": "5:2"
+              },
+              "accor": {
+                "ratio": "5:2"
+              }
             }
           }
         },
@@ -176,7 +418,10 @@
           "note": "Co-branded - Direct earn",
           "partners": {
             "airlines_domestic": {
-              "club_vistara": {"ratio": "1:1", "note": "Direct earn"}
+              "club_vistara": {
+                "ratio": "1:1",
+                "note": "Direct earn"
+              }
             },
             "airlines_international": {},
             "hotels": {}
@@ -190,18 +435,34 @@
           "note": "Poor ratios for lower-tier card",
           "partners": {
             "airlines_domestic": {
-              "club_vistara": {"ratio": "5:1"},
-              "itc": {"ratio": "5:1"},
-              "spicejet": {"ratio": "5:1"},
-              "airasia": {"ratio": "5:1"}
+              "club_vistara": {
+                "ratio": "5:1"
+              },
+              "itc": {
+                "ratio": "5:1"
+              },
+              "spicejet": {
+                "ratio": "5:1"
+              },
+              "airasia": {
+                "ratio": "5:1"
+              }
             },
             "airlines_international": {
-              "air_india": {"ratio": "10:1"},
-              "singapore": {"ratio": "10:1"},
-              "qatar": {"ratio": "10:1"}
+              "air_india": {
+                "ratio": "10:1"
+              },
+              "singapore": {
+                "ratio": "10:1"
+              },
+              "qatar": {
+                "ratio": "10:1"
+              }
             },
             "hotels": {
-              "marriott": {"ratio": "10:1"}
+              "marriott": {
+                "ratio": "10:1"
+              }
             }
           }
         },
@@ -213,15 +474,25 @@
           "note": "Similar to Privilege",
           "partners": {
             "airlines_domestic": {
-              "club_vistara": {"ratio": "5:1"},
-              "itc": {"ratio": "5:1"}
+              "club_vistara": {
+                "ratio": "5:1"
+              },
+              "itc": {
+                "ratio": "5:1"
+              }
             },
             "airlines_international": {
-              "air_india": {"ratio": "10:1"},
-              "singapore": {"ratio": "10:1"}
+              "air_india": {
+                "ratio": "10:1"
+              },
+              "singapore": {
+                "ratio": "10:1"
+              }
             },
             "hotels": {
-              "marriott": {"ratio": "10:1"}
+              "marriott": {
+                "ratio": "10:1"
+              }
             }
           }
         },
@@ -233,11 +504,255 @@
           "note": "Entry-level card",
           "partners": {
             "airlines_domestic": {
-              "club_vistara": {"ratio": "5:1"}
+              "club_vistara": {
+                "ratio": "5:1"
+              }
             },
             "airlines_international": {
-              "air_india": {"ratio": "10:1"}
+              "air_india": {
+                "ratio": "10:1"
+              }
             },
+            "hotels": {}
+          }
+        },
+        "AXIS_AIRTEL": {
+          "card_name": "AXIS AIRTEL CC",
+          "card_type": "cashback",
+          "currency": "Cashback",
+          "default_ratio": "N/A",
+          "note": "Cashback card - no partner transfers available",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AXIS_FLIPKART": {
+          "card_name": "AXIS FLIPKART",
+          "card_type": "cashback",
+          "currency": "Cashback",
+          "default_ratio": "N/A",
+          "note": "Cashback card - no partner transfers available",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AXIS_INDIAN_OIL": {
+          "card_name": "AXIS INDIAN OIL RUPAY",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AXIS_MY_ZONE": {
+          "card_name": "AXIS MY ZONE",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AXIS_SAMSUNG_INFINITE": {
+          "card_name": "Samsung Axis Bank Infinite Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AXIS_SAMSUNG_SIGNATURE": {
+          "card_name": "Samsung Axis Bank Signature Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AXIS_AURA": {
+          "card_name": "AXIS AURA CREDIT CARD",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AXIS_MILES_MORE": {
+          "card_name": "Axis Miles and More World Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AXIS_FREECHARGE": {
+          "card_name": "Axis Bank FreeCharge Plus Credit Card",
+          "card_type": "cashback",
+          "currency": "Cashback",
+          "default_ratio": "N/A",
+          "note": "Cashback card - no partner transfers available",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AXIS_NEO": {
+          "card_name": "Axis Neo",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AXIS__ACE_": {
+          "card_name": "Axis Bank ACE Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AXIS__HORIZON_": {
+          "card_name": "Axis Bank Horizon Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AXIS_CASHBACK_": {
+          "card_name": "Axis Cashback Credit Card",
+          "card_type": "cashback",
+          "currency": "Cashback",
+          "default_ratio": "N/A",
+          "note": "Cashback card - no partner transfers available",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AXIS_SHOPPERS_STOP_": {
+          "card_name": "Axis Shoppers Stop Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AXIS_SPICEJET__VOYAGE_BLACK_": {
+          "card_name": "Axis SpiceJet Bank Voyage Black Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AXIS_SPICEJET__VOYAGE_": {
+          "card_name": "Axis SpiceJet Bank Voyage Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AXIS_SUPERMONEY_RUPAY_": {
+          "card_name": "Axis Supermoney Rupay Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AXIS_VISTARA_PLATINUM": {
+          "card_name": "Axis Vistara Platinum",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "LIC_AXIS__PLATINUM_": {
+          "card_name": "LIC Axis Bank Platinum Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "LIC_AXIS__SIGNATURE_": {
+          "card_name": "LIC Axis Bank Signature Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
             "hotels": {}
           }
         }
@@ -255,29 +770,68 @@
           "note": "Premium card. 1:1 domestic, 2:1 international",
           "partners": {
             "airlines_domestic": {
-              "air_india": {"ratio": "2:1"},
-              "club_vistara": {"ratio": "2:1", "note": "Via Air India"},
-              "intermiles": {"ratio": "1:1"}
+              "air_india": {
+                "ratio": "2:1"
+              },
+              "club_vistara": {
+                "ratio": "2:1",
+                "note": "Via Air India"
+              },
+              "intermiles": {
+                "ratio": "1:1"
+              }
             },
             "airlines_international": {
-              "singapore": {"ratio": "1:1"},
-              "british_airways": {"ratio": "2:1"},
-              "qatar": {"ratio": "2:1"},
-              "etihad": {"ratio": "2:1"},
-              "united": {"ratio": "2:1"},
-              "turkish": {"ratio": "2:1"},
-              "virgin_atlantic": {"ratio": "2:1"},
-              "air_france_klm": {"ratio": "1:1"},
-              "air_canada": {"ratio": "2:1"},
-              "avianca": {"ratio": "2:1"},
-              "airasia": {"ratio": "1:1"},
-              "vietnam": {"ratio": "1:1"}
+              "singapore": {
+                "ratio": "1:1"
+              },
+              "british_airways": {
+                "ratio": "2:1"
+              },
+              "qatar": {
+                "ratio": "2:1"
+              },
+              "etihad": {
+                "ratio": "2:1"
+              },
+              "united": {
+                "ratio": "2:1"
+              },
+              "turkish": {
+                "ratio": "2:1"
+              },
+              "virgin_atlantic": {
+                "ratio": "2:1"
+              },
+              "air_france_klm": {
+                "ratio": "1:1"
+              },
+              "air_canada": {
+                "ratio": "2:1"
+              },
+              "avianca": {
+                "ratio": "2:1"
+              },
+              "airasia": {
+                "ratio": "1:1"
+              },
+              "vietnam": {
+                "ratio": "1:1"
+              }
             },
             "hotels": {
-              "marriott": {"ratio": "2:1"},
-              "accor": {"ratio": "2:1"},
-              "ihg": {"ratio": "1:1"},
-              "wyndham": {"ratio": "1:1"}
+              "marriott": {
+                "ratio": "2:1"
+              },
+              "accor": {
+                "ratio": "2:1"
+              },
+              "ihg": {
+                "ratio": "1:1"
+              },
+              "wyndham": {
+                "ratio": "1:1"
+              }
             }
           }
         },
@@ -289,18 +843,34 @@
           "note": "Identical to Infinia",
           "partners": {
             "airlines_domestic": {
-              "air_india": {"ratio": "2:1"},
-              "intermiles": {"ratio": "1:1"}
+              "air_india": {
+                "ratio": "2:1"
+              },
+              "intermiles": {
+                "ratio": "1:1"
+              }
             },
             "airlines_international": {
-              "singapore": {"ratio": "1:1"},
-              "british_airways": {"ratio": "2:1"},
-              "qatar": {"ratio": "2:1"},
-              "etihad": {"ratio": "2:1"},
-              "virgin_atlantic": {"ratio": "2:1"}
+              "singapore": {
+                "ratio": "1:1"
+              },
+              "british_airways": {
+                "ratio": "2:1"
+              },
+              "qatar": {
+                "ratio": "2:1"
+              },
+              "etihad": {
+                "ratio": "2:1"
+              },
+              "virgin_atlantic": {
+                "ratio": "2:1"
+              }
             },
             "hotels": {
-              "marriott": {"ratio": "2:1"}
+              "marriott": {
+                "ratio": "2:1"
+              }
             }
           }
         },
@@ -312,18 +882,34 @@
           "note": "Standard 2:1, except Air India 3:1",
           "partners": {
             "airlines_domestic": {
-              "air_india": {"ratio": "3:1"}
+              "air_india": {
+                "ratio": "3:1"
+              }
             },
             "airlines_international": {
-              "singapore": {"ratio": "2:1"},
-              "british_airways": {"ratio": "2:1"},
-              "etihad": {"ratio": "2:1"},
-              "united": {"ratio": "2:1"},
-              "air_canada": {"ratio": "2:1"},
-              "airasia": {"ratio": "2:1"}
+              "singapore": {
+                "ratio": "2:1"
+              },
+              "british_airways": {
+                "ratio": "2:1"
+              },
+              "etihad": {
+                "ratio": "2:1"
+              },
+              "united": {
+                "ratio": "2:1"
+              },
+              "air_canada": {
+                "ratio": "2:1"
+              },
+              "airasia": {
+                "ratio": "2:1"
+              }
             },
             "hotels": {
-              "accor": {"ratio": "2:1"}
+              "accor": {
+                "ratio": "2:1"
+              }
             }
           }
         },
@@ -337,7 +923,10 @@
             "airlines_domestic": {},
             "airlines_international": {},
             "hotels": {
-              "marriott": {"ratio": "1:1", "note": "Direct earn"}
+              "marriott": {
+                "ratio": "1:1",
+                "note": "Direct earn"
+              }
             }
           }
         },
@@ -349,10 +938,14 @@
           "note": "Entry-level rewards card",
           "partners": {
             "airlines_domestic": {
-              "intermiles": {"ratio": "2:1"}
+              "intermiles": {
+                "ratio": "2:1"
+              }
             },
             "airlines_international": {
-              "airasia": {"ratio": "2:1"}
+              "airasia": {
+                "ratio": "2:1"
+              }
             },
             "hotels": {}
           }
@@ -365,8 +958,275 @@
           "note": "Co-branded - Direct earn",
           "partners": {
             "airlines_domestic": {
-              "indigo_6e": {"ratio": "1:1", "note": "Direct earn"}
+              "indigo_6e": {
+                "ratio": "1:1",
+                "note": "Direct earn"
+              }
             },
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "HDFC_SWIGGY": {
+          "card_name": "HDFC Swiggy Credit Card",
+          "card_type": "cashback",
+          "currency": "Cashback",
+          "default_ratio": "N/A",
+          "note": "Cashback card - no partner transfers available",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "HDFC_INDIAN_OIL": {
+          "card_name": "HDFC INDIAN OIL",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "HDFC_TATA_NEU": {
+          "card_name": "HDFC TATA NEU",
+          "card_type": "rewards",
+          "currency": "Cashback",
+          "default_ratio": "N/A",
+          "note": "Cashback card - no partner transfers available",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "HDFC_SHOPPERS_STOP": {
+          "card_name": "HDFC SHOPPERS STOP",
+          "card_type": "cashback",
+          "currency": "Cashback",
+          "default_ratio": "N/A",
+          "note": "Cashback card - no partner transfers available",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "HDFC_IRCTC": {
+          "card_name": "HDFC IRCTC Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "HDFC_RUPAY": {
+          "card_name": "HDFC RuPay Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "HDFC_FREEDOM": {
+          "card_name": "HDFC Freedom Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "HDFC_TATA_NEU_INFINITY": {
+          "card_name": "Tata Neu Infinity HDFC Bank Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "HDFC_DINERS_BLACK_METAL": {
+          "card_name": "HDFC Diners Club Black Metal Edition",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "HDFC_SUPERIA": {
+          "card_name": "HDFC Superia Airline Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "HDFC_MONEYBACK_PLUS": {
+          "card_name": "HDFC MoneyBack Plus Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "HDFC__BHARAT_": {
+          "card_name": "HDFC Bank Bharat Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "HDFC_BIZ_FIRST_": {
+          "card_name": "HDFC Biz First Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "HDFC_BIZ_GROW_": {
+          "card_name": "HDFC Biz Grow Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "HDFC_BUSINESS_MONEYBACK_": {
+          "card_name": "HDFC Business Moneyback Credit card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "HDFC_S": {
+          "card_name": "HDFC Credit Cards",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "HDFC_DINERS_PRIVILEGE_": {
+          "card_name": "HDFC Diners Privilege Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "HDFC_MONEYBACK_": {
+          "card_name": "HDFC Moneyback Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "HDFC_PIXEL_PLAY_": {
+          "card_name": "HDFC PIXEL Play Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "HDFC_SHOPPERS_STOP_BLACK_": {
+          "card_name": "HDFC Shoppers Stop Black Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "PAYTM_HDFC__SELECT_": {
+          "card_name": "Paytm HDFC Bank Select Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "TATA_NEU_PLUS_HDFC__": {
+          "card_name": "Tata Neu Plus HDFC Bank Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
             "airlines_international": {},
             "hotels": {}
           }
@@ -385,25 +1245,65 @@
           "note": "Premium Amex. 1:1 for Marriott is best",
           "partners": {
             "airlines_domestic": {
-              "intermiles": {"ratio": "2:1", "min": 800},
-              "club_vistara": {"ratio": "3:1", "min": 900, "note": "Poor ratio"}
+              "intermiles": {
+                "ratio": "2:1",
+                "min": 800
+              },
+              "club_vistara": {
+                "ratio": "3:1",
+                "min": 900,
+                "note": "Poor ratio"
+              }
             },
             "airlines_international": {
-              "british_airways": {"ratio": "2:1", "min": 1200},
-              "emirates": {"ratio": "2:1", "min": 800},
-              "etihad": {"ratio": "2:1", "min": 1600},
-              "qatar": {"ratio": "2:1", "min": 500},
-              "singapore": {"ratio": "2:1", "min": 800},
-              "virgin_atlantic": {"ratio": "2:1", "min": 800},
-              "asia_miles": {"ratio": "2:1", "min": 800}
+              "british_airways": {
+                "ratio": "2:1",
+                "min": 1200
+              },
+              "emirates": {
+                "ratio": "2:1",
+                "min": 800
+              },
+              "etihad": {
+                "ratio": "2:1",
+                "min": 1600
+              },
+              "qatar": {
+                "ratio": "2:1",
+                "min": 500
+              },
+              "singapore": {
+                "ratio": "2:1",
+                "min": 800
+              },
+              "virgin_atlantic": {
+                "ratio": "2:1",
+                "min": 800
+              },
+              "asia_miles": {
+                "ratio": "2:1",
+                "min": 800
+              }
             },
             "hotels": {
-              "marriott": {"ratio": "1:1", "min": 100, "note": "Best value"},
-              "hilton": {"ratio": "10:9", "min": 1000}
+              "marriott": {
+                "ratio": "1:1",
+                "min": 100,
+                "note": "Best value"
+              },
+              "hilton": {
+                "ratio": "10:9",
+                "min": 1000
+              }
             },
             "vouchers": {
-              "postcard_hotels": {"ratio": "20000:10000", "note": "₹10k voucher for 20k points"},
-              "taj": {"ratio": "25000:10000"}
+              "postcard_hotels": {
+                "ratio": "20000:10000",
+                "note": "₹10k voucher for 20k points"
+              },
+              "taj": {
+                "ratio": "25000:10000"
+              }
             }
           }
         },
@@ -415,30 +1315,77 @@
           "note": "Entry-level Amex MR card",
           "partners": {
             "airlines_domestic": {
-              "intermiles": {"ratio": "2:1", "min": 800},
-              "club_vistara": {"ratio": "3:1", "min": 800}
+              "intermiles": {
+                "ratio": "2:1",
+                "min": 800
+              },
+              "club_vistara": {
+                "ratio": "3:1",
+                "min": 800
+              }
             },
             "airlines_international": {
-              "british_airways": {"ratio": "2:1", "min": 1200},
-              "emirates": {"ratio": "2:1", "min": 800},
-              "etihad": {"ratio": "2:1", "min": 1600},
-              "qatar": {"ratio": "2:1", "min": 500},
-              "singapore": {"ratio": "2:1", "min": 800},
-              "virgin_atlantic": {"ratio": "2:1", "min": 800},
-              "asia_miles": {"ratio": "2:1", "min": 800}
+              "british_airways": {
+                "ratio": "2:1",
+                "min": 1200
+              },
+              "emirates": {
+                "ratio": "2:1",
+                "min": 800
+              },
+              "etihad": {
+                "ratio": "2:1",
+                "min": 1600
+              },
+              "qatar": {
+                "ratio": "2:1",
+                "min": 500
+              },
+              "singapore": {
+                "ratio": "2:1",
+                "min": 800
+              },
+              "virgin_atlantic": {
+                "ratio": "2:1",
+                "min": 800
+              },
+              "asia_miles": {
+                "ratio": "2:1",
+                "min": 800
+              }
             },
             "hotels": {
-              "marriott": {"ratio": "1:1", "min": 100},
-              "hilton": {"ratio": "10:9", "min": 1000}
+              "marriott": {
+                "ratio": "1:1",
+                "min": 100
+              },
+              "hilton": {
+                "ratio": "10:9",
+                "min": 1000
+              }
             },
             "vouchers": {
-              "flipkart": {"ratio": "18000:6000"},
-              "myntra": {"ratio": "18000:7000"},
-              "taj": {"ratio": "18000:9000"},
-              "tanishq": {"ratio": "24000:9000"},
-              "shoppers_stop": {"ratio": "24000:10000"},
-              "reliance_digital": {"ratio": "18000:6000"},
-              "insta_vouchers": {"ratio": "1000:250"}
+              "flipkart": {
+                "ratio": "18000:6000"
+              },
+              "myntra": {
+                "ratio": "18000:7000"
+              },
+              "taj": {
+                "ratio": "18000:9000"
+              },
+              "tanishq": {
+                "ratio": "24000:9000"
+              },
+              "shoppers_stop": {
+                "ratio": "24000:10000"
+              },
+              "reliance_digital": {
+                "ratio": "18000:6000"
+              },
+              "insta_vouchers": {
+                "ratio": "1000:250"
+              }
             }
           }
         },
@@ -450,29 +1397,73 @@
           "note": "Cashback-focused with MR earning",
           "partners": {
             "airlines_domestic": {
-              "intermiles": {"ratio": "2:1", "min": 800},
-              "club_vistara": {"ratio": "3:1", "min": 800}
+              "intermiles": {
+                "ratio": "2:1",
+                "min": 800
+              },
+              "club_vistara": {
+                "ratio": "3:1",
+                "min": 800
+              }
             },
             "airlines_international": {
-              "british_airways": {"ratio": "2:1", "min": 1200},
-              "emirates": {"ratio": "2:1", "min": 800},
-              "etihad": {"ratio": "2:1", "min": 1600},
-              "qatar": {"ratio": "2:1", "min": 500},
-              "singapore": {"ratio": "2:1", "min": 800},
-              "virgin_atlantic": {"ratio": "2:1", "min": 800}
+              "british_airways": {
+                "ratio": "2:1",
+                "min": 1200
+              },
+              "emirates": {
+                "ratio": "2:1",
+                "min": 800
+              },
+              "etihad": {
+                "ratio": "2:1",
+                "min": 1600
+              },
+              "qatar": {
+                "ratio": "2:1",
+                "min": 500
+              },
+              "singapore": {
+                "ratio": "2:1",
+                "min": 800
+              },
+              "virgin_atlantic": {
+                "ratio": "2:1",
+                "min": 800
+              }
             },
             "hotels": {
-              "marriott": {"ratio": "1:1", "min": 100},
-              "hilton": {"ratio": "10:9", "min": 1000}
+              "marriott": {
+                "ratio": "1:1",
+                "min": 100
+              },
+              "hilton": {
+                "ratio": "10:9",
+                "min": 1000
+              }
             },
             "vouchers": {
-              "bigbasket": {"ratio": "1000:250"},
-              "flipkart": {"ratio": "1000:250"},
-              "myntra": {"ratio": "1000:250"},
-              "taj": {"ratio": "1000:250"},
-              "tanishq": {"ratio": "1000:250"},
-              "reliance_digital": {"ratio": "1000:250"},
-              "insta_vouchers": {"ratio": "1000:250"}
+              "bigbasket": {
+                "ratio": "1000:250"
+              },
+              "flipkart": {
+                "ratio": "1000:250"
+              },
+              "myntra": {
+                "ratio": "1000:250"
+              },
+              "taj": {
+                "ratio": "1000:250"
+              },
+              "tanishq": {
+                "ratio": "1000:250"
+              },
+              "reliance_digital": {
+                "ratio": "1000:250"
+              },
+              "insta_vouchers": {
+                "ratio": "1000:250"
+              }
             }
           }
         },
@@ -484,18 +1475,80 @@
           "note": "Similar to MRCC",
           "partners": {
             "airlines_domestic": {
-              "intermiles": {"ratio": "2:1"},
-              "club_vistara": {"ratio": "3:1"}
+              "intermiles": {
+                "ratio": "2:1"
+              },
+              "club_vistara": {
+                "ratio": "3:1"
+              }
             },
             "airlines_international": {
-              "british_airways": {"ratio": "2:1"},
-              "singapore": {"ratio": "2:1"},
-              "qatar": {"ratio": "2:1"}
+              "british_airways": {
+                "ratio": "2:1"
+              },
+              "singapore": {
+                "ratio": "2:1"
+              },
+              "qatar": {
+                "ratio": "2:1"
+              }
             },
             "hotels": {
-              "marriott": {"ratio": "1:1"},
-              "hilton": {"ratio": "10:9"}
+              "marriott": {
+                "ratio": "1:1"
+              },
+              "hilton": {
+                "ratio": "10:9"
+              }
             }
+          }
+        },
+        "AMEX_PLATINUM": {
+          "card_name": "Amex Express Platinum Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AMEX_GOLD_": {
+          "card_name": "Amex Gold Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AMEX_MEMBERSHIP_REWARDS_": {
+          "card_name": "Amex Membership Rewards Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AMEX_PLATINUM_RESERVE_": {
+          "card_name": "Amex Platinum Reserve Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
           }
         }
       }
@@ -512,22 +1565,58 @@
           "note": "New 2025/26 program. 1:1 Group A, 2:1 Group B",
           "partners": {
             "airlines_domestic": {
-              "air_india": {"ratio": "1:1", "group": "A"},
-              "club_vistara": {"ratio": "1:1", "group": "A"}
+              "air_india": {
+                "ratio": "1:1",
+                "group": "A"
+              },
+              "club_vistara": {
+                "ratio": "1:1",
+                "group": "A"
+              }
             },
             "airlines_international": {
-              "etihad": {"ratio": "1:1", "group": "A"},
-              "air_canada": {"ratio": "1:1", "group": "A"},
-              "air_france_klm": {"ratio": "1:1", "group": "A"},
-              "qantas": {"ratio": "1:1", "group": "A"},
-              "accor": {"ratio": "2:1", "group": "B"},
-              "singapore": {"ratio": "2:1", "group": "B"},
-              "united": {"ratio": "2:1", "group": "B"},
-              "qatar": {"ratio": "2:1", "group": "B"},
-              "emirates": {"ratio": "2:1", "group": "B"}
+              "etihad": {
+                "ratio": "1:1",
+                "group": "A"
+              },
+              "air_canada": {
+                "ratio": "1:1",
+                "group": "A"
+              },
+              "air_france_klm": {
+                "ratio": "1:1",
+                "group": "A"
+              },
+              "qantas": {
+                "ratio": "1:1",
+                "group": "A"
+              },
+              "accor": {
+                "ratio": "2:1",
+                "group": "B"
+              },
+              "singapore": {
+                "ratio": "2:1",
+                "group": "B"
+              },
+              "united": {
+                "ratio": "2:1",
+                "group": "B"
+              },
+              "qatar": {
+                "ratio": "2:1",
+                "group": "B"
+              },
+              "emirates": {
+                "ratio": "2:1",
+                "group": "B"
+              }
             },
             "hotels": {
-              "ihg": {"ratio": "1:1", "group": "A"}
+              "ihg": {
+                "ratio": "1:1",
+                "group": "A"
+              }
             }
           }
         },
@@ -539,12 +1628,20 @@
           "note": "Premium SBI card",
           "partners": {
             "airlines_domestic": {
-              "air_india": {"ratio": "2:1"},
-              "intermiles": {"ratio": "2:1"}
+              "air_india": {
+                "ratio": "2:1"
+              },
+              "intermiles": {
+                "ratio": "2:1"
+              }
             },
             "airlines_international": {
-              "singapore": {"ratio": "2:1"},
-              "etihad": {"ratio": "2:1"}
+              "singapore": {
+                "ratio": "2:1"
+              },
+              "etihad": {
+                "ratio": "2:1"
+              }
             },
             "hotels": {}
           }
@@ -557,13 +1654,122 @@
           "note": "Mid-tier card",
           "partners": {
             "airlines_domestic": {
-              "air_india": { "ratio": "5:1" }
+              "air_india": {
+                "ratio": "5:1"
+              }
             },
             "airlines_international": {},
             "hotels": {}
           }
+        },
+        "SBI_BPCL_OCTANE": {
+          "card_name": "SBI BPCL OCTANE",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "SBI_CASHBACK": {
+          "card_name": "SBI CASHBACK",
+          "card_type": "cashback",
+          "currency": "Cashback",
+          "default_ratio": "N/A",
+          "note": "Cashback card - no partner transfers available",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "SBI_SIMPLY_CLICK": {
+          "card_name": "SBI SIMPLY CLICK",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "SBI_PRIME": {
+          "card_name": "SBI Prime Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "SBI_SIMPLYSAVE": {
+          "card_name": "SBI SimplySave Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "FLIPKART_SBI_": {
+          "card_name": "Flipkart SBI Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "IRCTC_SBI_PLATINUM_": {
+          "card_name": "IRCTC SBI Platinum Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "SBI__PULSE_": {
+          "card_name": "SBI Card Pulse Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "TATA_NEU_INFINITY_SBI_": {
+          "card_name": "Tata Neu Infinity SBI Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
         }
-
       }
     },
     "AU_BANK": {
@@ -578,8 +1784,12 @@
           "note": "Premium AU card",
           "partners": {
             "airlines_domestic": {
-              "air_india": {"ratio": "1.5:1"},
-              "club_vistara": {"ratio": "1.5:1"}
+              "air_india": {
+                "ratio": "1.5:1"
+              },
+              "club_vistara": {
+                "ratio": "1.5:1"
+              }
             },
             "airlines_international": {},
             "hotels": {}
@@ -593,7 +1803,9 @@
           "note": "Mid-tier AU card. Same 6:1 slab as other non-Zenith+ AU cards",
           "partners": {
             "airlines_domestic": {
-              "air_india": { "ratio": "6:1" }
+              "air_india": {
+                "ratio": "6:1"
+              }
             },
             "airlines_international": {},
             "hotels": {}
@@ -601,14 +1813,53 @@
         },
         "AU_ALTURA": {
           "card_name": "AU Altura",
-          "card_type": "rewards",
+          "card_type": "cashback",
           "currency": "AU Reward Points",
           "default_ratio": "6:1",
           "note": "Entry-level rewards",
           "partners": {
             "airlines_domestic": {
-              "air_india": {"ratio": "6:1", "min": 100}
+              "air_india": {
+                "ratio": "6:1",
+                "min": 100
+              }
             },
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AU_NOMO": {
+          "card_name": "AU Nomo Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AU_ALTURA_PLUS_": {
+          "card_name": "AU Altura Plus Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "AU__LIT_": {
+          "card_name": "AU Bank LIT Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
             "airlines_international": {},
             "hotels": {}
           }
@@ -627,10 +1878,41 @@
           "note": "Poor Air India ratio",
           "partners": {
             "airlines_domestic": {
-              "club_vistara": {"ratio": "4:1"},
-              "intermiles": {"ratio": "4:1"},
-              "air_india": {"ratio": "15:1", "note": "Extremely poor"}
+              "club_vistara": {
+                "ratio": "4:1"
+              },
+              "intermiles": {
+                "ratio": "4:1"
+              },
+              "air_india": {
+                "ratio": "15:1",
+                "note": "Extremely poor"
+              }
             },
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "YES_POP_CLUB": {
+          "card_name": "YES BANK POP-CLUB Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "YES__ACE_": {
+          "card_name": "YES BANK ACE Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
             "airlines_international": {},
             "hotels": {}
           }
@@ -656,7 +1938,10 @@
               }
             },
             "airlines_international": {
-              "british_airways": {"ratio": "2:1", "note": "Via Avios co-brand"}
+              "british_airways": {
+                "ratio": "2:1",
+                "note": "Via Avios co-brand"
+              }
             },
             "hotels": {}
           }
@@ -670,9 +1955,75 @@
           "partners": {
             "airlines_domestic": {},
             "airlines_international": {
-              "british_airways": { "ratio": "2:1", "note": "Via Avios co-brand"},
-              "qatar": {"ratio": "1:1", "note": "Avios partner"}
+              "british_airways": {
+                "ratio": "2:1",
+                "note": "Via Avios co-brand"
+              },
+              "qatar": {
+                "ratio": "1:1",
+                "note": "Avios partner"
+              }
             },
+            "hotels": {}
+          }
+        },
+        "INDUSIND_EASYDINER": {
+          "card_name": "IndusInd EASYDINER",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "INDUSIND_PLATINUM_RUPAY": {
+          "card_name": "IndusInd PLATINUM RUPAY",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "INDUSIND_PLATINUM_AURA": {
+          "card_name": "IndusInd Platinum Aura Edge Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "INDUSIND_TIGER": {
+          "card_name": "IndusInd Tiger Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "INDUSIND_": {
+          "card_name": "IndusInd Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
             "hotels": {}
           }
         }
@@ -693,18 +2044,842 @@
             "airlines_international": {},
             "hotels": {}
           }
+        },
+        "ICICI_HPCL_SUPER_SAVER": {
+          "card_name": "ICICI HPCL SUPER SAVER",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "ICICI_HPCL_CORAL": {
+          "card_name": "ICICI HPCL CORAL",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "ICICI_PLATINUM_CHIP": {
+          "card_name": "ICICI PLATINUM CHIP",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "ICICI_MAKEMYTRIP": {
+          "card_name": "MakeMyTrip ICICI Bank Credit Card",
+          "card_type": "cashback",
+          "currency": "Cashback",
+          "default_ratio": "N/A",
+          "note": "Cashback card - no partner transfers available",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "ICICI_AMAZON_PAY": {
+          "card_name": "ICICI Amazon Pay Credit Card",
+          "card_type": "cashback",
+          "currency": "Cashback",
+          "default_ratio": "N/A",
+          "note": "Cashback card - no partner transfers available",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "ICICI_SAPPHIRO": {
+          "card_name": "ICICI Sapphiro Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "ICICI_RUBYX": {
+          "card_name": "ICICI Rubyx Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "TIMES_BLACK_ICICI__": {
+          "card_name": "Times Black ICICI Bank Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "MAKEMYTRIP_ICICI__SIGNATURE_": {
+          "card_name": "MakeMyTrip ICICI Bank Signature Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
         }
       }
     },
     "STANDARD_CHARTERED": {
       "bank_name": "Standard Chartered",
       "program_name": "SC 360 Rewards",
-      "cards": {}
+      "cards": {
+        "STANC_EASE_MY_TRIP": {
+          "card_name": "StanC EASE MY TRIP",
+          "card_type": "cashback",
+          "currency": "Cashback",
+          "default_ratio": "N/A",
+          "note": "Cashback card - no partner transfers available",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "STANC_SMART": {
+          "card_name": "StanC SMART",
+          "card_type": "cashback",
+          "currency": "Cashback",
+          "default_ratio": "N/A",
+          "note": "Cashback card - no partner transfers available",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "STANC_ULTIMATE": {
+          "card_name": "Standard Chartered Ultimate",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "STANDARD_CHARTERED_EMIRATES_PLATINUM_": {
+          "card_name": "Standard Chartered Emirates Platinum Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "STANDARD_CHARTERED_PLATINUM_REWARDS_": {
+          "card_name": "Standard Chartered Platinum Rewards Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        }
+      }
     },
     "IDFC_FIRST": {
       "bank_name": "IDFC FIRST Bank",
       "program_name": "IDFC First Rewards",
-      "cards": {}
+      "cards": {
+        "IDFC_SELECT": {
+          "card_name": "IDFC FIRST SELECT",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "IDFC_POWER_PLUS": {
+          "card_name": "IDFC POWER PLUS",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "IDFC_CLUB_VISTARA": {
+          "card_name": "IDFC CLUB VISTARA",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "IDFC_WOW": {
+          "card_name": "IDFC FIRST WOW CREDIT CARD",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "IDFC_MILLENIA": {
+          "card_name": "IDFC FIRST MILLENIA CREDIT CARD",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "IDFC_ASHVA": {
+          "card_name": "IDFC ASHVA CREDIT CARD",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "IDFC_MAYURA": {
+          "card_name": "IDFC MAYURA CREDIT CARD",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "IDFC_WEALTH": {
+          "card_name": "IDFC Wealth Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "IDFC_CLASSIC": {
+          "card_name": "IDFC FIRST CLASSIC CREDIT CARD",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "IDFC_POWER": {
+          "card_name": "IDFC POWER",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "IDFC_PRIVATE": {
+          "card_name": "IDFC First Private Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "IDFC_FIRST_DUAL_INDIGO_": {
+          "card_name": "IDFC FIRST Dual Indigo Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "IDFC_FIRST_SWYP_": {
+          "card_name": "IDFC First SWYP Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        }
+      }
+    },
+    "HSBC": {
+      "bank_name": "HSBC",
+      "program_name": "Cashback",
+      "cards": {
+        "HSBC_LIVE_PLUS": {
+          "card_name": "HSBC Live+ Credit Card",
+          "card_type": "cashback",
+          "currency": "Cashback",
+          "default_ratio": "N/A",
+          "note": "Cashback card - no partner transfers available",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "HSBC_PLATINUM": {
+          "card_name": "HSBC Platinum Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "HSBC_PREMIER": {
+          "card_name": "HSBC Premier MasterCard Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "HSBC_CASHBACK_": {
+          "card_name": "HSBC Cashback Credit Card",
+          "card_type": "cashback",
+          "currency": "Cashback",
+          "default_ratio": "N/A",
+          "note": "Cashback card - no partner transfers available",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "HSBC_RUPAY_CASHBACK_": {
+          "card_name": "HSBC RuPay Cashback Credit Card",
+          "card_type": "cashback",
+          "currency": "Cashback",
+          "default_ratio": "N/A",
+          "note": "Cashback card - no partner transfers available",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "HSBC_TRAVEL_ONE_": {
+          "card_name": "HSBC Travel One Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        }
+      }
+    },
+    "RBL_BANK": {
+      "bank_name": "RBL BANK",
+      "program_name": "Reward Points",
+      "cards": {
+        "RBL_SHOPRITE": {
+          "card_name": "RBL Shoprite Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "RBL_INDIANOIL": {
+          "card_name": "IndianOil RBL Bank Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "RBL_INDIANOIL_XTRA": {
+          "card_name": "Indian Oil RBL Bank XTRA Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "RBL_WORLD_SAFARI": {
+          "card_name": "RBL World Safari Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "RBL_INSIGNIA": {
+          "card_name": "RBL Insignia Preferred Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "RBL__COOKIES_": {
+          "card_name": "RBL Bank Cookies Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "RBL__PLAY_": {
+          "card_name": "RBL Bank Play Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "RBL_PLATINUM_MAXIMA_PLUS_": {
+          "card_name": "RBL Platinum Maxima Plus Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "RBL_SUPER_BINGE_": {
+          "card_name": "RBL Super Binge Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "IRCTC_RBL_": {
+          "card_name": "IRCTC RBL Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        }
+      }
+    },
+    "KOTAK_BANK": {
+      "bank_name": "KOTAK BANK",
+      "program_name": "Reward Points",
+      "cards": {
+        "KOTAK_ZEN": {
+          "card_name": "Kotak Zen Signature ",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "KOTAK_INDIANOIL": {
+          "card_name": "Kotak IndianOil Platinum Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "KOTAK_DELIGHT_PLATINUM_": {
+          "card_name": "Kotak Delight Platinum Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "KOTAK_ESSENTIA_PLATINUM_": {
+          "card_name": "Kotak Essentia Platinum Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "KOTAK_LEAGUE_PLATINUM_": {
+          "card_name": "Kotak League Platinum Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "KOTAK_MOJO_PLATINUM_": {
+          "card_name": "Kotak Mojo Platinum Credit card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "MYNTRA_KOTAK_": {
+          "card_name": "Myntra Kotak Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "PVR_KOTAK_PLATINUM_": {
+          "card_name": "PVR Kotak Platinum Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        }
+      }
+    },
+    "TEST": {
+      "bank_name": "TEST",
+      "program_name": "Cashback",
+      "cards": {
+        "TEST_CARD": {
+          "card_name": "Test Card",
+          "card_type": "cashback",
+          "currency": "Cashback",
+          "default_ratio": "N/A",
+          "note": "Cashback card - no partner transfers available",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        }
+      }
+    },
+    "KIWI": {
+      "bank_name": "KIWI",
+      "program_name": "Reward Points",
+      "cards": {
+        "KIWI_CARD": {
+          "card_name": "Kiwi",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        }
+      }
+    },
+    "BAJAJ_FINSERV": {
+      "bank_name": "Bajaj Finserv",
+      "program_name": "Reward Points",
+      "cards": {
+        "BAJAJ_FINSERV_RBL__SUPER": {
+          "card_name": "Bajaj Finserv RBL Bank SuperCard",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "BAJAJ_FINSERV_DBS__SUPER": {
+          "card_name": "Bajaj Finserv DBS Bank SuperCard",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "BAJAJ_FINSERV_HDFC__SUPER": {
+          "card_name": "Bajaj Finserv HDFC Bank SuperCard",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        }
+      }
+    },
+    "FEDERAL_BANK": {
+      "bank_name": "Federal Bank",
+      "program_name": "Reward Points",
+      "cards": {
+        "FEDERAL__S": {
+          "card_name": "Federal Bank Credit Cards",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        }
+      }
+    },
+    "SBM_BANK": {
+      "bank_name": "SBM Bank",
+      "program_name": "Reward Points",
+      "cards": {
+        "SBM_KREDIT_PE_": {
+          "card_name": "SBM Kredit.Pe Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "SBM_ZET_MAGNET_": {
+          "card_name": "SBM ZET Magnet Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        }
+      }
+    },
+    "OTHER_ISSUERS": {
+      "bank_name": "OTHER ISSUERS",
+      "program_name": "Reward Points",
+      "cards": {
+        "JUPITER_EDGE_": {
+          "card_name": "Jupiter Edge Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "KIWI_KLICK_": {
+          "card_name": "Kiwi Klick Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "SCAPIA_": {
+          "card_name": "Scapia Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "ZAGG_RUPAY_": {
+          "card_name": "Zagg Rupay Credit Card",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        },
+        "INDIAN_OIL_VISA": {
+          "card_name": "Indian Oil Visa",
+          "card_type": "rewards",
+          "currency": "Reward Points",
+          "default_ratio": "2:1",
+          "note": "Rewards card - partner data to be added",
+          "partners": {
+            "airlines_domestic": {},
+            "airlines_international": {},
+            "hotels": {}
+          }
+        }
+      }
     }
   }
 }

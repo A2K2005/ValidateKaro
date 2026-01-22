@@ -10,13 +10,14 @@ ValidateKaro is an internal operations tool that automates the extraction and va
 
 ### Core Capabilities
 - **🤖 AI-Powered Extraction** - Uses GLM-4.5-Air via OpenRouter to analyze MITC PDFs and extract reward structures
-- **📄 Client-Side PDF Processing** - Uses pdfjs-dist for secure, browser-based text extraction that preserves table structure via Y-coordinate tracking
-- **✂️ Smart Chunking** - Automatically splits large documents into ~45KB chunks for reliable API processing
+- **📄 Client-Side PDF Processing** - Secure, browser-based text extraction with `pdfjs-dist` that preserves table structure via Y-coordinate tracking
+- **✂️ Smart Chunking** - Automatically splits large documents into ~8000 character chunks for reliable parallel processing
 - **⚡ Parallel Analysis** - Processes all chunks simultaneously with intelligent result merging based on confidence scores
-- **🎯 Fuzzy Card Matching** - Accepts variations of card names (e.g., "Magnus", "Burgundy", "Axis Magnus" all match "Axis Magnus Burgundy")
+- **🔄 Re-Analysis** - Re-run AI extraction on existing cards without re-uploading PDFs
+- **🎯 Fuzzy Card Matching** - Accepts variations of card names (e.g., "Magnus", "Burgundy", "Axis Magnus" all match)
 - **💾 Dual Storage** - Saves to both Supabase (cloud) and localStorage (offline fallback)
 - **📊 Real-time Progress Tracking** - Live overlay showing job status, progress percentage, and detailed activity logs
-- **✈️ Partner Transfers** - Calculate and display airline/hotel loyalty program transfer options with conversion ratios
+- **✈️ Partner Transfers V2** - Smart card type detection with intelligent fallback for partner transfer options
 - **💰 Rewards Calculator** - Transaction-based reward point calculations with partner conversion options
 
 ### Extracted Data Points
@@ -63,7 +64,7 @@ Automatically extracts reward information for 19 spending categories:
 
 3. **Configure environment variables**
 
-   Copy `.env.example` to `.env` and fill in your values:
+   Create `.env` file with your values:
    ```env
    VITE_OPENROUTER_API_KEY=sk-or-v1-your-api-key-here
    VITE_SUPABASE_URL=https://your-project.supabase.co
@@ -87,7 +88,7 @@ Automatically extracts reward information for 19 spending categories:
 
 6. **Open the app**
    ```
-   http://localhost:5173
+   http://localhost:3000
    ```
 
 ---
@@ -97,61 +98,96 @@ Automatically extracts reward information for 19 spending categories:
 ```
 validatekaro_v1/
 ├── public/
-│   └── pdf.worker.min.mjs    # PDF.js worker for client-side extraction
+│   └── pdf.worker.min.mjs           # PDF.js worker for client-side extraction
 ├── src/
 │   ├── components/
-│   │   ├── Sidebar.tsx       # Navigation sidebar
-│   │   ├── UploadModal.tsx   # PDF upload with bank/card dropdowns
-│   │   ├── ValidationView.tsx # Detailed results with Partner Transfers tab
-│   │   ├── JsonModal.tsx     # Raw JSON viewer
+│   │   ├── Sidebar.tsx              # Navigation sidebar
+│   │   ├── UploadModal.tsx          # PDF upload with bank/card dropdowns
+│   │   ├── ValidationView.tsx       # Detailed results with Partner Transfers tab
+│   │   ├── JsonModal.tsx            # Raw JSON viewer
 │   │   ├── PartnerConversionPanel.tsx # Transfer partner display UI
-│   │   └── ui/               # Shadcn UI components (Button, Card, Tabs, etc.)
+│   │   └── ui/                      # Shadcn UI components (Button, Card, Tabs, etc.)
 │   ├── services/
-│   │   ├── aiService.ts      # PDF extraction & AI analysis logic
-│   │   ├── supabaseService.ts # Database & storage operations
-│   │   └── rewardsEngine/    # Rewards calculation engine
-│   │       ├── index.ts      # Barrel exports
-│   │       ├── types.ts      # TypeScript type definitions
-│   │       ├── redemptions.ts # Partner transfer logic
-│   │       ├── calculator.ts # Transaction rewards calculator
+│   │   ├── aiService.ts             # PDF extraction & AI analysis logic
+│   │   ├── supabaseService.ts       # Database & storage operations
+│   │   └── rewardsEngine/           # V2 Rewards calculation engine
+│   │       ├── index.ts             # Barrel exports
+│   │       ├── types.ts             # TypeScript type definitions
+│   │       ├── redemptionsV2.ts     # V2 Partner transfer logic with fallbacks
+│   │       ├── calculator.ts        # Transaction rewards calculator
 │   │       └── missingDataHandler.ts # Missing ratio tracking
 │   ├── lib/
-│   │   └── supabase.ts       # Supabase client configuration
-│   ├── types.ts              # TypeScript interfaces
-│   ├── constants.ts          # Category keys & labels
-│   └── App.tsx               # Main application with dashboard
-├── redemption_data.json      # Card reward types & transfer partner data
-├── supabase-schema.sql       # Database schema
-├── .env.example              # Environment variables template
+│   │   ├── supabase.ts              # Supabase client configuration
+│   │   └── utils.ts                 # Utility functions
+│   ├── types.ts                     # TypeScript interfaces
+│   ├── constants.ts                 # Category keys & labels
+│   └── App.tsx                      # Main application with dashboard
+├── card_partners_v2.json            # V2 Partner data (94 cards, bank-centric)
+├── supabase-schema.sql              # Database schema
 └── README.md
 ```
 
 ---
 
-## 🎯 Rewards Engine
+## 🎯 Rewards Engine V2
 
-The Rewards Engine provides comprehensive credit card reward calculations and partner program transfer functionality.
+The V2 Rewards Engine provides comprehensive credit card reward calculations with intelligent card type detection and partner program transfer functionality.
+
+### V2 Migration & Consolidation
+
+**Key Changes:**
+- **Single Source of Truth**: `card_partners_v2.json` - bank-centric structure with 94 cards
+- **Card Type Filtering**: Explicit `card_type` field (`rewards` or `cashback`) for all cards
+- **Smart Fallback System**: 3-layer lookup strategy for unknown cards
+- **Deprecated Files**: Removed old `redemptions.ts`, `partnerLookup.ts`, and `reward-cashback.json`
+
+### Card Type System
+
+**Rewards Cards (81 cards):**
+- Earn transferable reward points
+- Show partner transfer options
+- Fallback to bank defaults if card not found
+
+**Cashback Cards (13 cards):**
+- Earn direct cashback
+- **No partner transfers** - explicitly return empty list
+- No fallback to bank partners
+
+Examples:
+- `HDFC Swiggy` → Cashback → No partners shown
+- `Axis Magnus` → Rewards → Full partner list
+- `SBI Cashback` → Cashback → No partners shown
+
+### 3-Layer Fallback Strategy
+
+When looking up partner transfers:
+
+1. **Exact Card Match** - Find specific card in JSON (e.g., "Axis Magnus Burgundy")
+2. **Fuzzy Keyword Match** - Match by keywords (e.g., "Random Card" → finds bank-level partners)
+3. **Bank-Level Default** - Use default card for that bank (e.g., Axis → "Axis Magnus")
+
+**Cashback Override**: If card is identified as `card_type: 'cashback'`, returns empty list (no fallback).
 
 ### Features
 
-- **Card Type Detection** - Automatically determine if a card earns cashback or transferable reward points
-- **Partner Transfer Lookup** - Find available airline/hotel transfer partners for any card
-- **Conversion Calculations** - Calculate partner points from bank points with ratio support (e.g., 3:1, 1:1)
-- **Transaction Rewards** - Calculate rewards earned from spending transactions with category-wise breakdown
-- **Reference Valuations** - Display-only estimated values in INR/USD (with appropriate warnings)
-- **Missing Data Tracking** - Track and report missing conversion ratios for product improvement
+- **Automatic Card Type Detection** - Determine cashback vs rewards cards
+- **Bank-Centric Data Structure** - Organized by bank with default cards
+- **Partner Transfer Lookup** - Find airline/hotel transfer partners for any rewards card
+- **Conversion Calculations** - Calculate partner points with ratio support (e.g., 5:4, 3:1, 1:1)
+- **Transaction Rewards** - Calculate rewards earned from spending with category-wise breakdown
+- **Missing Data Tracking** - Track and report missing conversion ratios
 - **Subcategory Support** - Domestic vs International partner categorization
-- **Partner Points Types** - Display proper point names ("Club Vistara Points", "Marriott Bonvoy Points", etc.)
+- **Proper Point Names** - Display correct terminology ("EDGE Rewards", "Membership Rewards", etc.)
 
-### Partner Transfers Tab in ValidationView
+### Partner Transfers Tab
 
-The ValidationView now includes a **Partner Transfers** tab that displays:
+The ValidationView includes a **Partner Transfers** tab that displays:
 - Category-wise reward points earned (based on extracted reward rates)
 - Available partner transfer options for each category
 - Conversion ratios and minimum points requirements
 - Estimated values with appropriate disclaimers
 - Filtering by partner category (Airlines, Hotels, Vouchers)
-- Sorting by value, ratio, or name
+- **Automatic hiding for cashback cards**
 
 ### Quick Start
 
@@ -159,12 +195,15 @@ The ValidationView now includes a **Partner Transfers** tab that displays:
 import {
   getCardType,
   calculateRewardsForTransaction,
-  getAvailablePartners,
-  calculatePartnerPoints,
+  getPartnerConversionsV2,
+  getBestValueV2,
 } from '@/services/rewardsEngine';
 
 // Check if card earns rewards or cashback
-const cardType = getCardType('HDFC Infinia Credit Card');
+const cardType = getCardType('HDFC Swiggy');
+// => 'cashback'
+
+const cardType2 = getCardType('HDFC Infinia');
 // => 'rewards'
 
 // Calculate rewards from a transaction
@@ -176,37 +215,58 @@ const result = calculateRewardsForTransaction(
 );
 // => { earned: 50, partnerConversions: [...], bankPointsType: 'EDGE Rewards', ... }
 
-// Get available transfer partners
-const partners = getAvailablePartners('HDFC Infinia Credit Card');
-// => [{ partnerId: 'marriott_bonvoy', partnerName: 'Marriott Bonvoy', ratio: '1:1', ... }]
+// Get partner conversions (V2 with fallback)
+const partners = getPartnerConversionsV2(10000, 'Axis Magnus Burgundy');
+// => [{ partnerId: 'marriott', ratio: '5:4', ... }]
 
-// Calculate partner points
-const conversion = calculatePartnerPoints(10000, 'HDFC Infinia', 'marriott_bonvoy');
-// => { partnerPoints: 10000, conversionRatio: '1:1', canConvert: true, ... }
+// Cashback card returns empty
+const cashbackPartners = getPartnerConversionsV2(5000, 'HDFC Swiggy');
+// => []
+
+// Get best value conversion
+const bestValue = getBestValueV2(10000, 'Axis Magnus');
+// => { partnerId: 'marriott', partnerPoints: 12500, estimatedValue: 'Rs. 25,000', ... }
 ```
+
+### Supported Cards (94 Total)
+
+| Bank | Cards | Examples |
+|------|-------|----------|
+| **Axis Bank** (18) | Magnus, Atlas, Reserve, Vistara, Privilege, Select, Aura, Neo, Flipkart, Airtel, etc. | Rewards + Cashback |
+| **HDFC Bank** (24) | Infinia, Diners Club Black, Regalia Gold, Millenia, Marriott Bonvoy, Swiggy, Tata Neu, etc. | Rewards + Cashback |
+| **American Express** (5) | Platinum Travel, MRCC, Smart Earn, Gold, Platinum Charge | All Rewards |
+| **SBI Card** (8) | Elite, Aurum, Prime, Miles, Simply Click, Cashback, BPCL Octane, etc. | Rewards + Cashback |
+| **ICICI Bank** (8) | Emeralde, Sapphiro, Rubyx, HPCL Coral, Amazon Pay, MakeMyTrip, etc. | Rewards + Cashback |
+| **IDFC FIRST** (11) | Select, Wealth, Private, Club Vistara, Millenia, Power, Ashva, Mayura, etc. | All Rewards |
+| **IndusInd** (6) | Legend, EasyDiner, Avios, Platinum RuPay, Aura Edge, Tiger | All Rewards |
+| **AU Bank** (4) | Zenith, Zenith Plus, Altura, Nomo | Rewards + Cashback |
+| **HSBC** (3) | Live+, Platinum, Premier | Rewards + Cashback |
+| **RBL Bank** (5) | Shoprite, World Safari, Insignia, IndianOil, IndianOil XTRA | All Rewards |
+| **Others** | Kotak, YES Bank, Standard Chartered, Samsung Axis, Kiwi | Various |
 
 ### Supported Transfer Partners
 
-| Category | Partners | Subcategory |
-|----------|----------|-------------|
-| Airlines | British Airways Avios, Emirates Skywards, Singapore KrisFlyer, Etihad Guest, Club Vistara, Air India Flying Returns, United MileagePlus, Cathay Pacific Asia Miles, Qantas, Miles & More, IndiGo 6E Rewards | Domestic / International |
-| Hotels | Marriott Bonvoy, Hilton Honors, IHG Rewards, Accor Live Limitless, Wyndham Rewards | - |
-| Vouchers | Amazon Pay, Flipkart, Tanishq | - |
+| Category | Partners | Notes |
+|----------|----------|-------|
+| **Airlines Domestic** | Club Vistara, IndiGo 6E Rewards, Air India Flying Returns, InterMiles | Vistara merged with Air India (2024) |
+| **Airlines International** | British Airways Avios, Emirates Skywards, Singapore KrisFlyer, Etihad Guest, Qatar Privilege Club, Cathay Asia Miles, Virgin Atlantic, etc. | 15+ programs |
+| **Hotels** | Marriott Bonvoy, Hilton Honors, IHG One Rewards, Accor Live Limitless, Taj InnerCircle, Hyatt, Wyndham, etc. | 12+ programs |
+| **Vouchers** | Amazon Pay, Flipkart, Tanishq, Postcard Hotels | Select cards only |
 
-### Supported Card Programs
+### Bank-Level Defaults
 
-| Bank | Reward Program | Example Cards |
-|------|----------------|---------------|
-| HDFC | Infinia/Diners Points | Infinia, Diners Black, Regalia Gold, Millenia |
-| American Express | Membership Rewards | Platinum, Gold, Smart Earn, MRCC, Platinum Travel |
-| Axis Bank | EDGE Rewards | Atlas, Magnus, Horizon, My Zone, Vistara |
-| AU Bank | Reward Points | Zenith, Zenith Plus, Altura, Altura Plus |
-| SBI | Reward Points | Elite, Prime, BPCL Octane |
-| ICICI | Reward Points | Emeralde, Coral |
-| IndusInd | Avios/Reward Points | Avios, Iconia |
-| Standard Chartered | Reward Points | Emirates |
-| Kotak | Reward Points | 6E Rewards |
-| IDFC FIRST | Reward Points | Club Vistara |
+When a specific card isn't found, the system falls back to these defaults:
+
+| Bank | Default Card | Program |
+|------|-------------|---------|
+| Axis Bank | Axis Magnus | EDGE Rewards |
+| HDFC Bank | Regalia Gold | Infinia/Diners Points |
+| American Express | AMEX MRCC | Membership Rewards |
+| SBI Card | SBI Miles Prime | Reward Points |
+| AU Bank | AU Zenith | Reward Points |
+| IndusInd | IndusInd Legend | Reward Points |
+| ICICI Bank | ICICI Emeralde | Reward Points |
+| IDFC FIRST | IDFC Select | Reward Points |
 
 ### UI Component
 
@@ -228,6 +288,7 @@ import { PartnerConversionPanel } from '@/components/PartnerConversionPanel';
 - Minimum points validation
 - Warning-styled reference values with disclaimers
 - Disabled states for insufficient points
+- **Hidden for cashback cards automatically**
 
 ### Important Notes
 
@@ -288,7 +349,7 @@ Tracks uploaded PDF files.
 
 1. Click **"New Audit"** button (or press `N`)
 2. Select **Issuing Bank** from searchable dropdown (16 supported banks)
-3. Enter **Card Name** - autocomplete from 170+ cards or enter custom name
+3. Enter **Card Name** - autocomplete from 94+ cards or enter custom name
 4. Upload **PDF files** (max 10, drag & drop supported)
 5. Click **"Start Extraction"**
 
@@ -308,8 +369,9 @@ A floating overlay shows real-time progress:
 - **Search** - Filter audits by card or bank name (press `/` to focus)
 - **Validation View** - Click any audit to see detailed extraction per category
   - **Category Details Tab** - View extracted reward rates, caps, exclusions for each spending category
-  - **Partner Transfers Tab** - See available partner transfer options with conversion ratios
+  - **Partner Transfers Tab** - See available partner transfer options (auto-hidden for cashback cards)
 - **JSON Export** - View raw extracted JSON data
+- **Re-Analysis** - Click "Re-run" to analyze again without re-uploading PDFs
 - **Keyboard Navigation** - Use `j`/`k` to navigate, `Enter` to select, `Esc` to go back
 
 ### 4. Approval Workflow
@@ -332,14 +394,14 @@ Located in `src/services/aiService.ts`:
 {
   model: "z-ai/glm-4.5-air",
   temperature: 0.1,           // Low for consistency
-  max_tokens: 32768,          // Maximum for complete responses
+  max_tokens: 16384,          // Maximum for complete responses
   response_format: { type: "json_object" }
 }
 ```
 
 ### Chunk Processing
 
-- **Chunk size**: ~45,000 characters (safe under OpenRouter limits)
+- **Chunk size**: ~8,000 characters (optimized to prevent truncation)
 - **Parallel processing**: All chunks analyzed simultaneously via `Promise.all`
 - **Smart splitting**: Tries to break at newlines to preserve context
 - **Result merging**: Higher confidence results override lower ones
@@ -352,7 +414,7 @@ Client-side extraction using pdfjs-dist:
 - Spaces added between items on same line
 - Detects scanned PDFs (< 50 chars extracted) and throws error
 
-### Confidence Scoring Penalties
+### Confidence Scoring
 
 ```
 📉 Missing category: -5%
@@ -360,6 +422,8 @@ Client-side extraction using pdfjs-dist:
 📉 Missing MITC citation: -10%
 📉 Low confidence (< 70): -5%
 📉 Vague caps/limits: -2%
+📉 All categories N/A: Score = 0%
+📉 < 3 categories with data: Score capped at 30%
 ```
 
 ---
@@ -374,6 +438,7 @@ Client-side extraction using pdfjs-dist:
 - Responsive design (mobile-friendly)
 
 ### ⌨️ Keyboard Shortcuts
+
 | Key | Action |
 |-----|--------|
 | `N` | New audit |
@@ -394,7 +459,7 @@ Client-side extraction using pdfjs-dist:
 **Solution**: The PDF is likely a scanned image without embedded text. Use OCR'd PDFs instead.
 
 ### Issue: "Chunk X: JSON parse failed"
-**Solution**: The AI response was truncated or malformed. The system gracefully handles this by returning empty results for that chunk.
+**Solution**: The AI response was truncated or malformed. Try re-running with the Re-Analysis feature.
 
 ### Issue: PDFs not uploading
 **Solution**: Check Supabase storage bucket `audit-pdfs` exists and has public access enabled
@@ -404,6 +469,10 @@ Client-side extraction using pdfjs-dist:
 1. Verify OpenRouter API key is valid and has credits
 2. Check that PDF contains actual text (not scanned images)
 3. Ensure card name somewhat matches content in the MITC
+4. Use Re-Analysis feature to try again
+
+### Issue: Cashback card showing partner transfers
+**Solution**: Verify the card has `card_type: "cashback"` in `card_partners_v2.json`. The system automatically hides partner transfers for cashback cards.
 
 ### Issue: Job stuck in progress overlay
 **Solution**: If a job fails, the overlay shows error details. Click the ✕ to dismiss completed/failed jobs.
@@ -420,16 +489,18 @@ Client-side extraction using pdfjs-dist:
 | Tailwind CSS | 3.4 | Styling |
 | pdfjs-dist | 5.4 | PDF Text Extraction |
 | Supabase | 2.x | Database & Storage |
-| OpenRouter | - | AI Model Access |
+| OpenRouter | - | AI Model Access (GLM-4.5-Air) |
+| Bun | Latest | Runtime & Package Manager |
 
 ---
 
 ## 📊 Performance
 
 - **Text Extraction**: ~1-3 seconds per PDF (client-side)
-- **AI Analysis**: ~30-120 seconds (depends on document size)
-- **Total Processing**: ~1-3 minutes per card
+- **AI Analysis**: ~30-90 seconds (optimized chunking)
+- **Total Processing**: ~1-2 minutes per card
 - **Concurrent Jobs**: Up to 3 jobs can run simultaneously
+- **Re-Analysis**: Same speed, no re-upload needed
 
 ---
 
@@ -438,20 +509,35 @@ Client-side extraction using pdfjs-dist:
 - **Client-Side PDF Processing**: PDFs processed in browser, not sent to external servers for text extraction
 - **RLS Policies**: Row-level security enabled on all Supabase tables
 - **Public Storage**: PDFs in public bucket (contains no sensitive PII)
-- **API Keys**: Stored in `.env` (never committed - use `.env.example` as template)
+- **API Keys**: Stored in `.env` (never committed)
 - **No Secrets Logged**: Error messages sanitized to avoid exposing API keys
 
 ---
 
-## 🚧 Future Enhancements
+## 🚧 Recent Enhancements (Jan 2026)
 
-- [ ] Support for more AI models (GPT-4, Claude)
-- [ ] Batch processing (multiple cards at once)
-- [ ] Historical comparison (track MITC changes over time)
-- [ ] Export to Excel/CSV
-- [ ] Email notifications on completion
-- [ ] Dark mode toggle
-- [ ] OCR support for scanned PDFs
+### V2 Migration & Consolidation ✅
+- Migrated to `card_partners_v2.json` with bank-centric structure
+- Added explicit `card_type` field for all 94 cards (81 rewards, 13 cashback)
+- Implemented 3-layer fallback system (exact → fuzzy → bank default)
+- Cashback cards now correctly return empty partner list (no fallback)
+- Deprecated and removed old files (`redemptions.ts`, `partnerLookup.ts`)
+
+### Re-Analysis Feature ✅
+- Re-run AI analysis on existing cards without re-uploading PDFs
+- Fetches stored PDF URLs from Supabase or localStorage
+- Shows progress in Active Jobs overlay
+- Updates existing audit record with new results
+
+### Improved Scoring Logic ✅
+- All N/A categories → 0% score (failed extraction)
+- < 3 categories with data → Score capped at 30%
+- Better detection of failed extractions
+
+### Optimized Chunking ✅
+- Reduced chunk size to 8,000 characters
+- Prevents token truncation errors
+- Better handling of large MITC documents
 
 ---
 

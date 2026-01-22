@@ -877,9 +877,20 @@ const App: React.FC = () => {
   };
 
   const handleApprove = async (id: string) => {
-    await supabaseService.updateStatus(id, 'approved', 'Production Ready');
+    // Find the current process to check its status
+    const currentProcess = processes.find(p => p.process_id === id);
+    const newStatus = currentProcess?.status === 'approved' ? 'review_required' : 'approved';
+    const note = newStatus === 'approved' ? 'Manually approved' : 'Un-approved';
+    
+    await supabaseService.updateStatus(id, newStatus as ProcessStatus, note);
     const updatedProcesses = await supabaseService.getProcesses();
     setProcesses(updatedProcesses);
+    
+    // Update selected process if it's the one being approved
+    if (selectedProcess?.process_id === id) {
+      const updated = updatedProcesses.find(p => p.process_id === id);
+      if (updated) setSelectedProcess(updated);
+    }
   };
 
   const handleRevalidate = async (process: ValidationProcess) => {

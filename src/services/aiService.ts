@@ -16,19 +16,23 @@ async function extractTextFromPDF(
   pdfInput: string,
   index: number
 ): Promise<string> {
+  const docStartTime = performance.now();
   try {
-    console.log(`[ValidateKaro] Doc ${index + 1}: Starting client-side text extraction...`);
+    console.log(`[ValidateKaro] 📄 Doc ${index + 1}: Starting client-side text extraction...`);
 
     // Load the PDF document
+    const loadStartTime = performance.now();
     const loadingTask = pdfjsLib.getDocument(pdfInput);
     const pdf = await loadingTask.promise;
-
-    console.log(`[ValidateKaro] Doc ${index + 1}: PDF loaded - ${pdf.numPages} pages`);
+    const loadDuration = ((performance.now() - loadStartTime) / 1000).toFixed(2);
+    console.log(`[ValidateKaro] ⏱️  Doc ${index + 1}: PDF loaded in ${loadDuration}s - ${pdf.numPages} pages`);
 
     let fullText = '';
+    const pageExtractTimes: number[] = [];
 
     // Extract text from each page
     for (let i = 1; i <= pdf.numPages; i++) {
+      const pageStartTime = performance.now();
       const page = await pdf.getPage(i);
       const textContent = await page.getTextContent();
 
@@ -54,6 +58,8 @@ async function extractTextFromPDF(
       }
 
       fullText += `--- Page ${i} ---\n${pageText}\n\n`;
+      const pageDuration = ((performance.now() - pageStartTime) / 1000).toFixed(2);
+      pageExtractTimes.push(parseFloat(pageDuration));
     }
 
     // Safety Check: If extraction failed (scanned PDF?), throw error
@@ -61,7 +67,13 @@ async function extractTextFromPDF(
       throw new Error("Extracted text is empty. File might be a scanned image.");
     }
 
-    console.log(`[ValidateKaro] Doc ${index + 1}: Extracted ${fullText.length} characters from ${pdf.numPages} pages`);
+    const docDuration = ((performance.now() - docStartTime) / 1000).toFixed(2);
+    const avgPageTime = (pageExtractTimes.reduce((a, b) => a + b, 0) / pageExtractTimes.length).toFixed(2);
+    console.log(`[ValidateKaro] ⏱️  Doc ${index + 1}: Extraction completed in ${docDuration}s`);
+    console.log(`[ValidateKaro]    ├─ Load time: ${loadDuration}s`);
+    console.log(`[ValidateKaro]    ├─ Pages extracted: ${pdf.numPages}`);
+    console.log(`[ValidateKaro]    ├─ Avg time per page: ${avgPageTime}s`);
+    console.log(`[ValidateKaro]    └─ Total characters: ${fullText.length.toLocaleString()}`);
 
     return fullText;
 
@@ -197,11 +209,17 @@ export async function processPDFsForCard(
 
   // Create promises for all chunks with progress tracking
   let completedChunks = 0;
+  const chunkTimings: number[] = [];
   const chunkPromises = chunks.map(async (chunk, i) => {
     const chunkAIStart = performance.now();
+    console.log(`[ValidateKaro] 🤖 Chunk ${i + 1}/${chunks.length}: Starting AI analysis...`);
     const result = await analyzeChunk(chunk, cardName, apiKey, currentDate, i, chunks.length);
-    const chunkAIDuration = ((performance.now() - chunkAIStart) / 1000).toFixed(2);
-    console.log(`[ValidateKaro] ⏱️  Chunk ${i + 1}/${chunks.length} analyzed in ${chunkAIDuration}s`);
+    const chunkAIDuration = (performance.now() - chunkAIStart) / 1000;
+    chunkTimings.push(chunkAIDuration);
+    console.log(`[ValidateKaro] ⏱️  Chunk ${i + 1}/${chunks.length}: Completed in ${chunkAIDuration.toFixed(2)}s`);
+    if (result.token_usage) {
+      console.log(`[ValidateKaro]    ├─ Tokens: ${result.token_usage.total_tokens} (prompt: ${result.token_usage.prompt_tokens}, completion: ${result.token_usage.completion_tokens})`);
+    }
     completedChunks++;
     onProgress?.('analyzing', `AI analysis: ${completedChunks}/${chunks.length} chunks complete`);
     return result;
@@ -210,8 +228,15 @@ export async function processPDFsForCard(
   // Wait for all to complete
   const results = await Promise.all(chunkPromises);
   const aiEndTime = performance.now();
-  const aiDuration = ((aiEndTime - aiStartTime) / 1000).toFixed(2);
-  console.log(`[ValidateKaro] ⏱️  AI Analysis (all chunks) completed in ${aiDuration}s`);
+  const aiDuration = (aiEndTime - aiStartTime) / 1000;
+  const avgChunkTime = chunkTimings.length > 0 ? (chunkTimings.reduce((a, b) => a + b, 0) / chunkTimings.length).toFixed(2) : '0';
+  const maxChunkTime = chunkTimings.length > 0 ? Math.max(...chunkTimings).toFixed(2) : '0';
+  const minChunkTime = chunkTimings.length > 0 ? Math.min(...chunkTimings).toFixed(2) : '0';
+  console.log(`[ValidateKaro] ⏱️  AI Analysis (all chunks) completed in ${aiDuration.toFixed(2)}s`);
+  console.log(`[ValidateKaro]    ├─ Total chunks: ${chunks.length}`);
+  console.log(`[ValidateKaro]    ├─ Avg time per chunk: ${avgChunkTime}s`);
+  console.log(`[ValidateKaro]    ├─ Fastest chunk: ${minChunkTime}s`);
+  console.log(`[ValidateKaro]    └─ Slowest chunk: ${maxChunkTime}s`);
 
   // STEP 4: Merge results
   const mergeStartTime = performance.now();
@@ -233,14 +258,35 @@ export async function processPDFsForCard(
 
   // Final timing summary
   const processEndTime = performance.now();
-  const totalDuration = ((processEndTime - processStartTime) / 1000).toFixed(2);
-  console.log(`[ValidateKaro] ═══════════════════════════════════════`);
-  console.log(`[ValidateKaro] ⏱️  TOTAL PROCESSING TIME: ${totalDuration}s`);
-  console.log(`[ValidateKaro]    ├─ PDF Extraction: ${extractDuration}s`);
-  console.log(`[ValidateKaro]    ├─ Chunking: ${chunkDuration}s`);
-  console.log(`[ValidateKaro]    ├─ AI Analysis: ${aiDuration}s`);
-  console.log(`[ValidateKaro]    └─ Merging: ${mergeDuration}s`);
-  console.log(`[ValidateKaro] ═══════════════════════════════════════`);
+  const totalDuration = (processEndTime - processStartTime) / 1000;
+  const extractDurationNum = parseFloat(extractDuration);
+  const chunkDurationNum = parseFloat(chunkDuration);
+  const aiDurationNum = parseFloat(aiDuration);
+  const mergeDurationNum = parseFloat(mergeDuration);
+  
+  const extractPercent = ((extractDurationNum / totalDuration) * 100).toFixed(1);
+  const chunkPercent = ((chunkDurationNum / totalDuration) * 100).toFixed(1);
+  const aiPercent = ((aiDurationNum / totalDuration) * 100).toFixed(1);
+  const mergePercent = ((mergeDurationNum / totalDuration) * 100).toFixed(1);
+  
+  console.log(`[ValidateKaro] ════════════════════════════════════════════════════════`);
+  console.log(`[ValidateKaro] ⏱️  ═══ TIMING SUMMARY ═══`);
+  console.log(`[ValidateKaro] ════════════════════════════════════════════════════════`);
+  console.log(`[ValidateKaro] 📊 TOTAL PROCESSING TIME: ${totalDuration.toFixed(2)}s (${(totalDuration / 60).toFixed(2)} min)`);
+  console.log(`[ValidateKaro]    ├─ PDF Extraction: ${extractDuration}s (${extractPercent}%)`);
+  console.log(`[ValidateKaro]    ├─ Chunking: ${chunkDuration}s (${chunkPercent}%)`);
+  console.log(`[ValidateKaro]    ├─ AI Analysis: ${aiDurationNum.toFixed(2)}s (${aiPercent}%)`);
+  console.log(`[ValidateKaro]    └─ Merging: ${mergeDuration}s (${mergePercent}%)`);
+  console.log(`[ValidateKaro] ════════════════════════════════════════════════════════`);
+  console.log(`[ValidateKaro] 📈 PERFORMANCE METRICS:`);
+  console.log(`[ValidateKaro]    ├─ PDFs processed: ${pdfInputs.length}`);
+  console.log(`[ValidateKaro]    ├─ Total text extracted: ${totalLength.toLocaleString()} chars`);
+  console.log(`[ValidateKaro]    ├─ Chunks created: ${chunks.length}`);
+  console.log(`[ValidateKaro]    ├─ Total tokens used: ${totalTokens.total_tokens.toLocaleString()}`);
+  console.log(`[ValidateKaro]    │  ├─ Prompt tokens: ${totalTokens.prompt_tokens.toLocaleString()}`);
+  console.log(`[ValidateKaro]    │  └─ Completion tokens: ${totalTokens.completion_tokens.toLocaleString()}`);
+  console.log(`[ValidateKaro]    └─ Throughput: ${(totalLength / totalDuration).toFixed(0)} chars/sec`);
+  console.log(`[ValidateKaro] ════════════════════════════════════════════════════════`);
 
   return {
     categories: masterCategories,
@@ -376,6 +422,8 @@ CRITICAL: Output MUST include ALL 19 keys. Set reward_type to "N/A" if category 
       controller.abort();
     }, 180000);
 
+    const networkStartTime = performance.now();
+    console.log(`[ValidateKaro] 🌐 Chunk ${chunkIndex + 1}: Sending API request...`);
     const response = await fetch(OPENROUTER_ENDPOINT, {
       method: "POST",
       headers: {
@@ -387,6 +435,8 @@ CRITICAL: Output MUST include ALL 19 keys. Set reward_type to "N/A" if category 
       body: requestBody,
       signal: controller.signal
     });
+    const networkDuration = ((performance.now() - networkStartTime) / 1000).toFixed(2);
+    console.log(`[ValidateKaro] ⏱️  Chunk ${chunkIndex + 1}: Network request completed in ${networkDuration}s`);
 
     clearTimeout(timeoutId);
 
@@ -396,8 +446,11 @@ CRITICAL: Output MUST include ALL 19 keys. Set reward_type to "N/A" if category 
       return { categories: {} };
     }
 
+    const parseStartTime = performance.now();
     const result = await response.json();
-    console.log(`[ValidateKaro] Chunk ${chunkIndex + 1}: Full API response structure:`, {
+    const parseDuration = ((performance.now() - parseStartTime) / 1000).toFixed(2);
+    console.log(`[ValidateKaro] ⏱️  Chunk ${chunkIndex + 1}: Response parsed in ${parseDuration}s`);
+    console.log(`[ValidateKaro] 📦 Chunk ${chunkIndex + 1}: API response structure:`, {
       has_choices: !!result.choices,
       choices_length: result.choices?.length,
       has_message: !!result.choices?.[0]?.message,

@@ -10,8 +10,6 @@
 import {
   getCardType,
   getPartnerPointsType,
-} from './redemptions';
-import {
   getPartnerConversionsV2,
   getBestValueV2
 } from './redemptionsV2';

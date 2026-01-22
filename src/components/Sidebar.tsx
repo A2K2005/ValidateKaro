@@ -36,15 +36,13 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
   return (
     <div className="w-72 bg-white text-gray-700 h-screen fixed left-0 top-0 flex flex-col z-50 border-r-2 border-gray-200 shadow-xl">
       <div className="px-6 pt-7 pb-8 border-b-2 border-gray-100">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-violet-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-violet-200">
-            <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-            </svg>
+        <div className="flex items-center gap-4">
+          <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg shadow-violet-100 border border-violet-100 overflow-hidden p-2">
+            <img src="/logo.png" alt="ValidateKaro" className="w-full h-full object-contain" />
           </div>
           <div>
-            <h1 className="text-base font-bold text-gray-900 tracking-tight">ValidateKaro</h1>
-            <p className="text-[10px] text-gray-500 font-medium">Internal Ops Tool</p>
+            <h1 className="text-xl font-bold text-gray-900 tracking-tight">ValidateKaro</h1>
+            <p className="text-xs text-gray-500 font-medium">Internal Ops Tool</p>
           </div>
         </div>
       </div>

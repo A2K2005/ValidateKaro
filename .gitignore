@@ -31,8 +31,28 @@ dist-ssr
 *.sln
 *.sw?
 
+# Deprecated/Old files
 partnerLookup.ts
-ENGINEERING_CONTEXT.md
-Redemption - v1 (1).xlsx
 redemption_data.json
 redemption_data.txt
+Redemption - v1 (1).xlsx
+
+# Temporary/Test files
+*.test.js
+*.test.ts
+*.spec.js
+*.spec.ts
+check_json.*
+update_card_types.*
+sync_with_clean_list.*
+analyze_and_add_cards.*
+add_missing_cards.*
+verify_final.*
+test_*.ts
+test_*.js
+fix_json.*
+final_verification.*
+
+# Root-level duplicate files (if any exist)
+/App.tsx
+/index.tsx

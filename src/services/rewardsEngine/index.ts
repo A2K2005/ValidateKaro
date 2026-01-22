@@ -40,14 +40,12 @@
 // Redemptions exports
 export {
   getCardType,
-  getConversionRatio,
-  calculatePartnerPoints,
-  getAvailablePartners,
+  getPartnerConversionsV2,
   getTransferableCards,
   canTransferTo,
   getAllPartners,
   getPartnerPointsType,
-} from './redemptions';
+} from './redemptionsV2';
 
 // Calculator exports
 export {
