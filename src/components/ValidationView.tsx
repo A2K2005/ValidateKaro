@@ -5,6 +5,7 @@ import JsonModal from './JsonModal';
 import { calculateRewardsForTransaction } from '../services/rewardsEngine/calculator';
 import { getCardType } from '../services/rewardsEngine/redemptionsV2';
 import PartnerConversionPanel from './PartnerConversionPanel';
+import { mapToCompleteProductionFormat } from '../services/productionMapper';
 
 interface ValidationViewProps {
   process: ValidationProcess;
@@ -14,10 +15,11 @@ interface ValidationViewProps {
 }
 
 const CATEGORY_GROUPS = [
-  { title: "E-Commerce & Food", keys: ['amazon_spends', 'flipkart_spends', 'other_online_spends', 'grocery_spends_online', 'online_food_ordering'] },
-  { title: "Utilities & Bills", keys: ['mobile_phone_bills', 'electricity_bills', 'water_bills', 'rent', 'school_fees'] },
+  { title: "E-Commerce & Food", keys: ['amazon_spends', 'flipkart_spends', 'other_online_spends', 'grocery_spends_online', 'online_food_ordering', 'offline_grocery'] },
+  { title: "Utilities & Bills", keys: ['mobile_phone_bills', 'electricity_bills', 'water_bills', 'rent', 'school_fees', 'ott_channels'] },
   { title: "Travel & Lifestyle", keys: ['fuel', 'dining_or_going_out', 'flights_annual', 'hotels_annual', 'domestic_lounge_usage_quarterly', 'international_lounge_usage_quarterly'] },
-  { title: "Insurance & General", keys: ['insurance_health_annual', 'insurance_car_or_bike_annual', 'other_offline_spends'] }
+  { title: "Insurance & General", keys: ['insurance_health_annual', 'insurance_car_or_bike_annual', 'life_insurance', 'other_offline_spends'] },
+  { title: "Shopping & Health", keys: ['large_electronics_purchase_like_mobile_tv_etc', 'all_pharmacy'] }
 ];
 
 const CategoryCard: React.FC<{ label: string, keyName: string, data?: CategoryFields }> = ({ label, keyName, data }) => {
@@ -250,6 +252,27 @@ const ValidationView: React.FC<ValidationViewProps> = ({ process, onApprove, onR
           </div>
 
           <div className="flex gap-3">
+            <button 
+              onClick={() => {
+                if (!process.data) return;
+                // Card ID starts from 1 - update this after DB import if needed
+                const productionData = mapToCompleteProductionFormat(process.data, 1);
+                const blob = new Blob([JSON.stringify(productionData, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${process.card_name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_production.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+              }}
+              className="px-5 py-3 bg-violet-50 border-2 border-violet-200 text-violet-700 text-sm font-semibold rounded-xl hover:bg-violet-100 hover:border-violet-300 transition-all duration-300 ease-out flex items-center gap-2"
+              title="Download Production SQL JSON"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+              SQL JSON
+            </button>
             <button onClick={() => setIsJsonModalOpen(true)} className="px-5 py-3 bg-gray-100 border-2 border-gray-200 text-gray-700 text-sm font-semibold rounded-xl hover:bg-gray-200 hover:border-gray-300 transition-all duration-300 ease-out flex items-center gap-2">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
               JSON

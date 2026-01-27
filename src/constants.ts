@@ -21,6 +21,12 @@ export const SPEND_KEY_LABELS: Record<SpendKey, string> = {
   [SpendKey.RENT]: 'Rent Payments',
   [SpendKey.SCHOOL_FEES]: 'School Fees',
   [SpendKey.OTHER_OFFLINE_SPENDS]: 'Offline Shopping (Stores/POS)',
+  // Additional Production DB Categories
+  [SpendKey.OTT_CHANNELS]: 'OTT Subscriptions (Netflix, Prime, etc.)',
+  [SpendKey.ELECTRONICS_PURCHASE]: 'Electronics Purchase (Mobile, TV, etc.)',
+  [SpendKey.PHARMACY]: 'Pharmacy & Medical',
+  [SpendKey.OFFLINE_GROCERY]: 'Offline Grocery Shopping',
+  [SpendKey.LIFE_INSURANCE]: 'Life Insurance (Annual)',
 };
 
 export const CANONICAL_KEYS = Object.values(SpendKey);

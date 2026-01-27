@@ -88,4 +88,10 @@ export enum SpendKey {
   RENT = 'rent',
   SCHOOL_FEES = 'school_fees',
   OTHER_OFFLINE_SPENDS = 'other_offline_spends',
+  // Additional Production DB Categories
+  OTT_CHANNELS = 'ott_channels',
+  ELECTRONICS_PURCHASE = 'large_electronics_purchase_like_mobile_tv_etc',
+  PHARMACY = 'all_pharmacy',
+  OFFLINE_GROCERY = 'offline_grocery',
+  LIFE_INSURANCE = 'life_insurance',
 }

@@ -17,16 +17,19 @@ ValidateKaro is an internal operations tool that automates the extraction and va
 - **🎯 Fuzzy Card Matching** - Accepts variations of card names (e.g., "Magnus", "Burgundy", "Axis Magnus" all match)
 - **💾 Dual Storage** - Saves to both Supabase (cloud) and localStorage (offline fallback)
 - **📊 Real-time Progress Tracking** - Live overlay showing job status, progress percentage, and detailed activity logs
+- **⏱️ Comprehensive Timing Logs** - Detailed performance metrics for PDF extraction, chunking, AI analysis, and merging
 - **✈️ Partner Transfers V2** - Smart card type detection with intelligent fallback for partner transfer options
 - **💰 Rewards Calculator** - Transaction-based reward point calculations with partner conversion options
+- **✅ Manual Approval** - Override automatic validation and manually approve cards regardless of confidence score
 
 ### Extracted Data Points
-Automatically extracts reward information for 19 spending categories:
+Automatically extracts reward information for 24 spending categories:
 - 🛒 E-commerce (Amazon, Flipkart, Other Online)
-- 🍔 Food & Groceries (Online grocery, Food delivery)
-- 💡 Utilities (Mobile, Electricity, Water bills)
-- ✈️ Travel (Flights, Hotels, Lounge access)
-- 🏥 Insurance (Health, Car/Bike)
+- 🍔 Food & Groceries (Online grocery, Offline grocery, Food delivery)
+- 💡 Utilities (Mobile, Electricity, Water bills, OTT subscriptions)
+- ✈️ Travel (Flights, Hotels, Domestic/International Lounge access)
+- 🏥 Insurance (Health, Car/Bike, Life Insurance)
+- 🏪 Shopping (Electronics, Pharmacy, Offline stores)
 - 📦 General (Rent, School fees, Fuel, Dining, etc.)
 
 ### For Each Category
@@ -232,17 +235,23 @@ const bestValue = getBestValueV2(10000, 'Axis Magnus');
 
 | Bank | Cards | Examples |
 |------|-------|----------|
-| **Axis Bank** (18) | Magnus, Atlas, Reserve, Vistara, Privilege, Select, Aura, Neo, Flipkart, Airtel, etc. | Rewards + Cashback |
-| **HDFC Bank** (24) | Infinia, Diners Club Black, Regalia Gold, Millenia, Marriott Bonvoy, Swiggy, Tata Neu, etc. | Rewards + Cashback |
-| **American Express** (5) | Platinum Travel, MRCC, Smart Earn, Gold, Platinum Charge | All Rewards |
-| **SBI Card** (8) | Elite, Aurum, Prime, Miles, Simply Click, Cashback, BPCL Octane, etc. | Rewards + Cashback |
-| **ICICI Bank** (8) | Emeralde, Sapphiro, Rubyx, HPCL Coral, Amazon Pay, MakeMyTrip, etc. | Rewards + Cashback |
-| **IDFC FIRST** (11) | Select, Wealth, Private, Club Vistara, Millenia, Power, Ashva, Mayura, etc. | All Rewards |
-| **IndusInd** (6) | Legend, EasyDiner, Avios, Platinum RuPay, Aura Edge, Tiger | All Rewards |
-| **AU Bank** (4) | Zenith, Zenith Plus, Altura, Nomo | Rewards + Cashback |
-| **HSBC** (3) | Live+, Platinum, Premier | Rewards + Cashback |
-| **RBL Bank** (5) | Shoprite, World Safari, Insignia, IndianOil, IndianOil XTRA | All Rewards |
-| **Others** | Kotak, YES Bank, Standard Chartered, Samsung Axis, Kiwi | Various |
+| **Axis Bank** (28) | Magnus, Atlas, Reserve, Vistara, Privilege, Select, Aura, Neo, Flipkart, Airtel, ACE, Horizon, Cashback, etc. | Rewards + Cashback |
+| **HDFC Bank** (35) | Infinia, Diners Club Black, Regalia Gold, Millenia, Marriott Bonvoy, Swiggy, Tata Neu, Bharat, Biz First, PIXEL, etc. | Rewards + Cashback |
+| **American Express** (8) | Platinum Travel, MRCC, Smart Earn, Gold, Platinum Charge, Platinum Reserve, etc. | All Rewards |
+| **SBI Card** (13) | Elite, Aurum, Prime, Miles, Simply Click, Cashback, BPCL Octane, Pulse, Flipkart, IRCTC, etc. | Rewards + Cashback |
+| **ICICI Bank** (10) | Emeralde, Sapphiro, Rubyx, HPCL Coral, Amazon Pay, MakeMyTrip, Times Black, etc. | Rewards + Cashback |
+| **IDFC FIRST** (13) | Select, Wealth, Private, Club Vistara, Millenia, Power, Ashva, Mayura, Dual Indigo, SWYP, etc. | All Rewards |
+| **IndusInd** (7) | Legend, EasyDiner, Avios, Platinum RuPay, Aura Edge, Tiger, Generic | All Rewards |
+| **AU Bank** (6) | Zenith, Zenith Plus, Altura, Nomo, Altura Plus, LIT | Rewards + Cashback |
+| **HSBC** (6) | Live+, Platinum, Premier, Cashback, RuPay Cashback, Travel One | Rewards + Cashback |
+| **RBL Bank** (10) | Shoprite, World Safari, Insignia, IndianOil, IndianOil XTRA, Cookies, Play, Super Binge, IRCTC, etc. | All Rewards |
+| **Kotak Bank** (8) | Zen Signature, IndianOil Platinum, Delight, Essentia, League, Mojo, Myntra, PVR | All Rewards |
+| **Standard Chartered** (5) | Ultimate, Ease My Trip, Smart, Emirates Platinum, Platinum Rewards | Rewards + Cashback |
+| **YES Bank** (2) | Marquee, Pop Club, ACE | All Rewards |
+| **Bajaj Finserv** (3) | RBL SuperCard, DBS SuperCard, HDFC SuperCard | All Rewards |
+| **Federal Bank** (1) | Credit Cards | Rewards |
+| **SBM Bank** (2) | Kredit.Pe, ZET Magnet | All Rewards |
+| **Other Issuers** (5) | Jupiter Edge, Kiwi Klick, Scapia, Zagg Rupay, Indian Oil Visa | Various |
 
 ### Supported Transfer Partners
 
@@ -349,7 +358,7 @@ Tracks uploaded PDF files.
 
 1. Click **"New Audit"** button (or press `N`)
 2. Select **Issuing Bank** from searchable dropdown (16 supported banks)
-3. Enter **Card Name** - autocomplete from 94+ cards or enter custom name
+3. Enter **Card Name** - autocomplete from 157+ cards or enter custom name
 4. Upload **PDF files** (max 10, drag & drop supported)
 5. Click **"Start Extraction"**
 
@@ -371,6 +380,7 @@ A floating overlay shows real-time progress:
   - **Category Details Tab** - View extracted reward rates, caps, exclusions for each spending category
   - **Partner Transfers Tab** - See available partner transfer options (auto-hidden for cashback cards)
 - **JSON Export** - View raw extracted JSON data
+- **SQL JSON Export** - Download production-ready JSON for direct database import
 - **Re-Analysis** - Click "Re-run" to analyze again without re-uploading PDFs
 - **Keyboard Navigation** - Use `j`/`k` to navigate, `Enter` to select, `Esc` to go back
 
@@ -518,7 +528,7 @@ Client-side extraction using pdfjs-dist:
 
 ### V2 Migration & Consolidation ✅
 - Migrated to `card_partners_v2.json` with bank-centric structure
-- Added explicit `card_type` field for all 94 cards (81 rewards, 13 cashback)
+- Added explicit `card_type` field for all 157 cards (141 rewards, 16 cashback)
 - Implemented 3-layer fallback system (exact → fuzzy → bank default)
 - Cashback cards now correctly return empty partner list (no fallback)
 - Deprecated and removed old files (`redemptions.ts`, `partnerLookup.ts`)
@@ -538,6 +548,230 @@ Client-side extraction using pdfjs-dist:
 - Reduced chunk size to 8,000 characters
 - Prevents token truncation errors
 - Better handling of large MITC documents
+
+### Comprehensive Timing & Performance Logs ✅
+- Detailed timing breakdown for each processing phase
+- Per-chunk analysis timing with network request metrics
+- Token usage tracking (prompt + completion)
+- Performance metrics: throughput, average times, fastest/slowest chunks
+- Visual timing summary with percentage breakdowns
+
+### Manual Approval Feature ✅
+- Override automatic validation regardless of confidence score
+- Manual approval for low-confidence or rejected cards
+- Un-approve functionality to revert approval status
+- Clear visual indicators for manual overrides
+
+### Card Coverage Expansion ✅
+- **157 total cards** across 19 banks (up from 94)
+- Added 63 new cards from missing list
+- 4 new banks: Bajaj Finserv, Federal Bank, SBM Bank, Other Issuers
+- Complete coverage of major Indian credit card issuers
+
+### UI/UX Improvements ✅
+- Custom logo and favicon integration
+- Enhanced cashback card messaging (clear indication when no partner transfers)
+- Improved sidebar with larger logo display
+
+### SQL JSON Export ✅
+- **Production-ready export**: Download card data in SQL-compatible format for direct database import
+- **Two-table structure**: Generates both `spending_category` definitions and `card_spending_category` values
+- **Smart tier parsing**: Handles complex reward structures like "12 points up to 150000, then 35 points"
+- **Cashback vs Rewards**: Correctly formats `cb` or `rewards` structure based on card type
+- **24 category mappings**: Synced with Production DB IDs (1-30, excluding placeholder IDs)
+- **Download button**: Click "SQL JSON" in ValidationView header to download
+- **File naming**: Auto-generates filename like `axis_magnus_credit_card_production.json`
+
+#### Export Format
+```json
+{
+  "spending_categories": [
+    {
+      "category_name": "amazon_spends",
+      "display_name": "Amazon Spends",
+      "base_reward_value": { ... },
+      "additional_benefits": { ... }
+    }
+  ],
+  "card_spending_categories": [
+    {
+      "card_id": 1,
+      "spending_category_id": 2,
+      "spend_categories_json": {
+        "rewards": {
+          "tiers": { "12": "0-150000", "35": "150000-Unlimited" },
+          "cash_conversion": 0.2,
+          "spend_conversion": 200,
+          "category_max_points": "Unlimited"
+        }
+      },
+      "notes": "Excludes EMI transactions"
+    }
+  ]
+}
+```
+
+---
+
+## 🚀 Deployment to Vercel
+
+### Prerequisites
+- Vercel account (free tier works)
+- GitHub/GitLab/Bitbucket repository with your code
+- Supabase project configured
+- OpenRouter API key
+
+### Step-by-Step Deployment
+
+1. **Prepare Your Repository**
+   ```bash
+   # Ensure all changes are committed
+   git add .
+   git commit -m "Ready for deployment"
+   git push origin main
+   ```
+
+2. **Connect to Vercel**
+   - Go to [vercel.com](https://vercel.com)
+   - Click "Add New Project"
+   - Import your Git repository
+   - Vercel will auto-detect Vite configuration
+
+3. **Configure Build Settings**
+   - **Framework Preset**: Vite
+   - **Build Command**: `npm run build` (or `bun run build`)
+   - **Output Directory**: `dist`
+   - **Install Command**: `npm install` (or `bun install`)
+
+4. **Add Environment Variables**
+   In Vercel Dashboard → Project Settings → Environment Variables, add:
+   ```
+   VITE_OPENROUTER_API_KEY=sk-or-v1-your-api-key-here
+   VITE_SUPABASE_URL=https://your-project.supabase.co
+   VITE_SUPABASE_ANON_KEY=your-anon-key-here
+   ```
+   - Add for **Production**, **Preview**, and **Development** environments
+   - Click "Save" after adding each variable
+
+5. **Deploy**
+   - Click "Deploy"
+   - Wait for build to complete (~2-3 minutes)
+   - Your app will be live at `https://your-project.vercel.app`
+
+### Post-Deployment Checklist
+
+✅ **Verify Environment Variables**
+- Check that all API keys are set correctly
+- Test OpenRouter connection
+- Verify Supabase connection
+
+✅ **Test Core Functionality**
+- Upload a PDF and test extraction
+- Verify Supabase storage bucket is accessible
+- Test partner transfers feature
+
+✅ **Configure Custom Domain (Optional)**
+- Go to Project Settings → Domains
+- Add your custom domain
+- Follow DNS configuration instructions
+
+### Vercel Configuration File (Optional)
+
+Create `vercel.json` in project root for custom configuration:
+
+```json
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
+```
+
+### Important Notes
+
+⚠️ **Client-Side Processing**
+- PDF processing happens in the browser (client-side)
+- No server-side processing required
+- All API calls are made directly from the browser
+
+⚠️ **Environment Variables**
+- Vercel automatically injects `VITE_*` variables at build time
+- Variables are bundled into the client-side code
+- **Never commit `.env` files** - use Vercel's environment variables
+
+⚠️ **Supabase CORS**
+- Ensure Supabase project allows requests from your Vercel domain
+- Add Vercel URL to Supabase allowed origins if needed
+
+⚠️ **Storage Bucket**
+- Ensure `audit-pdfs` bucket is set to **public** in Supabase
+- Verify RLS policies allow public read access
+
+### Troubleshooting
+
+#### Quick Diagnostic Checklist
+
+If you're getting errors, run through this checklist:
+
+```bash
+# 1. Check if .env file exists
+ls -la .env  # or: dir .env (Windows)
+
+# 2. Verify environment variables are loaded
+# Add this temporarily to your code:
+console.log('API Key exists:', !!import.meta.env.VITE_OPENROUTER_API_KEY);
+console.log('API Key prefix:', import.meta.env.VITE_OPENROUTER_API_KEY?.substring(0, 10));
+
+# 3. Restart dev server (required after .env changes)
+npm run dev  # or: bun dev
+
+# 4. Check browser console for detailed error messages
+# Open DevTools (F12) -> Console tab
+```
+
+**Build Fails:**
+- Check build logs in Vercel dashboard
+- Verify all dependencies are in `package.json`
+- Ensure Node.js version is compatible (18+)
+
+**Environment Variables Not Working:**
+- Verify variables start with `VITE_`
+- Redeploy after adding new variables
+- Check variable names match exactly (case-sensitive)
+
+**PDF Upload Fails:**
+- Check Supabase storage bucket configuration
+- Verify CORS settings
+- Check browser console for errors
+
+**API Calls Fail (403 Forbidden Error):**
+- **Check API Key Setup:**
+  1. Verify `.env` file exists in project root
+  2. Confirm `VITE_OPENROUTER_API_KEY=sk-or-v1-...` is set
+  3. Restart dev server after adding/changing `.env`
+- **Verify API Key:**
+  1. Visit https://openrouter.ai/keys
+  2. Check if key is active and not expired
+  3. Verify key format starts with `sk-or-v1-`
+- **Check Credits:**
+  1. Visit https://openrouter.ai/credits
+  2. Ensure you have sufficient credits
+  3. Add credits if balance is low
+- **Model Access:**
+  1. Verify your account has access to `z-ai/glm-4.5-air`
+  2. Some models require specific permissions
+- **Rate Limits:**
+  1. Check if you've exceeded rate limits
+  2. Wait a few minutes and try again
+  3. Consider upgrading plan if needed
 
 ---
 

@@ -1,0 +1,1661 @@
+{
+    "success": 1,
+    "data": [
+        {
+            "id": 29,
+            "card_id": 6,
+            "spending_category_id": 23,
+            "spend_categories_json": {
+                "rewards": {
+                    "tiers": {
+                        "12": "0-150000",
+                        "35": "150000-Unlimited"
+                    },
+                    "cash_conversion": 0.74,
+                    "spend_conversion": 200,
+                    "category_max_points": "Unlimited"
+                }
+            },
+            "notes": null,
+            "createdAt": "2025-12-05T05:32:32.000Z",
+            "updatedAt": "2025-12-05T05:32:32.000Z",
+            "spending_category": {
+                "id": 23,
+                "category_name": "all_pharmacy",
+                "display_name": "Pharmacy Spends",
+                "description": "",
+                "questions": "",
+                "cat_questions": "",
+                "cat_questions_order": 0,
+                "cat_questions_min_value": "0.00",
+                "cat_questions_max_value": "200000.00",
+                "cat_questions_asset": null,
+                "cat_questions_slider_marks": null,
+                "cat_questions_stepper": [
+                    {
+                        "limit": 20000,
+                        "value": 2000
+                    },
+                    {
+                        "limit": 100000,
+                        "value": 10000
+                    },
+                    {
+                        "limit": 200000,
+                        "value": 10000
+                    }
+                ],
+                "type": 1,
+                "questions_order": 0,
+                "min_value": "0.00",
+                "max_value": "20000.00",
+                "assets": null,
+                "status": 1,
+                "base_cashback_value": {
+                    "cb": {
+                        "cb_percentage": 1,
+                        "category_max_cap": "Unlimited"
+                    }
+                },
+                "base_reward_value": {
+                    "rewards": {
+                        "tiers": {
+                            "1": "0-Unlimited"
+                        },
+                        "cash_conversion": 0.1,
+                        "spend_conversion": 200,
+                        "category_max_points": "Unlimited"
+                    }
+                },
+                "category_id": null,
+                "additional_benefits": null,
+                "createdAt": "2025-11-19T00:26:22.000Z",
+                "updatedAt": "2026-01-16T00:03:16.000Z"
+            },
+            "group_id": 1,
+            "is_grouped": true
+        },
+        {
+            "id": 30,
+            "card_id": 6,
+            "spending_category_id": 14,
+            "spend_categories_json": {
+                "rewards": {
+                    "tiers": {
+                        "12": "0-150000",
+                        "35": "150000-Unlimited"
+                    },
+                    "cash_conversion": 0.74,
+                    "spend_conversion": 200,
+                    "category_max_points": "Unlimited"
+                }
+            },
+            "notes": null,
+            "createdAt": "2025-12-05T05:32:32.000Z",
+            "updatedAt": "2025-12-05T05:32:32.000Z",
+            "spending_category": {
+                "id": 14,
+                "category_name": "ott_channels",
+                "display_name": "OTT Channels",
+                "description": "",
+                "questions": "",
+                "cat_questions": "",
+                "cat_questions_order": 0,
+                "cat_questions_min_value": "0.00",
+                "cat_questions_max_value": "200000.00",
+                "cat_questions_asset": null,
+                "cat_questions_slider_marks": null,
+                "cat_questions_stepper": [
+                    {
+                        "limit": 20000,
+                        "value": 2000
+                    },
+                    {
+                        "limit": 100000,
+                        "value": 10000
+                    },
+                    {
+                        "limit": 200000,
+                        "value": 10000
+                    }
+                ],
+                "type": 1,
+                "questions_order": 0,
+                "min_value": "0.00",
+                "max_value": "20000.00",
+                "assets": null,
+                "status": 1,
+                "base_cashback_value": {
+                    "cb": {
+                        "cb_percentage": 1,
+                        "category_max_cap": "Unlimited"
+                    }
+                },
+                "base_reward_value": {
+                    "rewards": {
+                        "tiers": {
+                            "1": "0-Unlimited"
+                        },
+                        "cash_conversion": 0.1,
+                        "spend_conversion": 200,
+                        "category_max_points": "Unlimited"
+                    }
+                },
+                "category_id": null,
+                "additional_benefits": null,
+                "createdAt": "2025-11-19T00:26:22.000Z",
+                "updatedAt": "2026-01-16T00:03:16.000Z"
+            },
+            "group_id": 1,
+            "is_grouped": true
+        },
+        {
+            "id": 31,
+            "card_id": 6,
+            "spending_category_id": 2,
+            "spend_categories_json": {
+                "rewards": {
+                    "tiers": {
+                        "12": "0-150000",
+                        "35": "150000-Unlimited"
+                    },
+                    "cash_conversion": 0.74,
+                    "spend_conversion": 200,
+                    "category_max_points": "Unlimited"
+                }
+            },
+            "notes": null,
+            "createdAt": "2025-12-05T05:32:32.000Z",
+            "updatedAt": "2025-12-05T05:32:32.000Z",
+            "spending_category": {
+                "id": 2,
+                "category_name": "amazon_spends",
+                "display_name": "Amazon Spends",
+                "description": "",
+                "questions": "Amazon spends per Month?",
+                "cat_questions": "Amazon",
+                "cat_questions_order": 1,
+                "cat_questions_min_value": "0.00",
+                "cat_questions_max_value": "500000.00",
+                "cat_questions_asset": "https://d2sriifpjiqv0p.cloudfront.net/BankKaro_Amazon.png",
+                "cat_questions_slider_marks": [
+                    {
+                        "label": "₹0",
+                        "value": 0
+                    },
+                    {
+                        "label": "₹5K",
+                        "value": 5000
+                    },
+                    {
+                        "label": "₹11K",
+                        "value": 11000
+                    },
+                    {
+                        "label": "₹22K",
+                        "value": 22000
+                    },
+                    {
+                        "label": "₹55K",
+                        "value": 55000
+                    },
+                    {
+                        "label": "₹1L",
+                        "value": 100000
+                    },
+                    {
+                        "label": "₹3L",
+                        "value": 300000
+                    },
+                    {
+                        "label": "₹5L",
+                        "value": 500000
+                    },
+                    {
+                        "label": "₹14L",
+                        "value": 1400000
+                    }
+                ],
+                "cat_questions_stepper": [
+                    {
+                        "limit": 11000,
+                        "value": 1100
+                    },
+                    {
+                        "limit": 55000,
+                        "value": 4400
+                    },
+                    {
+                        "limit": 300000,
+                        "value": 24500
+                    },
+                    {
+                        "limit": 1400000,
+                        "value": 110000
+                    }
+                ],
+                "type": 1,
+                "questions_order": 1,
+                "min_value": "0.00",
+                "max_value": "50000.00",
+                "assets": "https://bankkaro-cdn.s3.ap-south-1.amazonaws.com/BankKaro_Amazon.png",
+                "status": 1,
+                "base_cashback_value": {
+                    "cb": {
+                        "cb_percentage": 1,
+                        "category_max_cap": "Unlimited"
+                    }
+                },
+                "base_reward_value": {
+                    "rewards": {
+                        "tiers": {
+                            "1": "0-Unlimited"
+                        },
+                        "cash_conversion": 0.1,
+                        "spend_conversion": 200,
+                        "category_max_points": "Unlimited"
+                    }
+                },
+                "category_id": 1,
+                "additional_benefits": null,
+                "createdAt": "2025-11-19T00:26:22.000Z",
+                "updatedAt": "2026-01-21T14:38:14.000Z"
+            },
+            "group_id": 1,
+            "is_grouped": true
+        },
+        {
+            "id": 32,
+            "card_id": 6,
+            "spending_category_id": 18,
+            "spend_categories_json": {
+                "brands": [
+                    {
+                        "note": "",
+                        "brand": "Oberoi & Trident Hotels"
+                    },
+                    {
+                        "note": "",
+                        "brand": "The postcard Hotels, Yatra "
+                    }
+                ],
+                "rewards": {
+                    "tiers": {
+                        "35": "200000-Unlimited",
+                        "60": "0-200000"
+                    },
+                    "cash_conversion": 0.25,
+                    "spend_conversion": 200,
+                    "category_max_points": "Unlimited"
+                }
+            },
+            "notes": null,
+            "createdAt": "2025-12-05T05:32:32.000Z",
+            "updatedAt": "2025-12-05T05:32:32.000Z",
+            "spending_category": {
+                "id": 18,
+                "category_name": "hotels_annual",
+                "display_name": "Annual Hotel Stays",
+                "description": "",
+                "questions": "Hotel Spends per Year?",
+                "cat_questions": "Hotels",
+                "cat_questions_order": 2,
+                "cat_questions_min_value": "0.00",
+                "cat_questions_max_value": "200000.00",
+                "cat_questions_asset": "https://d2sriifpjiqv0p.cloudfront.net/BankKaro_Hotel.png",
+                "cat_questions_slider_marks": [
+                    {
+                        "label": "₹0",
+                        "value": 0
+                    },
+                    {
+                        "label": "₹80K",
+                        "value": 80000
+                    },
+                    {
+                        "label": "₹2L",
+                        "value": 200000
+                    },
+                    {
+                        "label": "₹4L",
+                        "value": 400000
+                    },
+                    {
+                        "label": "₹8L",
+                        "value": 800000
+                    },
+                    {
+                        "label": "₹16L",
+                        "value": 1600000
+                    },
+                    {
+                        "label": "₹40L",
+                        "value": 4000000
+                    },
+                    {
+                        "label": "₹80L",
+                        "value": 8000000
+                    },
+                    {
+                        "label": "₹2Cr",
+                        "value": 20000000
+                    }
+                ],
+                "cat_questions_stepper": [
+                    {
+                        "limit": 200000,
+                        "value": 20000
+                    },
+                    {
+                        "limit": 800000,
+                        "value": 60000
+                    },
+                    {
+                        "limit": 4000000,
+                        "value": 320000
+                    },
+                    {
+                        "limit": 20000000,
+                        "value": 1600000
+                    }
+                ],
+                "type": 1,
+                "questions_order": 12,
+                "min_value": "0.00",
+                "max_value": "200000.00",
+                "assets": "https://d2sriifpjiqv0p.cloudfront.net/card-genius/hotel.png",
+                "status": 1,
+                "base_cashback_value": {
+                    "cb": {
+                        "cb_percentage": 1,
+                        "category_max_cap": "Unlimited"
+                    }
+                },
+                "base_reward_value": {
+                    "rewards": {
+                        "tiers": {
+                            "1": "0-Unlimited"
+                        },
+                        "cash_conversion": 0.1,
+                        "spend_conversion": 200,
+                        "category_max_points": "Unlimited"
+                    }
+                },
+                "category_id": 7,
+                "additional_benefits": null,
+                "createdAt": "2025-11-19T00:26:22.000Z",
+                "updatedAt": "2026-01-22T04:19:38.000Z"
+            },
+            "group_id": 2,
+            "is_grouped": true
+        },
+        {
+            "id": 33,
+            "card_id": 6,
+            "spending_category_id": 19,
+            "spend_categories_json": {
+                "brands": [
+                    {
+                        "note": "",
+                        "brand": "Yatra"
+                    }
+                ],
+                "rewards": {
+                    "tiers": {
+                        "35": "200000-Unlimited",
+                        "60": "0-200000"
+                    },
+                    "cash_conversion": 0.25,
+                    "spend_conversion": 200,
+                    "category_max_points": "Unlimited"
+                }
+            },
+            "notes": null,
+            "createdAt": "2025-12-05T05:32:32.000Z",
+            "updatedAt": "2025-12-05T05:32:32.000Z",
+            "spending_category": {
+                "id": 19,
+                "category_name": "flights_annual",
+                "display_name": "Annual Flight Spends",
+                "description": "",
+                "questions": "Flight Spends per Year?",
+                "cat_questions": "Flights",
+                "cat_questions_order": 1,
+                "cat_questions_min_value": "0.00",
+                "cat_questions_max_value": "1000000.00",
+                "cat_questions_asset": "https://d2sriifpjiqv0p.cloudfront.net/BankKaro_Flight.png",
+                "cat_questions_slider_marks": [
+                    {
+                        "label": "₹0",
+                        "value": 0
+                    },
+                    {
+                        "label": "₹80K",
+                        "value": 80000
+                    },
+                    {
+                        "label": "₹2L",
+                        "value": 200000
+                    },
+                    {
+                        "label": "₹4L",
+                        "value": 400000
+                    },
+                    {
+                        "label": "₹8L",
+                        "value": 800000
+                    },
+                    {
+                        "label": "₹16L",
+                        "value": 1600000
+                    },
+                    {
+                        "label": "₹40L",
+                        "value": 4000000
+                    },
+                    {
+                        "label": "₹80L",
+                        "value": 8000000
+                    },
+                    {
+                        "label": "₹2Cr",
+                        "value": 20000000
+                    }
+                ],
+                "cat_questions_stepper": [
+                    {
+                        "limit": 200000,
+                        "value": 20000
+                    },
+                    {
+                        "limit": 800000,
+                        "value": 60000
+                    },
+                    {
+                        "limit": 4000000,
+                        "value": 320000
+                    },
+                    {
+                        "limit": 20000000,
+                        "value": 1600000
+                    }
+                ],
+                "type": 1,
+                "questions_order": 11,
+                "min_value": "0.00",
+                "max_value": "200000.00",
+                "assets": "https://d2sriifpjiqv0p.cloudfront.net/card-genius/flights.png",
+                "status": 1,
+                "base_cashback_value": {
+                    "cb": {
+                        "cb_percentage": 1,
+                        "category_max_cap": "Unlimited"
+                    }
+                },
+                "base_reward_value": {
+                    "rewards": {
+                        "tiers": {
+                            "1": "0-Unlimited"
+                        },
+                        "cash_conversion": 0.1,
+                        "spend_conversion": 200,
+                        "category_max_points": "Unlimited"
+                    }
+                },
+                "category_id": 7,
+                "additional_benefits": null,
+                "createdAt": "2025-11-19T00:26:22.000Z",
+                "updatedAt": "2026-01-22T04:19:27.000Z"
+            },
+            "group_id": 2,
+            "is_grouped": true
+        },
+        {
+            "id": 34,
+            "card_id": 6,
+            "spending_category_id": 1,
+            "spend_categories_json": {
+                "rewards": {
+                    "tiers": {
+                        "12": "0-150000",
+                        "35": "150000-Unlimited"
+                    },
+                    "cash_conversion": 0.74,
+                    "spend_conversion": 200,
+                    "category_max_points": "Unlimited"
+                }
+            },
+            "notes": null,
+            "createdAt": "2025-12-05T05:32:33.000Z",
+            "updatedAt": "2025-12-05T05:32:33.000Z",
+            "spending_category": {
+                "id": 1,
+                "category_name": "flipkart_spends",
+                "display_name": "Flipkart Spends",
+                "description": "",
+                "questions": "Flipkart Spends per Month?",
+                "cat_questions": "Flipkart",
+                "cat_questions_order": 2,
+                "cat_questions_min_value": "0.00",
+                "cat_questions_max_value": "500000.00",
+                "cat_questions_asset": "https://d2sriifpjiqv0p.cloudfront.net/BankKaro_Flipkart.png",
+                "cat_questions_slider_marks": [
+                    {
+                        "label": "₹0",
+                        "value": 0
+                    },
+                    {
+                        "label": "₹7K",
+                        "value": 7000
+                    },
+                    {
+                        "label": "₹15K",
+                        "value": 15000
+                    },
+                    {
+                        "label": "₹30k",
+                        "value": 30000
+                    },
+                    {
+                        "label": "₹76K",
+                        "value": 76000
+                    },
+                    {
+                        "label": "₹2L",
+                        "value": 200000
+                    },
+                    {
+                        "label": "₹4L",
+                        "value": 400000
+                    },
+                    {
+                        "label": "₹8L",
+                        "value": 800000
+                    },
+                    {
+                        "label": "₹20L",
+                        "value": 2000000
+                    }
+                ],
+                "cat_questions_stepper": [
+                    {
+                        "limit": 15000,
+                        "value": 1500
+                    },
+                    {
+                        "limit": 76000,
+                        "value": 6100
+                    },
+                    {
+                        "limit": 400000,
+                        "value": 32400
+                    },
+                    {
+                        "limit": 2000000,
+                        "value": 160000
+                    }
+                ],
+                "type": 1,
+                "questions_order": 2,
+                "min_value": "0.00",
+                "max_value": "50000.00",
+                "assets": "https://d2sriifpjiqv0p.cloudfront.net/card-genius/flipkart.png",
+                "status": 1,
+                "base_cashback_value": {
+                    "cb": {
+                        "cb_percentage": 1,
+                        "category_max_cap": "Unlimited"
+                    }
+                },
+                "base_reward_value": {
+                    "rewards": {
+                        "tiers": {
+                            "1": "0-Unlimited"
+                        },
+                        "cash_conversion": 0.1,
+                        "spend_conversion": 200,
+                        "category_max_points": "Unlimited"
+                    }
+                },
+                "category_id": 1,
+                "additional_benefits": null,
+                "createdAt": "2025-11-19T00:26:22.000Z",
+                "updatedAt": "2026-01-21T14:38:32.000Z"
+            },
+            "group_id": 1,
+            "is_grouped": true
+        },
+        {
+            "id": 35,
+            "card_id": 6,
+            "spending_category_id": 15,
+            "spend_categories_json": {
+                "rewards": {
+                    "tiers": {
+                        "12": "0-150000",
+                        "35": "150000-Unlimited"
+                    },
+                    "cash_conversion": 0.74,
+                    "spend_conversion": 200,
+                    "category_max_points": "Unlimited"
+                }
+            },
+            "notes": null,
+            "createdAt": "2025-12-05T05:32:33.000Z",
+            "updatedAt": "2025-12-05T05:32:33.000Z",
+            "spending_category": {
+                "id": 15,
+                "category_name": "new_monthly_cat_1",
+                "display_name": "New Monthly Cat 1",
+                "description": "",
+                "questions": "",
+                "cat_questions": "",
+                "cat_questions_order": 0,
+                "cat_questions_min_value": "0.00",
+                "cat_questions_max_value": "200000.00",
+                "cat_questions_asset": null,
+                "cat_questions_slider_marks": null,
+                "cat_questions_stepper": [
+                    {
+                        "limit": 20000,
+                        "value": 2000
+                    },
+                    {
+                        "limit": 100000,
+                        "value": 10000
+                    },
+                    {
+                        "limit": 200000,
+                        "value": 10000
+                    }
+                ],
+                "type": 1,
+                "questions_order": 0,
+                "min_value": "0.00",
+                "max_value": "20000.00",
+                "assets": null,
+                "status": 1,
+                "base_cashback_value": {
+                    "cb": {
+                        "cb_percentage": 1,
+                        "category_max_cap": "Unlimited"
+                    }
+                },
+                "base_reward_value": {
+                    "rewards": {
+                        "tiers": {
+                            "1": "0-Unlimited"
+                        },
+                        "cash_conversion": 0.1,
+                        "spend_conversion": 200,
+                        "category_max_points": "Unlimited"
+                    }
+                },
+                "category_id": null,
+                "additional_benefits": null,
+                "createdAt": "2025-11-19T00:26:22.000Z",
+                "updatedAt": "2026-01-16T00:03:16.000Z"
+            },
+            "group_id": 1,
+            "is_grouped": true
+        },
+        {
+            "id": 36,
+            "card_id": 6,
+            "spending_category_id": 16,
+            "spend_categories_json": {
+                "rewards": {
+                    "tiers": {
+                        "12": "0-150000",
+                        "35": "150000-Unlimited"
+                    },
+                    "cash_conversion": 0.74,
+                    "spend_conversion": 200,
+                    "category_max_points": "Unlimited"
+                }
+            },
+            "notes": null,
+            "createdAt": "2025-12-05T05:32:33.000Z",
+            "updatedAt": "2025-12-05T05:32:33.000Z",
+            "spending_category": {
+                "id": 16,
+                "category_name": "new_monthly_cat_2",
+                "display_name": "New Monthly Cat 2",
+                "description": "",
+                "questions": "",
+                "cat_questions": "",
+                "cat_questions_order": 0,
+                "cat_questions_min_value": "0.00",
+                "cat_questions_max_value": "200000.00",
+                "cat_questions_asset": null,
+                "cat_questions_slider_marks": null,
+                "cat_questions_stepper": [
+                    {
+                        "limit": 20000,
+                        "value": 2000
+                    },
+                    {
+                        "limit": 100000,
+                        "value": 10000
+                    },
+                    {
+                        "limit": 200000,
+                        "value": 10000
+                    }
+                ],
+                "type": 1,
+                "questions_order": 0,
+                "min_value": "0.00",
+                "max_value": "20000.00",
+                "assets": null,
+                "status": 1,
+                "base_cashback_value": {
+                    "cb": {
+                        "cb_percentage": 1,
+                        "category_max_cap": "Unlimited"
+                    }
+                },
+                "base_reward_value": {
+                    "rewards": {
+                        "tiers": {
+                            "1": "0-Unlimited"
+                        },
+                        "cash_conversion": 0.1,
+                        "spend_conversion": 200,
+                        "category_max_points": "Unlimited"
+                    }
+                },
+                "category_id": null,
+                "additional_benefits": null,
+                "createdAt": "2025-11-19T00:26:22.000Z",
+                "updatedAt": "2026-01-16T00:03:16.000Z"
+            },
+            "group_id": 1,
+            "is_grouped": true
+        },
+        {
+            "id": 37,
+            "card_id": 6,
+            "spending_category_id": 7,
+            "spend_categories_json": {
+                "brands": [
+                    {
+                        "note": "",
+                        "brand": "Eazy Diner"
+                    }
+                ],
+                "rewards": {
+                    "tiers": {
+                        "12": "0-150000",
+                        "35": "150000-Unlimited"
+                    },
+                    "cash_conversion": 0.74,
+                    "spend_conversion": 200,
+                    "category_max_points": "Unlimited"
+                }
+            },
+            "notes": null,
+            "createdAt": "2025-12-05T05:32:33.000Z",
+            "updatedAt": "2025-12-05T05:32:33.000Z",
+            "spending_category": {
+                "id": 7,
+                "category_name": "dining_or_going_out",
+                "display_name": "Dining or Going Out",
+                "description": "",
+                "questions": "Dining Out Spends per Month?",
+                "cat_questions": "Dining Out",
+                "cat_questions_order": 1,
+                "cat_questions_min_value": "0.00",
+                "cat_questions_max_value": "200000.00",
+                "cat_questions_asset": "https://d2sriifpjiqv0p.cloudfront.net/BankKaro_Dining%20Out.png",
+                "cat_questions_slider_marks": [
+                    {
+                        "label": "₹0",
+                        "value": 0
+                    },
+                    {
+                        "label": "₹6K",
+                        "value": 6000
+                    },
+                    {
+                        "label": "₹12K",
+                        "value": 12000
+                    },
+                    {
+                        "label": "₹24K",
+                        "value": 24000
+                    },
+                    {
+                        "label": "₹60K",
+                        "value": 60000
+                    },
+                    {
+                        "label": "₹1L",
+                        "value": 100000
+                    },
+                    {
+                        "label": "₹3L",
+                        "value": 300000
+                    },
+                    {
+                        "label": "₹6L",
+                        "value": 600000
+                    },
+                    {
+                        "label": "₹15L",
+                        "value": 1500000
+                    }
+                ],
+                "cat_questions_stepper": [
+                    {
+                        "limit": 12000,
+                        "value": 1200
+                    },
+                    {
+                        "limit": 60000,
+                        "value": 4800
+                    },
+                    {
+                        "limit": 300000,
+                        "value": 24000
+                    },
+                    {
+                        "limit": 1500000,
+                        "value": 120000
+                    }
+                ],
+                "type": 1,
+                "questions_order": 9,
+                "min_value": "0.00",
+                "max_value": "30000.00",
+                "assets": "https://d2sriifpjiqv0p.cloudfront.net/card-genius/dining_out.png",
+                "status": 1,
+                "base_cashback_value": {
+                    "cb": {
+                        "cb_percentage": 1,
+                        "category_max_cap": "Unlimited"
+                    }
+                },
+                "base_reward_value": {
+                    "rewards": {
+                        "tiers": {
+                            "1": "0-Unlimited"
+                        },
+                        "cash_conversion": 0.1,
+                        "spend_conversion": 200,
+                        "category_max_points": "Unlimited"
+                    }
+                },
+                "category_id": 6,
+                "additional_benefits": null,
+                "createdAt": "2025-11-19T00:26:22.000Z",
+                "updatedAt": "2026-01-22T04:16:38.000Z"
+            },
+            "group_id": 1,
+            "is_grouped": true
+        },
+        {
+            "id": 38,
+            "card_id": 6,
+            "spending_category_id": 5,
+            "spend_categories_json": {
+                "rewards": {
+                    "tiers": {
+                        "12": "0-150000",
+                        "35": "150000-Unlimited"
+                    },
+                    "cash_conversion": 0.74,
+                    "spend_conversion": 200,
+                    "category_max_points": "Unlimited"
+                }
+            },
+            "notes": null,
+            "createdAt": "2025-12-05T05:32:33.000Z",
+            "updatedAt": "2025-12-05T05:32:33.000Z",
+            "spending_category": {
+                "id": 5,
+                "category_name": "other_online_spends",
+                "display_name": "Other Online Shopping",
+                "description": "",
+                "questions": "Other Online Shopping per Month?",
+                "cat_questions": "Other online apps (Myntra, Nykaa, Ajio)",
+                "cat_questions_order": 3,
+                "cat_questions_min_value": "0.00",
+                "cat_questions_max_value": "500000.00",
+                "cat_questions_asset": "https://d2sriifpjiqv0p.cloudfront.net/BankKaro_Other%20Online.png",
+                "cat_questions_slider_marks": [
+                    {
+                        "label": "₹0",
+                        "value": 0
+                    },
+                    {
+                        "label": "₹8K",
+                        "value": 8000
+                    },
+                    {
+                        "label": "₹16K",
+                        "value": 16000
+                    },
+                    {
+                        "label": "₹32K",
+                        "value": 32000
+                    },
+                    {
+                        "label": "₹80K",
+                        "value": 80000
+                    },
+                    {
+                        "label": "₹2L",
+                        "value": 200000
+                    },
+                    {
+                        "label": "₹4L",
+                        "value": 400000
+                    },
+                    {
+                        "label": "₹8L",
+                        "value": 800000
+                    },
+                    {
+                        "label": "₹20L",
+                        "value": 2000000
+                    }
+                ],
+                "cat_questions_stepper": [
+                    {
+                        "limit": 16000,
+                        "value": 1600
+                    },
+                    {
+                        "limit": 80000,
+                        "value": 6400
+                    },
+                    {
+                        "limit": 400000,
+                        "value": 32000
+                    },
+                    {
+                        "limit": 2000000,
+                        "value": 160000
+                    }
+                ],
+                "type": 1,
+                "questions_order": 3,
+                "min_value": "0.00",
+                "max_value": "100000.00",
+                "assets": "https://d2sriifpjiqv0p.cloudfront.net/card-genius/groc.png",
+                "status": 1,
+                "base_cashback_value": {
+                    "cb": {
+                        "cb_percentage": 1,
+                        "category_max_cap": "Unlimited"
+                    }
+                },
+                "base_reward_value": {
+                    "rewards": {
+                        "tiers": {
+                            "1": "0-Unlimited"
+                        },
+                        "cash_conversion": 0.1,
+                        "spend_conversion": 200,
+                        "category_max_points": "Unlimited"
+                    }
+                },
+                "category_id": 1,
+                "additional_benefits": null,
+                "createdAt": "2025-11-19T00:26:22.000Z",
+                "updatedAt": "2026-01-22T04:12:12.000Z"
+            },
+            "group_id": 1,
+            "is_grouped": true
+        },
+        {
+            "id": 39,
+            "card_id": 6,
+            "spending_category_id": 4,
+            "spend_categories_json": {
+                "rewards": {
+                    "tiers": {
+                        "12": "0-150000",
+                        "35": "150000-Unlimited"
+                    },
+                    "cash_conversion": 0.74,
+                    "spend_conversion": 200,
+                    "category_max_points": "Unlimited"
+                }
+            },
+            "notes": null,
+            "createdAt": "2025-12-05T05:32:33.000Z",
+            "updatedAt": "2025-12-05T05:32:33.000Z",
+            "spending_category": {
+                "id": 4,
+                "category_name": "online_food_ordering",
+                "display_name": "Food Delivery Apps",
+                "description": "",
+                "questions": "Food Delivery Apps per Month?",
+                "cat_questions": "Online Food Ordering (Swiggy, Zomato)",
+                "cat_questions_order": 1,
+                "cat_questions_min_value": "0.00",
+                "cat_questions_max_value": "200000.00",
+                "cat_questions_asset": "https://d2sriifpjiqv0p.cloudfront.net/BankKaro_Food%20Ordering.png",
+                "cat_questions_slider_marks": [
+                    {
+                        "label": "₹0",
+                        "value": 0
+                    },
+                    {
+                        "label": "₹5K",
+                        "value": 5000
+                    },
+                    {
+                        "label": "₹10K",
+                        "value": 10000
+                    },
+                    {
+                        "label": "₹20K",
+                        "value": 20000
+                    },
+                    {
+                        "label": "₹50K",
+                        "value": 50000
+                    },
+                    {
+                        "label": "₹1L",
+                        "value": 100000
+                    },
+                    {
+                        "label": "₹3L",
+                        "value": 300000
+                    },
+                    {
+                        "label": "₹5L",
+                        "value": 500000
+                    },
+                    {
+                        "label": "₹12L",
+                        "value": 1200000
+                    }
+                ],
+                "cat_questions_stepper": [
+                    {
+                        "limit": 10000,
+                        "value": 1000
+                    },
+                    {
+                        "limit": 50000,
+                        "value": 4000
+                    },
+                    {
+                        "limit": 300000,
+                        "value": 25000
+                    },
+                    {
+                        "limit": 1200000,
+                        "value": 90000
+                    }
+                ],
+                "type": 1,
+                "questions_order": 8,
+                "min_value": "0.00",
+                "max_value": "20000.00",
+                "assets": "https://d2sriifpjiqv0p.cloudfront.net/card-genius/online_food_ordering.png",
+                "status": 1,
+                "base_cashback_value": {
+                    "cb": {
+                        "cb_percentage": 1,
+                        "category_max_cap": "Unlimited"
+                    }
+                },
+                "base_reward_value": {
+                    "rewards": {
+                        "tiers": {
+                            "1": "0-Unlimited"
+                        },
+                        "cash_conversion": 0.1,
+                        "spend_conversion": 200,
+                        "category_max_points": "Unlimited"
+                    }
+                },
+                "category_id": 4,
+                "additional_benefits": null,
+                "createdAt": "2025-11-19T00:26:22.000Z",
+                "updatedAt": "2026-01-22T04:15:46.000Z"
+            },
+            "group_id": 1,
+            "is_grouped": true
+        },
+        {
+            "id": 40,
+            "card_id": 6,
+            "spending_category_id": 6,
+            "spend_categories_json": {
+                "rewards": {
+                    "tiers": {
+                        "12": "0-150000",
+                        "35": "150000-Unlimited"
+                    },
+                    "cash_conversion": 0.74,
+                    "spend_conversion": 200,
+                    "category_max_points": "Unlimited"
+                }
+            },
+            "notes": null,
+            "createdAt": "2025-12-05T05:32:33.000Z",
+            "updatedAt": "2025-12-05T05:32:33.000Z",
+            "spending_category": {
+                "id": 6,
+                "category_name": "other_offline_spends",
+                "display_name": "Offline Spends",
+                "description": "",
+                "questions": "Offline/ Retail Shopping per Month?",
+                "cat_questions": "Offline Shopping",
+                "cat_questions_order": 4,
+                "cat_questions_min_value": "0.00",
+                "cat_questions_max_value": "500000.00",
+                "cat_questions_asset": "https://d2sriifpjiqv0p.cloudfront.net/BankKaro_Other%20Offline.png",
+                "cat_questions_slider_marks": [
+                    {
+                        "label": "₹0",
+                        "value": 0
+                    },
+                    {
+                        "label": "₹8K",
+                        "value": 8000
+                    },
+                    {
+                        "label": "17K",
+                        "value": 17000
+                    },
+                    {
+                        "label": "₹34K",
+                        "value": 34000
+                    },
+                    {
+                        "label": "₹84K",
+                        "value": 84000
+                    },
+                    {
+                        "label": "₹2L",
+                        "value": 200000
+                    },
+                    {
+                        "label": "₹4L",
+                        "value": 400000
+                    },
+                    {
+                        "label": "₹8L",
+                        "value": 800000
+                    },
+                    {
+                        "label": "₹21L",
+                        "value": 2100000
+                    }
+                ],
+                "cat_questions_stepper": [
+                    {
+                        "limit": 17000,
+                        "value": 1700
+                    },
+                    {
+                        "limit": 84000,
+                        "value": 6700
+                    },
+                    {
+                        "limit": 400000,
+                        "value": 31600
+                    },
+                    {
+                        "limit": 2100000,
+                        "value": 170000
+                    }
+                ],
+                "type": 1,
+                "questions_order": 4,
+                "min_value": "0.00",
+                "max_value": "100000.00",
+                "assets": "https://d2sriifpjiqv0p.cloudfront.net/card-genius/offline.png",
+                "status": 1,
+                "base_cashback_value": {
+                    "cb": {
+                        "cb_percentage": 1,
+                        "category_max_cap": "Unlimited"
+                    }
+                },
+                "base_reward_value": {
+                    "rewards": {
+                        "tiers": {
+                            "1": "0-Unlimited"
+                        },
+                        "cash_conversion": 0.1,
+                        "spend_conversion": 200,
+                        "category_max_points": "Unlimited"
+                    }
+                },
+                "category_id": 1,
+                "additional_benefits": null,
+                "createdAt": "2025-11-19T00:26:22.000Z",
+                "updatedAt": "2026-01-22T04:14:02.000Z"
+            },
+            "group_id": 1,
+            "is_grouped": true
+        },
+        {
+            "id": 41,
+            "card_id": 6,
+            "spending_category_id": 3,
+            "spend_categories_json": {
+                "rewards": {
+                    "tiers": {
+                        "12": "0-150000",
+                        "35": "150000-Unlimited"
+                    },
+                    "cash_conversion": 0.74,
+                    "spend_conversion": 200,
+                    "category_max_points": "Unlimited"
+                }
+            },
+            "notes": null,
+            "createdAt": "2025-12-05T05:32:33.000Z",
+            "updatedAt": "2025-12-05T05:32:33.000Z",
+            "spending_category": {
+                "id": 3,
+                "category_name": "grocery_spends_online",
+                "display_name": "Online Grocery",
+                "description": "",
+                "questions": "Online Grocery per Month?",
+                "cat_questions": "Online Groceries (Blinkit, Zepto, Instamart, etc.)",
+                "cat_questions_order": 1,
+                "cat_questions_min_value": "0.00",
+                "cat_questions_max_value": "200000.00",
+                "cat_questions_asset": "https://d2sriifpjiqv0p.cloudfront.net/BankKaro_Zepto%26Blinkit.png",
+                "cat_questions_slider_marks": [
+                    {
+                        "label": "₹0",
+                        "value": 0
+                    },
+                    {
+                        "label": "₹6K",
+                        "value": 6000
+                    },
+                    {
+                        "label": "₹12K",
+                        "value": 12000
+                    },
+                    {
+                        "label": "₹24K",
+                        "value": 24000
+                    },
+                    {
+                        "label": "₹60K",
+                        "value": 60000
+                    },
+                    {
+                        "label": "₹1L",
+                        "value": 100000
+                    },
+                    {
+                        "label": "₹3L",
+                        "value": 300000
+                    },
+                    {
+                        "label": "₹6L",
+                        "value": 600000
+                    },
+                    {
+                        "label": "₹15L",
+                        "value": 1500000
+                    }
+                ],
+                "cat_questions_stepper": [
+                    {
+                        "limit": 12000,
+                        "value": 1200
+                    },
+                    {
+                        "limit": 60000,
+                        "value": 4800
+                    },
+                    {
+                        "limit": 300000,
+                        "value": 24000
+                    },
+                    {
+                        "limit": 1500000,
+                        "value": 120000
+                    }
+                ],
+                "type": 1,
+                "questions_order": 5,
+                "min_value": "0.00",
+                "max_value": "30000.00",
+                "assets": "https://d2sriifpjiqv0p.cloudfront.net/card-genius/groc.png",
+                "status": 1,
+                "base_cashback_value": {
+                    "cb": {
+                        "cb_percentage": 1,
+                        "category_max_cap": "Unlimited"
+                    }
+                },
+                "base_reward_value": {
+                    "rewards": {
+                        "tiers": {
+                            "1": "0-Unlimited"
+                        },
+                        "cash_conversion": 0.1,
+                        "spend_conversion": 200,
+                        "category_max_points": "Unlimited"
+                    }
+                },
+                "category_id": 3,
+                "additional_benefits": null,
+                "createdAt": "2025-11-19T00:26:22.000Z",
+                "updatedAt": "2026-01-22T04:15:19.000Z"
+            },
+            "group_id": 1,
+            "is_grouped": true
+        },
+        {
+            "id": 42,
+            "card_id": 6,
+            "spending_category_id": 22,
+            "spend_categories_json": {
+                "rewards": {
+                    "tiers": {
+                        "12": "0-150000",
+                        "35": "150000-Unlimited"
+                    },
+                    "cash_conversion": 0.74,
+                    "spend_conversion": 200,
+                    "category_max_points": "Unlimited"
+                }
+            },
+            "notes": null,
+            "createdAt": "2025-12-05T05:32:33.000Z",
+            "updatedAt": "2025-12-05T05:32:33.000Z",
+            "spending_category": {
+                "id": 22,
+                "category_name": "large_electronics_purchase_like_mobile_tv_etc",
+                "display_name": "Electronics Purchases",
+                "description": "",
+                "questions": "",
+                "cat_questions": "",
+                "cat_questions_order": 0,
+                "cat_questions_min_value": "0.00",
+                "cat_questions_max_value": "200000.00",
+                "cat_questions_asset": null,
+                "cat_questions_slider_marks": null,
+                "cat_questions_stepper": [
+                    {
+                        "limit": 20000,
+                        "value": 2000
+                    },
+                    {
+                        "limit": 100000,
+                        "value": 10000
+                    },
+                    {
+                        "limit": 200000,
+                        "value": 10000
+                    }
+                ],
+                "type": 1,
+                "questions_order": 0,
+                "min_value": "0.00",
+                "max_value": "200000.00",
+                "assets": null,
+                "status": 1,
+                "base_cashback_value": {
+                    "cb": {
+                        "cb_percentage": 1,
+                        "category_max_cap": "Unlimited"
+                    }
+                },
+                "base_reward_value": {
+                    "rewards": {
+                        "tiers": {
+                            "1": "0-Unlimited"
+                        },
+                        "cash_conversion": 0.1,
+                        "spend_conversion": 200,
+                        "category_max_points": "Unlimited"
+                    }
+                },
+                "category_id": null,
+                "additional_benefits": null,
+                "createdAt": "2025-11-19T00:26:22.000Z",
+                "updatedAt": "2026-01-16T00:03:16.000Z"
+            },
+            "group_id": 1,
+            "is_grouped": true
+        },
+        {
+            "id": 1365,
+            "card_id": 6,
+            "spending_category_id": 29,
+            "spend_categories_json": {
+                "rewards": {
+                    "tiers": {
+                        "12": "0-150000",
+                        "35": "150000-Unlimited"
+                    },
+                    "cash_conversion": 0.74,
+                    "spend_conversion": 200,
+                    "category_max_points": "Unlimited"
+                }
+            },
+            "notes": null,
+            "createdAt": "2025-12-05T05:32:33.000Z",
+            "updatedAt": "2025-12-05T05:32:33.000Z",
+            "spending_category": {
+                "id": 29,
+                "category_name": "offline_grocery",
+                "display_name": "Offline Grocery",
+                "description": "",
+                "questions": "Offline Grocery per Month?",
+                "cat_questions": "Offline Groceries (DMart, Reliance Smart, etc.)",
+                "cat_questions_order": 2,
+                "cat_questions_min_value": "0.00",
+                "cat_questions_max_value": "200000.00",
+                "cat_questions_asset": "https://d2sriifpjiqv0p.cloudfront.net/BankKaro_Offline%20Groceries.png",
+                "cat_questions_slider_marks": [
+                    {
+                        "label": "₹0",
+                        "value": 0
+                    },
+                    {
+                        "label": "₹6K",
+                        "value": 6000
+                    },
+                    {
+                        "label": "₹12K",
+                        "value": 12000
+                    },
+                    {
+                        "label": "₹24K",
+                        "value": 24000
+                    },
+                    {
+                        "label": "₹60K",
+                        "value": 60000
+                    },
+                    {
+                        "label": "₹1L",
+                        "value": 100000
+                    },
+                    {
+                        "label": "₹3L",
+                        "value": 300000
+                    },
+                    {
+                        "label": "₹6L",
+                        "value": 600000
+                    },
+                    {
+                        "label": "₹15L",
+                        "value": 1500000
+                    }
+                ],
+                "cat_questions_stepper": [
+                    {
+                        "limit": 12000,
+                        "value": 1200
+                    },
+                    {
+                        "limit": 60000,
+                        "value": 4800
+                    },
+                    {
+                        "limit": 300000,
+                        "value": 24000
+                    },
+                    {
+                        "limit": 1500000,
+                        "value": 120000
+                    }
+                ],
+                "type": 1,
+                "questions_order": 6,
+                "min_value": "0.00",
+                "max_value": "200000.00",
+                "assets": "",
+                "status": 1,
+                "base_cashback_value": {
+                    "cb": {
+                        "cb_percentage": 1,
+                        "category_max_cap": "Unlimited"
+                    }
+                },
+                "base_reward_value": {
+                    "rewards": {
+                        "tiers": {
+                            "1": "0-Unlimited"
+                        },
+                        "cash_conversion": 0.1,
+                        "spend_conversion": 200,
+                        "category_max_points": "Unlimited"
+                    }
+                },
+                "category_id": 3,
+                "additional_benefits": null,
+                "createdAt": "2026-01-13T09:27:04.000Z",
+                "updatedAt": "2026-01-22T04:15:33.000Z"
+            },
+            "group_id": 1,
+            "is_grouped": true
+        },
+        {
+            "id": 1568,
+            "card_id": 6,
+            "spending_category_id": 10,
+            "spend_categories_json": {
+                "rewards": {
+                    "tiers": {
+                        "12": "0-50000"
+                    },
+                    "cash_conversion": 0.74,
+                    "spend_conversion": 200,
+                    "category_max_points": 250
+                }
+            },
+            "notes": "",
+            "createdAt": "2026-01-22T08:59:33.000Z",
+            "updatedAt": "2026-01-22T08:59:33.000Z",
+            "spending_category": {
+                "id": 10,
+                "category_name": "rent",
+                "display_name": "Rent",
+                "description": "",
+                "questions": "Home rent per Month?",
+                "cat_questions": "Rent",
+                "cat_questions_order": 20,
+                "cat_questions_min_value": "0.00",
+                "cat_questions_max_value": "500000.00",
+                "cat_questions_asset": "https://d2sriifpjiqv0p.cloudfront.net/BankKaro_Rent.png",
+                "cat_questions_slider_marks": [
+                    {
+                        "label": "₹0",
+                        "value": 0
+                    },
+                    {
+                        "label": "₹40K",
+                        "value": 40000
+                    },
+                    {
+                        "label": "₹80K",
+                        "value": 80000
+                    },
+                    {
+                        "label": "₹2L",
+                        "value": 200000
+                    },
+                    {
+                        "label": "₹4L",
+                        "value": 400000
+                    },
+                    {
+                        "label": "₹8L",
+                        "value": 800000
+                    },
+                    {
+                        "label": "₹20L",
+                        "value": 2000000
+                    },
+                    {
+                        "label": "₹40L",
+                        "value": 4000000
+                    },
+                    {
+                        "label": "₹1Cr",
+                        "value": 10000000
+                    }
+                ],
+                "cat_questions_stepper": [
+                    {
+                        "limit": 80000,
+                        "value": 8000
+                    },
+                    {
+                        "limit": 400000,
+                        "value": 32000
+                    },
+                    {
+                        "limit": 2000000,
+                        "value": 160000
+                    },
+                    {
+                        "limit": 10000000,
+                        "value": 800000
+                    }
+                ],
+                "type": 1,
+                "questions_order": 18,
+                "min_value": "0.00",
+                "max_value": "100000.00",
+                "assets": "https://d2sriifpjiqv0p.cloudfront.net/card-genius/home.png",
+                "status": 1,
+                "base_cashback_value": {
+                    "cb": {
+                        "cb_percentage": 1,
+                        "category_max_cap": "Unlimited"
+                    }
+                },
+                "base_reward_value": {
+                    "rewards": {
+                        "tiers": {
+                            "1": "0-Unlimited"
+                        },
+                        "cash_conversion": 0.1,
+                        "spend_conversion": 200,
+                        "category_max_points": "Unlimited"
+                    }
+                },
+                "category_id": 602,
+                "additional_benefits": null,
+                "createdAt": "2025-11-19T00:26:22.000Z",
+                "updatedAt": "2026-01-22T04:21:38.000Z"
+            },
+            "group_id": 3,
+            "is_grouped": true
+        }
+    ]
+}

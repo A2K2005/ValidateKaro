@@ -131,7 +131,20 @@ export async function processPDFsForCard(
 
   const apiKey = import.meta.env.VITE_OPENROUTER_API_KEY;
   if (!apiKey) {
-    throw new Error("Configuration Error: OpenRouter API key not configured.");
+    console.error('[ValidateKaro] ❌ CONFIGURATION ERROR: OpenRouter API key not found!');
+    console.error('[ValidateKaro] 📋 To fix this:');
+    console.error('[ValidateKaro]   1. Create a .env file in the project root');
+    console.error('[ValidateKaro]   2. Add: VITE_OPENROUTER_API_KEY=sk-or-v1-your-key-here');
+    console.error('[ValidateKaro]   3. Get your key from: https://openrouter.ai/keys');
+    console.error('[ValidateKaro]   4. Restart the dev server (npm run dev or bun dev)');
+    throw new Error("OpenRouter API key not configured. Check console for setup instructions.");
+  }
+  
+  // Validate API key format
+  if (!apiKey.startsWith('sk-or-v1-')) {
+    console.warn('[ValidateKaro] ⚠️  WARNING: API key format looks incorrect');
+    console.warn('[ValidateKaro] Expected format: sk-or-v1-...');
+    console.warn('[ValidateKaro] Current format:', apiKey.substring(0, 15) + '...');
   }
 
   // STEP 1: Extract text (Client-side)
@@ -261,7 +274,7 @@ export async function processPDFsForCard(
   const totalDuration = (processEndTime - processStartTime) / 1000;
   const extractDurationNum = parseFloat(extractDuration);
   const chunkDurationNum = parseFloat(chunkDuration);
-  const aiDurationNum = parseFloat(aiDuration);
+  const aiDurationNum = aiDuration; // Already a number
   const mergeDurationNum = parseFloat(mergeDuration);
   
   const extractPercent = ((extractDurationNum / totalDuration) * 100).toFixed(1);
@@ -305,7 +318,7 @@ async function analyzeChunk(
 ): Promise<any> {
   const systemInstruction = `You are a credit card compliance analyst extracting reward information from "${cardName}" MITC documents.
 
-CONTEXT: This is chunk ${chunkIndex + 1}/${totalChunks} of the document.
+CONTEXT: This is chunk ${chunkIndex + 1}/${totalChunks} of the document. You must extract data for ALL 24 spending categories.
 
 CARD NAME MATCHING (FLEXIBLE):
 - Accept variations: If card is "Axis Magnus Burgundy", accept "Magnus", "Burgundy", "Axis Magnus", etc.
@@ -350,9 +363,9 @@ EXTRACTION RULES (PRIORITY ORDER):
 
 ---
 
-OUTPUT FORMAT (19 MANDATORY CATEGORIES):
+OUTPUT FORMAT (24 MANDATORY CATEGORIES):
 
-Return ONLY valid JSON with ALL 19 keys below. Each key must have these fields:
+Return ONLY valid JSON with ALL 24 keys below. Each key must have these fields:
 
 {
   "categories": {
@@ -371,7 +384,7 @@ Return ONLY valid JSON with ALL 19 keys below. Each key must have these fields:
 
 ---
 
-19 SPENDING CATEGORIES (MUST INCLUDE ALL):
+24 SPENDING CATEGORIES (MUST INCLUDE ALL):
 
 1. amazon_spends              → Amazon purchases
 2. flipkart_spends            → Flipkart purchases
@@ -392,8 +405,13 @@ Return ONLY valid JSON with ALL 19 keys below. Each key must have these fields:
 17. rent                      → Rent payments
 18. school_fees               → School/education fees
 19. other_offline_spends      → Offline store/POS purchases
+20. ott_channels              → OTT subscriptions (Netflix, Prime Video, Hotstar, etc.)
+21. large_electronics_purchase_like_mobile_tv_etc → Electronics purchases (mobile, TV, laptop, etc.)
+22. all_pharmacy              → Pharmacy and medical purchases
+23. offline_grocery           → Offline grocery shopping (supermarkets, stores)
+24. life_insurance            → Life insurance premiums
 
-CRITICAL: Output MUST include ALL 19 keys. Set reward_type to "N/A" if category not mentioned in chunk.`;
+CRITICAL: Output MUST include ALL 24 keys. Set reward_type to "N/A" if category not mentioned in chunk.`;
 
   const messages = [
     { role: "system", content: systemInstruction },
@@ -442,7 +460,23 @@ CRITICAL: Output MUST include ALL 19 keys. Set reward_type to "N/A" if category 
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
-      console.error(`[ValidateKaro] Chunk ${chunkIndex + 1} Failed with status ${response.status}`);
+      console.error(`[ValidateKaro] ❌ Chunk ${chunkIndex + 1} Failed with status ${response.status}`);
+      console.error(`[ValidateKaro] Error details:`, errorData);
+      
+      // Provide specific guidance for common errors
+      if (response.status === 403) {
+        console.error(`[ValidateKaro] 🔑 403 Forbidden - Possible causes:`);
+        console.error(`  1. Invalid or expired API key`);
+        console.error(`  2. API key not set in .env file (VITE_OPENROUTER_API_KEY)`);
+        console.error(`  3. Insufficient credits on OpenRouter account`);
+        console.error(`  4. API key doesn't have access to z-ai/glm-4.5-air model`);
+        console.error(`  5. Check your OpenRouter dashboard: https://openrouter.ai/keys`);
+      } else if (response.status === 429) {
+        console.error(`[ValidateKaro] ⏱️  429 Rate Limited - Too many requests`);
+      } else if (response.status === 401) {
+        console.error(`[ValidateKaro] 🔐 401 Unauthorized - API key is invalid`);
+      }
+      
       return { categories: {} };
     }
 
